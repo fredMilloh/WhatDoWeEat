@@ -39,6 +39,13 @@ class SearchController: UIViewController {
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
+        toRecipesList()
+
+    }
+
+    private func toRecipesList() {
+        guard let recipesList = self.storyboard?.instantiateViewController(withIdentifier: "ListRecipes") as? FavoriteController else { return }
+        self.navigationController?.pushViewController(recipesList, animated: true)
     }
 }
 

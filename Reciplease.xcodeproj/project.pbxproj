@@ -31,6 +31,7 @@
 		B6DC77F227AEAECC0096BDD8 /* TextFieldWhiteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6DC77F127AEAECC0096BDD8 /* TextFieldWhiteView.xib */; };
 		B6DC77F427AEB3C90096BDD8 /* TextFieldWhiteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77F327AEB3C90096BDD8 /* TextFieldWhiteView.swift */; };
 		B6DC77F727AECE360096BDD8 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77F627AECE360096BDD8 /* IngredientCell.swift */; };
+		B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77F827AEE5CB0096BDD8 /* ListRecipeCell.swift */; };
 		C45EDF46D0E9A45F1C1504C9 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B0618514C2C756849DB2C9 /* Pods_Reciplease.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		B6DC77F127AEAECC0096BDD8 /* TextFieldWhiteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldWhiteView.xib; sourceTree = "<group>"; };
 		B6DC77F327AEB3C90096BDD8 /* TextFieldWhiteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWhiteView.swift; sourceTree = "<group>"; };
 		B6DC77F627AECE360096BDD8 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		B6DC77F827AEE5CB0096BDD8 /* ListRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecipeCell.swift; sourceTree = "<group>"; };
 		EEAF4CAFF8314690F425C80A /* Pods-Reciplease-RecipleaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease-RecipleaseUITests.release.xcconfig"; path = "Target Support Files/Pods-Reciplease-RecipleaseUITests/Pods-Reciplease-RecipleaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EEB43ACCE44FB10EADA84F19 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F3950EC8678F1EF511AE1635 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DC77F627AECE360096BDD8 /* IngredientCell.swift */,
+				B6DC77F827AEE5CB0096BDD8 /* ListRecipeCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				B6DC77A227AE7FA30096BDD8 /* Reciplease.xcdatamodeld in Sources */,
 				B6DC77E227AE89410096BDD8 /* ViewController+.swift in Sources */,
 				B6DC77D227AE81A90096BDD8 /* FavoriteController.swift in Sources */,
+				B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */,
 				B6DC77F727AECE360096BDD8 /* IngredientCell.swift in Sources */,
 				B6DC77D027AE818F0096BDD8 /* SearchController.swift in Sources */,
 				B6DC779C27AE7FA30096BDD8 /* TabBarController.swift in Sources */,
