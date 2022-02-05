@@ -12,7 +12,7 @@ class TabBarAppearance: UITabBarAppearance {
     func setTabBarAppearance() {
 
         UITabBar.appearance().backgroundColor = .appColor
-        UITabBar.appearance().tintColor = .systemGray3
+        UITabBar.appearance().tintColor = .systemGray2
         UITabBar.appearance().unselectedItemTintColor = .white
 
         let tabbarAppearance = UITabBarItem.appearance()
