@@ -25,6 +25,7 @@
 		B6DC77E627AE8ACB0096BDD8 /* IngredientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77E527AE8ACB0096BDD8 /* IngredientManager.swift */; };
 		B6DC77E927AE8BB40096BDD8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DC77E827AE8BB40096BDD8 /* recipe.json */; };
 		B6DC77EB27AE8BEA0096BDD8 /* IngredientManager+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77EA27AE8BEA0096BDD8 /* IngredientManager+Tests.swift */; };
+		B6DC77ED27AE91A20096BDD8 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		B6DC77E527AE8ACB0096BDD8 /* IngredientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientManager.swift; sourceTree = "<group>"; };
 		B6DC77E827AE8BB40096BDD8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
 		B6DC77EA27AE8BEA0096BDD8 /* IngredientManager+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientManager+Tests.swift"; sourceTree = "<group>"; };
+		B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 			children = (
 				B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */,
 				B6DC77E127AE89410096BDD8 /* ViewController+.swift */,
+				B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6DC77ED27AE91A20096BDD8 /* UIImageView+.swift in Sources */,
 				B6DC77DE27AE865D0096BDD8 /* TabBarAppearance.swift in Sources */,
 				B6DC77E027AE86AA0096BDD8 /* UIColor+.swift in Sources */,
 				B6DC77A227AE7FA30096BDD8 /* Reciplease.xcdatamodeld in Sources */,
