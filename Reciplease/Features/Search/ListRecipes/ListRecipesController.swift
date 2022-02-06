@@ -39,7 +39,7 @@ extension ListRecipesController: UITableViewDataSource {
 
         let recipe = self.list[indexPath.row]
         cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
-        cell.configCell(name: recipe.name, ingredients: recipe.ingredients)
+        cell.configCell(name: recipe.name, ingredients: recipe.ingredients, yields: recipe.yield, time: recipe.totalTime)
         return cell
     }
 }

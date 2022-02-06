@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimeView" customModule="Reciplease" customModuleProvider="target">
+            <connections>
+                <outlet property="contentTimeView" destination="iN0-l3-epB" id="Q72-69-Jr7"/>
+                <outlet property="timeLabel" destination="GzE-Oa-H0e" id="j3d-kb-ZiV"/>
+                <outlet property="yieldLabel" destination="S30-Mu-4yj" id="iAd-nS-eCs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="392" height="354"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ThW-L7-VeV">
+                    <rect key="frame" x="10" y="10" width="372" height="334"/>
+                    <subviews>
+                        <stackView contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fcX-8g-Oh7">
+                            <rect key="frame" x="0.0" y="0.0" width="372" height="159.5"/>
+                            <subviews>
+                                <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S30-Mu-4yj">
+                                    <rect key="frame" x="0.0" y="0.0" width="183.5" height="159.5"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZx-Wc-bgJ">
+                                    <rect key="frame" x="188.5" y="-3" width="183.5" height="165.5"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="chart.pie.fill" catalog="system" symbolScale="large"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="S30-Mu-4yj" firstAttribute="top" secondItem="fcX-8g-Oh7" secondAttribute="top" id="1zD-0S-PMh"/>
+                                <constraint firstAttribute="bottom" secondItem="CZx-Wc-bgJ" secondAttribute="bottom" id="31d-wv-7N6"/>
+                                <constraint firstAttribute="bottom" secondItem="S30-Mu-4yj" secondAttribute="bottom" id="WBy-E6-1LW"/>
+                                <constraint firstAttribute="trailing" secondItem="CZx-Wc-bgJ" secondAttribute="trailing" id="aGS-ya-uha"/>
+                                <constraint firstItem="CZx-Wc-bgJ" firstAttribute="top" secondItem="fcX-8g-Oh7" secondAttribute="top" id="gDf-pm-Zvi"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-32-Z2l">
+                            <rect key="frame" x="0.0" y="174.5" width="372" height="159.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1H30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzE-Oa-H0e">
+                                    <rect key="frame" x="0.0" y="0.0" width="183.5" height="159.5"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o1v-ya-D19">
+                                    <rect key="frame" x="188.5" y="-3" width="183.5" height="165.5"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="image" image="timer" catalog="system" symbolScale="large"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="o1v-ya-D19" secondAttribute="trailing" id="6N5-77-dZn"/>
+                                <constraint firstItem="GzE-Oa-H0e" firstAttribute="top" secondItem="S5e-32-Z2l" secondAttribute="top" id="W1f-Ik-ILr"/>
+                                <constraint firstAttribute="bottom" secondItem="GzE-Oa-H0e" secondAttribute="bottom" id="dhb-5S-IWE"/>
+                                <constraint firstItem="o1v-ya-D19" firstAttribute="top" secondItem="S5e-32-Z2l" secondAttribute="top" id="ibj-1J-1OX"/>
+                                <constraint firstAttribute="bottom" secondItem="o1v-ya-D19" secondAttribute="bottom" id="pJZ-rB-F2j"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.21551859379999999" green="0.2000619471" blue="0.1960774958" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ThW-L7-VeV" secondAttribute="bottom" constant="10" id="1gT-X7-WxU"/>
+                <constraint firstItem="ThW-L7-VeV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="8jE-VF-Xk2"/>
+                <constraint firstAttribute="trailing" secondItem="ThW-L7-VeV" secondAttribute="trailing" constant="10" id="C9h-Hl-tq4"/>
+                <constraint firstItem="ThW-L7-VeV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="PUc-GY-xVP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-94.20289855072464" y="238.39285714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chart.pie.fill" catalog="system" width="128" height="121"/>
+        <image name="timer" catalog="system" width="128" height="121"/>
+    </resources>
+</document>

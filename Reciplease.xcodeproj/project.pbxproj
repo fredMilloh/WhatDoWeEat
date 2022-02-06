@@ -36,6 +36,9 @@
 		B6DC780027AEFE0A0096BDD8 /* DetailRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77FF27AEFE0A0096BDD8 /* DetailRecipeController.swift */; };
 		B6DC780227AFEB050096BDD8 /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC780127AFEB050096BDD8 /* RecipeManager.swift */; };
 		B6DC780527AFEF690096BDD8 /* ListRecipesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC780427AFEF690096BDD8 /* ListRecipesController.swift */; };
+		B6DC780927B02F6E0096BDD8 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC780827B02F6E0096BDD8 /* TimeView.swift */; };
+		B6DC780D27B039FF0096BDD8 /* TimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6DC780C27B039FF0096BDD8 /* TimeView.xib */; };
+		B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781327B0562C0096BDD8 /* Double+.swift */; };
 		C45EDF46D0E9A45F1C1504C9 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B0618514C2C756849DB2C9 /* Pods_Reciplease.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +96,9 @@
 		B6DC77FF27AEFE0A0096BDD8 /* DetailRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeController.swift; sourceTree = "<group>"; };
 		B6DC780127AFEB050096BDD8 /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
 		B6DC780427AFEF690096BDD8 /* ListRecipesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecipesController.swift; sourceTree = "<group>"; };
+		B6DC780827B02F6E0096BDD8 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
+		B6DC780C27B039FF0096BDD8 /* TimeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeView.xib; sourceTree = "<group>"; };
+		B6DC781327B0562C0096BDD8 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		EEAF4CAFF8314690F425C80A /* Pods-Reciplease-RecipleaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease-RecipleaseUITests.release.xcconfig"; path = "Target Support Files/Pods-Reciplease-RecipleaseUITests/Pods-Reciplease-RecipleaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EEB43ACCE44FB10EADA84F19 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F3950EC8678F1EF511AE1635 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -220,6 +226,9 @@
 		B6DC77CB27AE80180096BDD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B6DC780827B02F6E0096BDD8 /* TimeView.swift */,
+				B6DC780C27B039FF0096BDD8 /* TimeView.xib */,
+				B6DC780E27B04E250096BDD8 /* Header */,
 				B6DC77F527AECE130096BDD8 /* Cell */,
 			);
 			path = View;
@@ -287,6 +296,7 @@
 				B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */,
 				B6DC77E127AE89410096BDD8 /* ViewController+.swift */,
 				B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */,
+				B6DC781327B0562C0096BDD8 /* Double+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -331,6 +341,13 @@
 				B6DC780427AFEF690096BDD8 /* ListRecipesController.swift */,
 			);
 			path = ListRecipes;
+			sourceTree = "<group>";
+		};
+		B6DC780E27B04E250096BDD8 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,6 +465,7 @@
 				B6DC77A727AE7FAC0096BDD8 /* LaunchScreen.storyboard in Resources */,
 				B6DC77A427AE7FAC0096BDD8 /* Assets.xcassets in Resources */,
 				B6DC779F27AE7FA30096BDD8 /* Main.storyboard in Resources */,
+				B6DC780D27B039FF0096BDD8 /* TimeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,9 +598,11 @@
 				B6DC77DE27AE865D0096BDD8 /* TabBarAppearance.swift in Sources */,
 				B6DC780027AEFE0A0096BDD8 /* DetailRecipeController.swift in Sources */,
 				B6DC780227AFEB050096BDD8 /* RecipeManager.swift in Sources */,
+				B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */,
 				B6DC77E027AE86AA0096BDD8 /* UIColor+.swift in Sources */,
 				B6DC77A227AE7FA30096BDD8 /* Reciplease.xcdatamodeld in Sources */,
 				B6DC77E227AE89410096BDD8 /* ViewController+.swift in Sources */,
+				B6DC780927B02F6E0096BDD8 /* TimeView.swift in Sources */,
 				B6DC77D227AE81A90096BDD8 /* FavoriteController.swift in Sources */,
 				B6DC77FD27AEF6610096BDD8 /* APIService.swift in Sources */,
 				B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */,

@@ -36,7 +36,7 @@ extension FavoriteController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListRecipeCell else { return UITableViewCell() }
 
         let recipe = self.listOfFavoriteRecipes[indexPath.row]
-        cell.configCell(name: recipe.name, ingredients: recipe.ingredients)
+        cell.configCell(name: recipe.name, ingredients: recipe.ingredients, yields: recipe.yield, time: recipe.totalTime)
         return cell
     }
 }

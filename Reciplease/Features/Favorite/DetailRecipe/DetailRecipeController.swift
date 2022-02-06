@@ -9,6 +9,7 @@ import UIKit
 
 class DetailRecipeController: UIViewController {
 
+    @IBOutlet weak var detailTimeView: TimeView!
     @IBOutlet weak var detailTableView: UITableView!
     @IBOutlet weak var detailRecipeImageView: UIImageView!
     @IBOutlet weak var detailRecipeNameLabel: UILabel!
@@ -20,6 +21,7 @@ class DetailRecipeController: UIViewController {
         super.viewDidLoad()
         detailTableView.delegate = self
         detailTableView.dataSource = self
+        detailRecipeImageView.makeGradient(to: detailRecipeImageView)
     }
     
     @IBAction func getDirectionsButton(_ sender: UIButton) {
@@ -37,6 +39,12 @@ extension DetailRecipeController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell else {
             return UITableViewCell()
         }
+
+        let yieldsString = String(selectedRecipe.yield.withoutDecimal())
+        let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
+        detailTimeView.yieldLabel.text = yieldsString
+        detailTimeView.timeLabel.text = timeString
+        
         detailRecipeImageView.image = selectedImage != UIImage() ? selectedImage : UIImage(named: "DefaultImage")
         detailRecipeNameLabel.text = selectedRecipe.name
 
