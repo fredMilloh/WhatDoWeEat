@@ -39,15 +39,22 @@ class SearchController: UIViewController {
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
-        toRecipesList()
-
+        APIService.shared.getRecipes { status, recipes in
+            if status {
+                guard let recipes = recipes?.hits else { return }
+                self.toRecipesList(with: recipes)
+            }
+        }
     }
 
-    private func toRecipesList() {
-        guard let recipesList = self.storyboard?.instantiateViewController(withIdentifier: "ListRecipes") as? FavoriteController else { return }
+    private func toRecipesList(with recipes: [Recipe]) {
+        guard let recipesList = self.storyboard?.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController else { return }
+        recipesList.listOfRecipes = recipes
         self.navigationController?.pushViewController(recipesList, animated: true)
     }
 }
+
+// MARK: - TableView DataSource
 
 extension SearchController: UITableViewDataSource {
 
@@ -65,6 +72,8 @@ extension SearchController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - TableView Delegate
 
 extension SearchController: UITableViewDelegate {
 
@@ -93,8 +102,8 @@ extension SearchController: UITextFieldDelegate {
         ingredientTextField.becomeFirstResponder()
     }
 
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    ingredientTextField.resignFirstResponder()
-    return true
-}
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        ingredientTextField.resignFirstResponder()
+        return true
+    }
 }
