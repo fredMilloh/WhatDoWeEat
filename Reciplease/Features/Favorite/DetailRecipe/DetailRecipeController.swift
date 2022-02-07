@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailRecipeController: UIViewController {
 
@@ -31,6 +32,10 @@ class DetailRecipeController: UIViewController {
     }
     
     @IBAction func getDirectionsButton(_ sender: UIButton) {
+        let directionsLink = selectedRecipe.urlDirections
+        guard let directionsUrl = URL(string: directionsLink) else { return }
+        let directionsView = SFSafariViewController(url: directionsUrl)
+        present(directionsView, animated: true, completion: nil)
     }
 
     private func configureNavigationItem() {
