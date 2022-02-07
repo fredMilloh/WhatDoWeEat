@@ -39,11 +39,12 @@ class SearchController: UIViewController {
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
-        APIService.shared.getRecipes { status, recipes in
-            if status {
-                guard let recipes = recipes?.hits else { return }
-                self.toRecipesList(with: recipes)
+        RecipeRepository.shared.getRecipes(ingredients: listOfIngredients) { recipes, error in
+            if let recipeError = error {
+                print("search error : ", recipeError.localizedDescription)
             }
+            guard let recipes = recipes?.hits else { return }
+            self.toRecipesList(with: recipes)
         }
     }
 
