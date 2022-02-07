@@ -17,4 +17,8 @@ class RecipeManager {
     func addToFavorite(recipe: Recipe) {
         favoriteRecipes.append(recipe)
     }
+
+    func removeRecipe(at index: Int) {
+        favoriteRecipes.remove(at: index)
+    }
 }

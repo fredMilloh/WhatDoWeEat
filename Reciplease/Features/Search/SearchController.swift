@@ -11,6 +11,8 @@ class SearchController: UIViewController {
 
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var searchButton: UIButton!
 
     var listOfIngredients = [String]()
     lazy var ingredientManager = IngredientManager(delegate: self)
@@ -39,7 +41,13 @@ class SearchController: UIViewController {
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
-        RecipeRepository.shared.getRecipes(ingredients: listOfIngredients) { recipes, error in
+        searchButton.isHidden = true
+        activityIndicator.isHidden = false
+
+        RecipeRepository.shared.getRecipes(ingredients: listOfIngredients) { [self] recipes, error in
+            searchButton.isHidden = false
+            activityIndicator.isHidden = true
+
             if let recipeError = error {
                 print("search error : ", recipeError.localizedDescription)
             }
