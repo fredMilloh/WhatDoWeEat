@@ -41,6 +41,8 @@
 		B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781327B0562C0096BDD8 /* Double+.swift */; };
 		B6DC781627B10CA10096BDD8 /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781527B10CA10096BDD8 /* RecipeRepository.swift */; };
 		B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781727B1186A0096BDD8 /* RecipeError.swift */; };
+		B6DC781A27B187D40096BDD8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781927B187D40096BDD8 /* String+.swift */; };
+		B6DC781C27B2788F0096BDD8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781B27B2788F0096BDD8 /* UITextField+.swift */; };
 		C45EDF46D0E9A45F1C1504C9 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B0618514C2C756849DB2C9 /* Pods_Reciplease.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,8 @@
 		B6DC781327B0562C0096BDD8 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		B6DC781527B10CA10096BDD8 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
 		B6DC781727B1186A0096BDD8 /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
+		B6DC781927B187D40096BDD8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		B6DC781B27B2788F0096BDD8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		EEAF4CAFF8314690F425C80A /* Pods-Reciplease-RecipleaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease-RecipleaseUITests.release.xcconfig"; path = "Target Support Files/Pods-Reciplease-RecipleaseUITests/Pods-Reciplease-RecipleaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EEB43ACCE44FB10EADA84F19 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F3950EC8678F1EF511AE1635 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
@@ -303,6 +307,8 @@
 				B6DC77E127AE89410096BDD8 /* ViewController+.swift */,
 				B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */,
 				B6DC781327B0562C0096BDD8 /* Double+.swift */,
+				B6DC781927B187D40096BDD8 /* String+.swift */,
+				B6DC781B27B2788F0096BDD8 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -606,10 +612,12 @@
 				B6DC781627B10CA10096BDD8 /* RecipeRepository.swift in Sources */,
 				B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */,
 				B6DC780227AFEB050096BDD8 /* RecipeManager.swift in Sources */,
+				B6DC781C27B2788F0096BDD8 /* UITextField+.swift in Sources */,
 				B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */,
 				B6DC77E027AE86AA0096BDD8 /* UIColor+.swift in Sources */,
 				B6DC77A227AE7FA30096BDD8 /* Reciplease.xcdatamodeld in Sources */,
 				B6DC77E227AE89410096BDD8 /* ViewController+.swift in Sources */,
+				B6DC781A27B187D40096BDD8 /* String+.swift in Sources */,
 				B6DC780927B02F6E0096BDD8 /* TimeView.swift in Sources */,
 				B6DC77D227AE81A90096BDD8 /* FavoriteController.swift in Sources */,
 				B6DC77FD27AEF6610096BDD8 /* APIService.swift in Sources */,

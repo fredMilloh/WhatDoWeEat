@@ -11,7 +11,7 @@ class ListRecipesController: UIViewController {
 
     @IBOutlet weak var listRecipesTableView: UITableView!
 
-    var listOfRecipes: [Recipe]!
+    var listOfRecipes: (RecipePage)!
     /// unwrapped list to allow deletion of a cell
     var list = [Recipe]()
 
@@ -22,7 +22,7 @@ class ListRecipesController: UIViewController {
         listRecipesTableView.delegate = self
         listRecipesTableView.dataSource = self
         guard let list = listOfRecipes else { return }
-        self.list = list
+        self.list = list.hits
     }
 }
 

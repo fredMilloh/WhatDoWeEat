@@ -20,6 +20,7 @@ class SearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Reciplease"
+        setTextField()
         tabBarConfig()
         ingredientTableView.delegate = self
         ingredientTableView.dataSource = self
@@ -31,7 +32,6 @@ class SearchController: UIViewController {
         ingredientManager.createIngredientsArray(with: inventory)
         ingredientManager.addIngredientToList()
         ingredientTableView.reloadData()
-        ingredientTextField.placeholder = "something else ..."
         ingredientTextField.resignFirstResponder()
     }
 
@@ -48,15 +48,16 @@ class SearchController: UIViewController {
             searchButton.isHidden = false
             activityIndicator.isHidden = true
 
-            if let recipeError = error {
-                print("search error : ", recipeError.localizedDescription)
-            }
-            guard let recipes = recipes?.hits else { return }
+            guard let recipes = recipes else { return }
             self.toRecipesList(with: recipes)
+            #if DEBUG
+            print("nextUrl", recipes.nextPage)
+            print("count", recipes.count)
+            #endif
         }
     }
 
-    private func toRecipesList(with recipes: [Recipe]) {
+    private func toRecipesList(with recipes: (RecipePage)) {
         guard let recipesList = self.storyboard?.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController else { return }
         recipesList.listOfRecipes = recipes
         self.navigationController?.pushViewController(recipesList, animated: true)
@@ -98,6 +99,20 @@ extension SearchController: UITableViewDelegate {
 
 extension SearchController: IngredientDelegate {
 
+    func presentAlert(message alertError: RecipeError) {
+        let alert = UIAlertController(
+            title: "Oups...",
+            message: alertError.localizedDescription,
+            preferredStyle: .alert
+        )
+        let errorAction = UIAlertAction(
+            title: "ok",
+            style: .cancel
+        )
+        alert.addAction(errorAction)
+        present(alert, animated: true)
+    }
+
     func ingredientsList(with ingredients: [String]) {
         listOfIngredients = ingredients
     }
@@ -109,10 +124,19 @@ extension SearchController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ingredientTextField.becomeFirstResponder()
+        ingredientTextField.placeholder = ""
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ingredientTextField.resignFirstResponder()
         return true
+    }
+
+    private func setTextField() {
+        ingredientTextField.attributedPlaceholder = NSAttributedString(
+            string: "Lemon, Cheese, Sausages,...",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
+        )
+        ingredientTextField.setBottomBorder()
     }
 }

@@ -10,13 +10,19 @@ import Foundation
 enum RecipeError: LocalizedError {
     case invalidData
     case unknow
+    case incorrectElement
+    case remove
 
     var errorDescription: String? {
         switch self {
         case .invalidData:
             return "There is no corresponding recipe. Add an ingredient if necessary."
         case .unknow:
-            return "Oups... An error has occurred... Try again."
+            return "An error has occurred... Try again."
+        case .incorrectElement:
+            return "Only words and comma are correct."
+        case .remove:
+            return "Ingredient de-listed"
         }
     }
 }

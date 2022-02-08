@@ -9,6 +9,7 @@ import Foundation
 
 protocol IngredientDelegate: AnyObject {
     func ingredientsList(with ingredients: [String])
+    func presentAlert(message alertError: RecipeError)
 }
 
 class IngredientManager {
@@ -25,11 +26,22 @@ class IngredientManager {
         }
     }
 
+    var warning: RecipeError = .incorrectElement {
+        didSet {
+            delegate?.presentAlert(message: warning)
+        }
+    }
+
+
     var ingredients = [String]()
 
     func createIngredientsArray(with inventory: String) {
-        let ingredient = inventory.split(separator: ",").map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
-        self.ingredients = ingredient
+        if inventory.isLetters {
+            let ingredient = inventory.split(separator: ",").map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
+            self.ingredients = ingredient
+        } else {
+            warning = .incorrectElement
+        }
     }
 
     private func listAlreadyContains(this: String) -> Bool {
@@ -52,6 +64,7 @@ class IngredientManager {
 
     func removeToList(at index: Int) {
         listOfIngredients.remove(at: index)
+        warning = .remove
     }
 
     func clearListOfIngredients() {

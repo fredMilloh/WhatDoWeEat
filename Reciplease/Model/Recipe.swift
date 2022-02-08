@@ -8,6 +8,8 @@
 import Foundation
 
 struct RecipePage: Decodable {
+    var nextPage: String
+    var count: Int
     let hits: [Recipe]
 }
 
@@ -21,13 +23,11 @@ struct Recipe: Decodable {
     var totalTime: Double
 }
 
-//struct IngredientName: Decodable {
-//    var name: String
-//}
-
 extension RecipePage {
 
     enum MainKeys: String, CodingKey {
+        case nextLink = "_links"
+        case count = "count"
         case hits = "hits"
 
         enum HitsKeys: String, CodingKey {
@@ -47,6 +47,14 @@ extension RecipePage {
                 case totalTime = "totalTime"
             }
         }
+
+        enum LinkKeys: String, CodingKey {
+            case next = "next"
+
+            enum NextKeys: String, CodingKey {
+                case nextUrl = "href"
+            }
+        }
     }
 
     init(from decoder: Decoder) throws {
@@ -59,6 +67,7 @@ extension RecipePage {
         var recipes = [Recipe]()
 
         while !hitsArray.isAtEnd {
+            /// container of one recipe
             let hitContainer = try hitsArray.nestedContainer(keyedBy: MainKeys.HitsKeys.self)
             /// recipe container
             let recipeContainer = try hitContainer.nestedContainer(keyedBy: MainKeys.HitsKeys.RecipeKeys.self, forKey: .recipe)
@@ -86,5 +95,14 @@ extension RecipePage {
             recipes.append(recipe)
         }
         self.hits = recipes
+
+        /// count
+        self.count = try container.decode(Int.self, forKey: .count)
+        
+        /// link container
+        let linkContainer = try container.nestedContainer(keyedBy: MainKeys.LinkKeys.self, forKey: .nextLink)
+        let nextContainer = try linkContainer.nestedContainer(keyedBy: MainKeys.LinkKeys.NextKeys.self, forKey: .next)
+        self.nextPage = try nextContainer.decode(String.self, forKey: .nextUrl)
+
     }
 }

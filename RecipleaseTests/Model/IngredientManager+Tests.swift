@@ -9,6 +9,10 @@ import XCTest
 @testable import Reciplease
 
 class IngredientManager_Tests: XCTestCase, IngredientDelegate {
+    func presentAlert(message alertError: RecipeError) {
+        print("alert")
+    }
+
     func ingredientsList(with ingredients: [String]) {
         _ = ingredients
     }
@@ -26,7 +30,7 @@ class IngredientManager_Tests: XCTestCase, IngredientDelegate {
         XCTAssertEqual(array, [])
     }
 
-    func test_given_ther_is_empty_ingredient_when_tap_add_then_array_is_unchanged() {
+    func test_given_there_is_empty_ingredient_when_tap_add_then_array_is_unchanged() {
         // arrange
         let sut = IngredientManager(delegate: self)
         sut.listOfIngredients = ["item"]
@@ -98,5 +102,26 @@ class IngredientManager_Tests: XCTestCase, IngredientDelegate {
         sut.clearListOfIngredients()
         // assert
         XCTAssertTrue(sut.listOfIngredients.isEmpty)
+    }
+
+    func test_given_list_filled_when_remove_one_ingredient_then_list_updated() {
+        // arrange
+        let sut = IngredientManager(delegate: self)
+        sut.listOfIngredients = ["Cheese", "Eggs", "Lemon", "Mushrooms", "Potatoe", "Tomatoe"]
+        // act
+        sut.removeToList(at: 3)
+        // assert
+        XCTAssertEqual(sut.listOfIngredients, ["Cheese", "Eggs", "Lemon", "Potatoe", "Tomatoe"])
+    }
+
+    func test_given_inventory_is_number_when_add_pressed_then_alert_is_displayed() {
+        // arrange
+        let sut = IngredientManager(delegate: self)
+        sut.listOfIngredients = ["Lemon", "Mushrooms", "Tomatoe"]
+        inventory = "34"
+        // act
+        sut.createIngredientsArray(with: inventory)
+        // arrange
+        XCTAssertEqual(sut.warning.localizedDescription, "Only words and comma are correct.")
     }
 }

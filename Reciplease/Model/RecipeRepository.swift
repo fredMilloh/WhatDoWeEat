@@ -24,10 +24,7 @@ class RecipeRepository {
         self.appId = appId
     }
 
-    func getRecipes(
-        ingredients: [String],
-        completion: @escaping RecipesOrError
-    ) {
+    func getRecipes(ingredients: [String], completion: @escaping RecipesOrError) {
 
         let recipesUrl = getUrl(with: ingredients)
         guard let url = recipesUrl else {
