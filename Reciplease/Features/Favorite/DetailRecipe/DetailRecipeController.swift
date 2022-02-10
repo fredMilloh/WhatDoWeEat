@@ -18,6 +18,8 @@ class DetailRecipeController: UIViewController {
     var selectedRecipe: Recipe!
     var selectedImage: UIImage!
     private var favoriteButton: UIBarButtonItem?
+    private let repository = FavoriteRepository()
+
     private var recipeManager = RecipeManager.shared
     lazy var favorites = recipeManager.favoriteRecipes
     private var isFavorite = false
@@ -51,13 +53,10 @@ class DetailRecipeController: UIViewController {
     }
 
     @objc private func favoriteButtonPressed() {
-        if !isFavorite {
-            RecipeManager.shared.addToFavorite(recipe: selectedRecipe)
-            favoriteButton?.image = UIImage(systemName: "star.fill")
-        } else {
-            favoriteButton?.image = UIImage(systemName: "star")
-        }
-
+        favoriteButton?.image = UIImage(systemName: "star.fill")
+//        repository.saveFavorite(recipe: selectedRecipe) {
+//            favoriteButton?.image = UIImage(systemName: "star.fill")
+//        }
     }
     /// avoids adding a recipe several times in favorites
     private func checkFavorite() {

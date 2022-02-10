@@ -112,6 +112,7 @@ class IngredientManager_Tests: XCTestCase, IngredientDelegate {
         sut.removeToList(at: 3)
         // assert
         XCTAssertEqual(sut.listOfIngredients, ["Cheese", "Eggs", "Lemon", "Potatoe", "Tomatoe"])
+        XCTAssertEqual(sut.warning.localizedDescription, "Ingredient de-listed")
     }
 
     func test_given_inventory_is_number_when_add_pressed_then_alert_is_displayed() {

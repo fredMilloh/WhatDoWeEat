@@ -9,6 +9,8 @@ import Foundation
 
 class RecipeRepository {
 
+    // MARK: - API
+
     typealias RecipesOrError = (_ recipes: (RecipePage)?, _ error: RecipeError?) -> Void
 
     /// Retrieving the result of the network call (Weather data or error) with the APIService method call.
@@ -40,6 +42,8 @@ class RecipeRepository {
         }
     }
 }
+
+    // MARK: - Url
 
 extension RecipeRepository {
 

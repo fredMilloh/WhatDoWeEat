@@ -44,7 +44,7 @@ extension ListRecipesController: UITableViewDataSource {
     }
 }
 
-//MARK: - TableView Delegate
+// MARK: - TableView Delegate
 
 extension ListRecipesController: UITableViewDelegate {
 
