@@ -58,7 +58,8 @@ class SearchController: UIViewController {
     }
 
     private func toRecipesList(with recipes: (RecipePage)) {
-        guard let recipesList = self.storyboard?.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController else { return }
+        let storyboard = UIStoryboard(name: "ListRecipes", bundle: Bundle.main)
+        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController else { return }
         recipesList.listOfRecipes = recipes
         self.navigationController?.pushViewController(recipesList, animated: true)
     }

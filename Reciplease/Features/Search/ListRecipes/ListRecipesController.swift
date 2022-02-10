@@ -54,7 +54,8 @@ extension ListRecipesController: UITableViewDelegate {
               let imageSelectedRecipe = cell.listCellImageView.image
         else { return }
 
-        guard let detailRecipe = self.storyboard?.instantiateViewController(withIdentifier: "DetailRecipeController") as? DetailRecipeController else { return }
+        let storyboard = UIStoryboard(name: "DetailRecipe", bundle: Bundle.main)
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe") as? DetailRecipeController else { return }
 
         detailRecipe.selectedRecipe = selectedRecipe
         detailRecipe.selectedImage = imageSelectedRecipe
