@@ -29,6 +29,7 @@ class FavoriteController: UIViewController {
     }
 
     private func getFavorite() {
+        favoritesRecipes = [Favorite]()
         favoriteRepository.getFavorite { favorites in
 
             for favorite in favorites {
@@ -61,25 +62,42 @@ extension FavoriteController: UITableViewDataSource {
 extension FavoriteController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedRecipe = favoritesRecipes[indexPath.row]
-//        guard let cell = listFavoriteTableView.cellForRow(at: indexPath) as? ListRecipeCell,
-//              let imageSelectedRecipe = cell.listCellImageView.image
-//        else { return }
-//
-//        let storyboard = UIStoryboard(name: "DetailRecipe", bundle: Bundle.main)
-//        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe") as? DetailRecipeController else { return }
-//
-//        detailRecipe.selectedRecipe = selectedRecipe
-//        detailRecipe.selectedImage = imageSelectedRecipe
-//        self.navigationController?.pushViewController(detailRecipe, animated: true)
+        let favoriteRecipe = favoritesRecipes[indexPath.row]
+        let selectedRecipe = prepareToDetail(favorite: favoriteRecipe)
+        guard let cell = listFavoriteTableView.cellForRow(at: indexPath) as? ListRecipeCell,
+              let imageSelectedRecipe = cell.listCellImageView.image
+        else { return }
+
+        let storyboard = UIStoryboard(name: "DetailRecipe", bundle: Bundle.main)
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe") as? DetailRecipeController else { return }
+
+        detailRecipe.selectedRecipe = selectedRecipe
+        detailRecipe.selectedImage = imageSelectedRecipe
+        self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            favoriteRepository.deleteFavorite(favorite: favoritesRecipes[indexPath.row])
             favoritesRecipes.remove(at: indexPath.row)
             listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
+            getFavorite()
             listFavoriteTableView.reloadData()
         }
     }
+}
 
+extension FavoriteController {
+
+    func prepareToDetail(favorite: Favorite) -> Recipe {
+        guard let name = favorite.name,
+              let ingredients = favorite.ingredients,
+              let urlDirections = favorite.urlDirections,
+              let ingredientLines = favorite.ingredientLines
+        else { return Recipe(name: "", imageUrl: "", urlDirections: "", yield: 0, ingredientLines: [""], ingredients: "", totalTime: 0) }
+        let yield = favorite.yield
+        let totalTime = favorite.totalTime
+
+        return Recipe(name: name, imageUrl: "", urlDirections: urlDirections, yield: yield, ingredientLines: ingredientLines, ingredients: ingredients, totalTime: totalTime)
+    }
 }

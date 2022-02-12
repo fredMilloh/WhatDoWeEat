@@ -40,7 +40,6 @@
 		B6DC781E27B2B8D90096BDD8 /* RecipeRepository+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781D27B2B8D90096BDD8 /* RecipeRepository+Tests.swift */; };
 		B6DC782127B2B9BB0096BDD8 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782027B2B9BB0096BDD8 /* TestCase.swift */; };
 		B6DC782327B2BA480096BDD8 /* Recipe+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */; };
-		B6DC782927B2CFB50096BDD8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782827B2CFB50096BDD8 /* CoreDataStack.swift */; };
 		B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */; };
 		B6DC783227B522400096BDD8 /* ListRecipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783127B522400096BDD8 /* ListRecipes.storyboard */; };
 		B6DC783527B522BE0096BDD8 /* SearchRecipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783327B522BE0096BDD8 /* SearchRecipes.storyboard */; };
@@ -108,7 +107,6 @@
 		B6DC781D27B2B8D90096BDD8 /* RecipeRepository+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeRepository+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782027B2B9BB0096BDD8 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Tests.swift"; sourceTree = "<group>"; };
-		B6DC782827B2CFB50096BDD8 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
 		B6DC783127B522400096BDD8 /* ListRecipes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListRecipes.storyboard; sourceTree = SOURCE_ROOT; };
 		B6DC783427B522BE0096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Reciplease/Features/Base.lproj/SearchRecipes.storyboard; sourceTree = SOURCE_ROOT; };
@@ -377,7 +375,6 @@
 			isa = PBXGroup;
 			children = (
 				B6DC77A027AE7FA30096BDD8 /* Reciplease.xcdatamodeld */,
-				B6DC782827B2CFB50096BDD8 /* CoreDataStack.swift */,
 				B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */,
 			);
 			path = CoreData;
@@ -578,7 +575,6 @@
 			files = (
 				B6DC77ED27AE91A20096BDD8 /* UIImageView+.swift in Sources */,
 				B6DC77DE27AE865D0096BDD8 /* TabBarAppearance.swift in Sources */,
-				B6DC782927B2CFB50096BDD8 /* CoreDataStack.swift in Sources */,
 				B6DC780027AEFE0A0096BDD8 /* DetailRecipeController.swift in Sources */,
 				B6DC781627B10CA10096BDD8 /* RecipeRepository.swift in Sources */,
 				B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */,
