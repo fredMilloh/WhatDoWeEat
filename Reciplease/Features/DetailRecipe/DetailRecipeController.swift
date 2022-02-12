@@ -18,10 +18,8 @@ class DetailRecipeController: UIViewController {
     var selectedRecipe: Recipe!
     var selectedImage: UIImage!
     private var favoriteButton: UIBarButtonItem?
-    private let repository = FavoriteRepository()
+    private let favoriteRepository = FavoriteRepository()
 
-    private var recipeManager = RecipeManager.shared
-    lazy var favorites = recipeManager.favoriteRecipes
     private var isFavorite = false
 
     override func viewDidLoad() {
@@ -30,7 +28,6 @@ class DetailRecipeController: UIViewController {
         detailTableView.dataSource = self
         detailRecipeImageView.makeGradient(to: detailRecipeImageView)
         configureNavigationItem()
-        checkFavorite()
     }
     
     @IBAction func getDirectionsButton(_ sender: UIButton) {
@@ -54,18 +51,18 @@ class DetailRecipeController: UIViewController {
 
     @objc private func favoriteButtonPressed() {
         favoriteButton?.image = UIImage(systemName: "star.fill")
-//        repository.saveFavorite(recipe: selectedRecipe) {
-//            favoriteButton?.image = UIImage(systemName: "star.fill")
-//        }
-    }
-    /// avoids adding a recipe several times in favorites
-    private func checkFavorite() {
-        favorites.forEach { favoriteRecipe in
-            if selectedRecipe.name == favoriteRecipe.name {
-                isFavorite = true
-            }
+        favoriteRepository.saveFavorite(recipe: selectedRecipe) {
+            favoriteButton?.image = UIImage(systemName: "star.fill")
         }
     }
+    /// avoids adding a recipe several times in favorites
+//    private func checkFavorite() {
+//        favorites.forEach { favoriteRecipe in
+//            if selectedRecipe.name == favoriteRecipe.name {
+//                isFavorite = true
+//            }
+//        }
+//    }
 }
 
 extension DetailRecipeController: UITableViewDataSource {

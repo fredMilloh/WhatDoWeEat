@@ -18,7 +18,4 @@ class TestCase: XCTestCase {
         return try? Data(contentsOf: url)
     }
 
-
-
-
 }

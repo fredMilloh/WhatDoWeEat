@@ -44,16 +44,20 @@ class SearchController: UIViewController {
         searchButton.isHidden = true
         activityIndicator.isHidden = false
 
-        RecipeRepository.shared.getRecipes(ingredients: listOfIngredients) { [self] recipes, error in
-            searchButton.isHidden = false
-            activityIndicator.isHidden = true
+        guard let url = RecipeRepository.shared.getUrl(with: listOfIngredients) else { return }
 
-            guard let recipes = recipes else { return }
-            self.toRecipesList(with: recipes)
-            #if DEBUG
-            print("nextUrl", recipes.nextPage)
-            print("count", recipes.count)
-            #endif
+        APIService.shared.get(url: url) { [self] data, error in
+            RecipeRepository.shared.getRecipes(data: data, error: error) { recipes, error in
+                searchButton.isHidden = false
+                activityIndicator.isHidden = true
+
+                guard let recipes = recipes else { return }
+                self.toRecipesList(with: recipes)
+                #if DEBUG
+                print("nextUrl", recipes.nextPage)
+                print("count", recipes.count)
+                #endif
+            }
         }
     }
 

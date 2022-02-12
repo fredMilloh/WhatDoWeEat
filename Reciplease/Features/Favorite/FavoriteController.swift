@@ -11,7 +11,7 @@ class FavoriteController: UIViewController {
     
     @IBOutlet weak var listFavoriteTableView: UITableView!
 
-    private let repository = FavoriteRepository()
+    private let favoriteRepository = FavoriteRepository()
     private var favoritesRecipes = [Favorite]()
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class FavoriteController: UIViewController {
     }
 
     private func getFavorite() {
-        repository.getFavorite { favorites in
+        favoriteRepository.getFavorite { favorites in
 
             for favorite in favorites {
                 self.favoritesRecipes.append(favorite)
@@ -76,8 +76,9 @@ extension FavoriteController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            RecipeManager.shared.removeRecipe(at: indexPath.row)
+            favoritesRecipes.remove(at: indexPath.row)
             listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
+            listFavoriteTableView.reloadData()
         }
     }
 

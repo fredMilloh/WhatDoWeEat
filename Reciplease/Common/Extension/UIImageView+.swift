@@ -26,7 +26,7 @@ extension UIImageView {
         gradientLayer.removeFromSuperlayer()
         gradientLayer.frame = image.bounds
         gradientLayer.type = .axial
-        gradientLayer.colors = [color.withAlphaComponent(0).cgColor, color.withAlphaComponent(0.6).cgColor]
+        gradientLayer.colors = [color.withAlphaComponent(0).cgColor, color.withAlphaComponent(0.7).cgColor]
         gradientLayer.locations = [0, 1]
         image.layer.addSublayer(gradientLayer)
     }

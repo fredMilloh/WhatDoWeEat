@@ -6,14 +6,13 @@
 //
 
 import Foundation
+import Alamofire
 
 class RecipeRepository {
 
     // MARK: - API
 
     typealias RecipesOrError = (_ recipes: (RecipePage)?, _ error: RecipeError?) -> Void
-
-    /// Retrieving the result of the network call (Weather data or error) with the APIService method call.
 
     static var shared = RecipeRepository()
     private init() {}
@@ -26,20 +25,16 @@ class RecipeRepository {
         self.appId = appId
     }
 
-    func getRecipes(ingredients: [String], completion: @escaping RecipesOrError) {
-
-        let recipesUrl = getUrl(with: ingredients)
-        guard let url = recipesUrl else {
-            completion(nil, nil)
-            return
-        }
-
-        APIService.shared.getRecipes(url: url) { status, recipes in
-            if status {
-                completion(recipes, nil)
+    func getRecipes(data: (Data)?, error: (AFError)?, callback: RecipesOrError) {
+        guard let data = data else { return }
+        do {
+            let decoder = JSONDecoder()
+            let recipes = try decoder.decode(RecipePage.self, from: data)
+                callback(recipes, nil)
+            print("aferror:", error as Any)
+            } catch {
+                callback(nil, .invalidData)
             }
-            completion(nil, .invalidData)
-        }
     }
 }
 

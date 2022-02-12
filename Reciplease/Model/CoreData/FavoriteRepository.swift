@@ -27,7 +27,7 @@ class FavoriteRepository {
 
     }
 
-    func saveFavorite(recipe: Favorite, completion: () -> Void) {
+    func saveFavorite(recipe: Recipe, completion: () -> Void) {
 
         let favorite = Favorite(context: coreDataStack.viewContext)
 
