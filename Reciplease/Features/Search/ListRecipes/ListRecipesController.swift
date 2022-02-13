@@ -60,7 +60,6 @@ extension ListRecipesController: UITableViewDelegate {
         detailRecipe.selectedRecipe = selectedRecipe
         detailRecipe.selectedImage = imageSelectedRecipe
         self.navigationController?.pushViewController(detailRecipe, animated: true)
-        
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -70,5 +69,4 @@ extension ListRecipesController: UITableViewDelegate {
             listRecipesTableView.reloadData()
         }
     }
-
 }

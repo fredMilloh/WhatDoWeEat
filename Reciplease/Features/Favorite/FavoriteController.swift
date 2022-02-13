@@ -8,7 +8,7 @@
 import UIKit
 
 class FavoriteController: UIViewController {
-    
+
     @IBOutlet weak var listFavoriteTableView: UITableView!
 
     private let favoriteRepository = FavoriteRepository()
@@ -63,7 +63,7 @@ extension FavoriteController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favoriteRecipe = favoritesRecipes[indexPath.row]
-        let selectedRecipe = prepareToDetail(favorite: favoriteRecipe)
+        let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe)
         guard let cell = listFavoriteTableView.cellForRow(at: indexPath) as? ListRecipeCell,
               let imageSelectedRecipe = cell.listCellImageView.image
         else { return }
@@ -78,7 +78,8 @@ extension FavoriteController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            favoriteRepository.deleteFavorite(favorite: favoritesRecipes[indexPath.row])
+            guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
+            favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
             favoritesRecipes.remove(at: indexPath.row)
             listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
             getFavorite()
@@ -89,15 +90,29 @@ extension FavoriteController: UITableViewDelegate {
 
 extension FavoriteController {
 
-    func prepareToDetail(favorite: Favorite) -> Recipe {
+    func convertionIntoRecipeFrom(favorite: Favorite) -> Recipe {
         guard let name = favorite.name,
               let ingredients = favorite.ingredients,
               let urlDirections = favorite.urlDirections,
               let ingredientLines = favorite.ingredientLines
-        else { return Recipe(name: "", imageUrl: "", urlDirections: "", yield: 0, ingredientLines: [""], ingredients: "", totalTime: 0) }
+        else { return Recipe(name: "",
+                             imageUrl: "",
+                             urlDirections: "",
+                             yield: 0,
+                             ingredientLines: [""],
+                             ingredients: "",
+                             totalTime: 0)
+        }
         let yield = favorite.yield
         let totalTime = favorite.totalTime
 
-        return Recipe(name: name, imageUrl: "", urlDirections: urlDirections, yield: yield, ingredientLines: ingredientLines, ingredients: ingredients, totalTime: totalTime)
+        return Recipe(name: name,
+                      imageUrl: "",
+                      urlDirections: urlDirections,
+                      yield: yield,
+                      ingredientLines: ingredientLines,
+                      ingredients: ingredients,
+                      totalTime: totalTime
+        )
     }
 }

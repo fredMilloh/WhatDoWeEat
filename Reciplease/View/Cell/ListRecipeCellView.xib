@@ -51,6 +51,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9A-JF-s0V" customClass="TimeView" customModule="Reciplease" customModuleProvider="target">
                             <rect key="frame" x="2" y="2" width="61" height="61"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -62,6 +67,11 @@
                         <constraint firstItem="f9A-JF-s0V" firstAttribute="leading" secondItem="6uh-l1-P1w" secondAttribute="leading" constant="2" id="gNV-Pg-cR6"/>
                         <constraint firstAttribute="trailing" secondItem="f9A-JF-s0V" secondAttribute="trailing" constant="2" id="xtg-gD-kOD"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

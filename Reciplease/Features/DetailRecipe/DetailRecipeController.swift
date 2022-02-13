@@ -19,8 +19,8 @@ class DetailRecipeController: UIViewController {
     var selectedImage: UIImage!
     private var favoriteButton: UIBarButtonItem?
     private let favoriteRepository = FavoriteRepository()
-
     private var isFavorite = false
+    private lazy var recipeUrl = selectedRecipe.urlDirections
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class DetailRecipeController: UIViewController {
         detailRecipeImageView.makeGradient(to: detailRecipeImageView)
         configureNavigationItem()
     }
-    
+
     @IBAction func getDirectionsButton(_ sender: UIButton) {
         let directionsLink = selectedRecipe.urlDirections
         guard let directionsUrl = URL(string: directionsLink) else { return }
@@ -43,26 +43,23 @@ class DetailRecipeController: UIViewController {
                                          target: self,
                                          action: #selector(favoriteButtonPressed))
         favoriteButton?.tintColor = .yellow
-        if isFavorite {
+        if favoriteRepository.isFavorite(recipeUrl: recipeUrl) {
+            isFavorite = true
             favoriteButton?.image = UIImage(systemName: "star.fill")
         }
         navigationItem.rightBarButtonItem = favoriteButton
     }
 
     @objc private func favoriteButtonPressed() {
-        favoriteButton?.image = UIImage(systemName: "star.fill")
-        favoriteRepository.saveFavorite(recipe: selectedRecipe) {
-            favoriteButton?.image = UIImage(systemName: "star.fill")
+        if isFavorite {
+            favoriteButton?.image = UIImage(systemName: "star")
+            favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+        } else {
+            favoriteRepository.saveFavorite(recipe: selectedRecipe) {
+                favoriteButton?.image = UIImage(systemName: "star.fill")
+            }
         }
     }
-    /// avoids adding a recipe several times in favorites
-//    private func checkFavorite() {
-//        favorites.forEach { favoriteRecipe in
-//            if selectedRecipe.name == favoriteRecipe.name {
-//                isFavorite = true
-//            }
-//        }
-//    }
 }
 
 extension DetailRecipeController: UITableViewDataSource {
@@ -80,7 +77,7 @@ extension DetailRecipeController: UITableViewDataSource {
         let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
         detailTimeView.yieldLabel.text = yieldsString
         detailTimeView.timeLabel.text = timeString
-        
+
         detailRecipeImageView.image = selectedImage != UIImage() ? selectedImage : UIImage(named: "DefaultImage")
         detailRecipeNameLabel.text = selectedRecipe.name
 
@@ -90,8 +87,6 @@ extension DetailRecipeController: UITableViewDataSource {
 
         return cell
     }
-
-
 }
 extension DetailRecipeController: UITableViewDelegate {
 

@@ -39,10 +39,9 @@ class FavoriteRepository {
         }
     }
 
-    func deleteFavorite(favorite: Favorite) {
+    func deleteFavorite(recipeUrl: String) {
         let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
-        guard let favoriteUrl = favorite.urlDirections else { return }
-        request.predicate = NSPredicate(format: "urlDirections == %@", "\(favoriteUrl)")
+        request.predicate = NSPredicate(format: "urlDirections == %@", "\(recipeUrl)")
         do {
             let arrayResponse = try AppDelegate.viewContext.fetch(request)
             for item in arrayResponse {
@@ -52,5 +51,19 @@ class FavoriteRepository {
         } catch {
             print("unable to delete this recipe")
         }
+    }
+
+    func isFavorite(recipeUrl: String) -> Bool {
+        let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
+        request.predicate = NSPredicate(format: "urlDirections == %@", "\(recipeUrl)")
+        do {
+            let arrayResponse = try AppDelegate.viewContext.fetch(request)
+            for _ in arrayResponse {
+                return true
+            }
+        } catch {
+            print("unable to find this recipe")
+        }
+        return false
     }
 }

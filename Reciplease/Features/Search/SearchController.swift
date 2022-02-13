@@ -98,7 +98,6 @@ extension SearchController: UITableViewDelegate {
             ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-
 }
 // MARK: - Protocol
 
