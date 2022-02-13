@@ -48,11 +48,16 @@ extension FavoriteController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListRecipeCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+                as? ListRecipeCell else { return UITableViewCell() }
 
         let recipe = favoritesRecipes[indexPath.row]
-        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl ?? "")
-        cell.configCell(name: recipe.name ?? "", ingredients: recipe.ingredients ?? "", yields: recipe.yield, time: recipe.totalTime)
+        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl.orEmpty)
+        cell.configCell(name: recipe.name.orEmpty,
+                        ingredients: recipe.ingredients.orEmpty,
+                        yields: recipe.yield,
+                        time: recipe.totalTime
+        )
         return cell
     }
 }
@@ -69,14 +74,18 @@ extension FavoriteController: UITableViewDelegate {
         else { return }
 
         let storyboard = UIStoryboard(name: "DetailRecipe", bundle: Bundle.main)
-        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe") as? DetailRecipeController else { return }
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe")
+                as? DetailRecipeController else { return }
 
         detailRecipe.selectedRecipe = selectedRecipe
         detailRecipe.selectedImage = imageSelectedRecipe
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath
+        ) {
         if editingStyle == .delete {
             guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
             favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)

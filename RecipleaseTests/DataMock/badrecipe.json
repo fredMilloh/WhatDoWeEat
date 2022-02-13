@@ -1,0 +1,74 @@
+{
+    "count": 10000,
+    "_links": {
+        "next": {
+            "href": "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7aac57c3a479c1b47bef3a206193917d&_cont=CHcVQBtNNQphDmgVQntAEX4BYlBtAgAEQGxAAWMQY1RxAgoBUXlSUGobYwAmAQoPEjcWBGcbMFYiDQdSSmARAmtHMAdzAwcVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=17f51d8a",
+            "title": "Next page"
+        }
+    },
+    "hits": [
+        {
+            "recipe": {
+                "label": "Baking with Dorie: Lemon-Lemon Lemon Cream Recipe",
+                "image": "https://www.edamam.com/web-img/fdb/fdbace4ccbbfc9b571035f0e3882f300.jpg",
+                "url": "http://www.seriouseats.com/recipes/2008/04/lemon-lemon-lemon-cream-recipe.html",
+                "yield": "8.0",
+                "ingredientLines": [
+                    "1 cup sugar",
+                    "Finely grated zest of 3 lemons",
+                    "4 large eggs",
+                    "3/4 cup freshly squeezed lemon juice (from 4 to 5 lemons)",
+                    "2 sticks plus 5 tablespoons (21 tablespoons; 10 1/2 ounces) unsalted butter, at room temperature and cut into tablespoon-sized pieces",
+                    "1 fully-baked 9-inch tart shell"
+                ],
+                "ingredients": [
+                    {
+                        "food": "sugar"
+                    },
+                    {
+                        "food": "eggs"
+                    },
+                    {
+                        "food": "lemon juice"
+                    },
+                    {
+                        "food": "unsalted butter"
+                    }
+                ],
+                "totalTime": "0.0"
+            }
+        },
+        {
+            "recipe": {
+                "label": "Lemon Bars",
+                "image": "https://www.edamam.com/web-img/52c/52c39fac86eb11ae14c5d36fc54e5022.jpg",
+                "url": "http://smittenkitchen.com/2008/01/lemon-bars/",
+                "yield": "8.0",
+                "ingredientLines": [
+                    "1/2 pound unsalted butter, at room temperature",
+                    "1/2 cup granulated sugar",
+                    "2 cups flour",
+                    "1/8 teaspoon kosher salt",
+                    "For the full-size lemon layer:",
+                    "2 1/2 cup granulated sugar",
+                    "2 tbsp Lemon zest",
+                    "1 cup freshly squeezed lemon juice",
+                    "1 cup Flour",
+                    "Confectioners’ sugar, for dusting"
+                ],
+                "ingredients": [
+                    {
+                        "food": "unsalted butter"
+                    },
+                    {
+                        "food": "granulated sugar"
+                    },
+                    {
+                        "food": "flour"
+                    }
+                ],
+                "totalTime": "0.0"
+            }
+        }
+    ]
+}

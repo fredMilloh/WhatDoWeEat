@@ -35,11 +35,17 @@ extension ListRecipesController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListRecipeCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell",
+                                                       for: indexPath) as? ListRecipeCell
+        else { return UITableViewCell() }
 
         let recipe = self.list[indexPath.row]
         cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
-        cell.configCell(name: recipe.name, ingredients: recipe.ingredients, yields: recipe.yield, time: recipe.totalTime)
+        cell.configCell(name: recipe.name,
+                        ingredients: recipe.ingredients,
+                        yields: recipe.yield,
+                        time: recipe.totalTime
+        )
         return cell
     }
 }
@@ -62,7 +68,10 @@ extension ListRecipesController: UITableViewDelegate {
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath
+        ) {
         if editingStyle == .delete {
             list.remove(at: indexPath.row)
             listRecipesTableView.deleteRows(at: [indexPath], with: .fade)

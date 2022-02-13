@@ -14,3 +14,16 @@ extension String  {
         return !isEmpty && rangeOfCharacter(from: notAllowed) == nil
     }
 }
+
+extension Optional where Wrapped == String {
+
+    /// to replace ?? ""
+    var orEmpty: String {
+        switch self {
+        case .none:
+            return ""
+        case .some(let wrapped):
+            return wrapped
+        }
+    }
+}

@@ -26,21 +26,21 @@ class IngredientManager {
         }
     }
 
-    var warning: RecipeError = .incorrectElement {
+    var alert: RecipeError = .incorrectElement {
         didSet {
-            delegate?.presentAlert(message: warning)
+            delegate?.presentAlert(message: alert)
         }
     }
-
 
     var ingredients = [String]()
 
     func createIngredientsArray(with inventory: String) {
         if inventory.isLetters {
-            let ingredient = inventory.split(separator: ",").map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
+            let ingredient = inventory.split(separator: ",")
+                .map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
             self.ingredients = ingredient
         } else {
-            warning = .incorrectElement
+            alert = .incorrectElement
         }
     }
 
@@ -64,7 +64,8 @@ class IngredientManager {
 
     func removeToList(at index: Int) {
         listOfIngredients.remove(at: index)
-        warning = .remove
+        ingredients = [String]()
+        alert = .remove
     }
 
     func clearListOfIngredients() {

@@ -31,6 +31,7 @@ class SearchController: UIViewController {
         guard let inventory = ingredientTextField.text else { return }
         ingredientManager.createIngredientsArray(with: inventory)
         ingredientManager.addIngredientToList()
+        ingredientTextField.text = "One more thing ? ..."
         ingredientTableView.reloadData()
         ingredientTextField.resignFirstResponder()
     }
@@ -63,7 +64,8 @@ class SearchController: UIViewController {
 
     private func toRecipesList(with recipes: (RecipePage)) {
         let storyboard = UIStoryboard(name: "ListRecipes", bundle: Bundle.main)
-        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController else { return }
+        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipes")
+                as? ListRecipesController else { return }
         recipesList.listOfRecipes = recipes
         self.navigationController?.pushViewController(recipesList, animated: true)
     }
@@ -92,10 +94,15 @@ extension SearchController: UITableViewDataSource {
 
 extension SearchController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath
+        ) {
         if editingStyle == .delete {
             ingredientManager.removeToList(at: indexPath.row)
             ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
+            presentAlert(message: .remove)
+            ingredientTableView.reloadData()
         }
     }
 }
@@ -105,8 +112,8 @@ extension SearchController: IngredientDelegate {
 
     func presentAlert(message alertError: RecipeError) {
         let alert = UIAlertController(
-            title: "Oups...",
-            message: alertError.localizedDescription,
+            title: "",
+            message: "\(alertError.localizedDescription)",
             preferredStyle: .alert
         )
         let errorAction = UIAlertAction(

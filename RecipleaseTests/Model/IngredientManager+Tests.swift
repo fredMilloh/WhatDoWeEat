@@ -9,6 +9,7 @@ import XCTest
 @testable import Reciplease
 
 class IngredientManager_Tests: XCTestCase, IngredientDelegate {
+
     func presentAlert(message alertError: RecipeError) {
         print("alert")
     }
@@ -112,10 +113,9 @@ class IngredientManager_Tests: XCTestCase, IngredientDelegate {
         sut.removeToList(at: 3)
         // assert
         XCTAssertEqual(sut.listOfIngredients, ["Cheese", "Eggs", "Lemon", "Potatoe", "Tomatoe"])
-        XCTAssertEqual(sut.warning.localizedDescription, "Ingredient de-listed")
     }
 
-    func test_given_inventory_is_number_when_add_pressed_then_alert_is_displayed() {
+    func test_given_inventory_is_number_when_add_pressed_then_not_added() {
         // arrange
         let sut = IngredientManager(delegate: self)
         sut.listOfIngredients = ["Lemon", "Mushrooms", "Tomatoe"]
@@ -123,6 +123,6 @@ class IngredientManager_Tests: XCTestCase, IngredientDelegate {
         // act
         sut.createIngredientsArray(with: inventory)
         // arrange
-        XCTAssertEqual(sut.warning.localizedDescription, "Only words and comma are correct.")
+        XCTAssertEqual(sut.listOfIngredients, ["Lemon", "Mushrooms", "Tomatoe"])
     }
 }

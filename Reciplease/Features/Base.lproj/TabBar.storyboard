@@ -31,7 +31,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="DetailRecipe" storyboardName="DetailRecipe" referencedIdentifier="DetailRecipe" id="dwR-un-5g1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6V-DZ-860" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3934.7826086956525" y="-307.36607142857139"/>
+            <point key="canvasLocation" x="19" y="729"/>
         </scene>
         <!--ListRecipes-->
         <scene sceneID="jBf-s6-xEt">
@@ -39,7 +39,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="ListRecipes" storyboardName="ListRecipes" referencedIdentifier="ListRecipes" id="4HT-VN-V8K" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DIj-6e-0KJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3040.579710144928" y="-309.375"/>
+            <point key="canvasLocation" x="457" y="665"/>
         </scene>
         <!--SearchRecipes-->
         <scene sceneID="Fmk-9O-m0B">
@@ -59,7 +59,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2H-aq-ypQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-314" y="575"/>
+            <point key="canvasLocation" x="-351" y="583"/>
         </scene>
         <!--FavoriteList-->
         <scene sceneID="yQh-gx-y70">
@@ -67,7 +67,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="FavoriteList" storyboardName="Favorite" referencedIdentifier="FavoriteList" id="4zh-AT-KFa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6g-Iw-3DM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.913043478261" y="489.50892857142856"/>
+            <point key="canvasLocation" x="-394" y="665"/>
         </scene>
     </scenes>
 </document>

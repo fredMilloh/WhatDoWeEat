@@ -25,13 +25,12 @@ class RecipeRepository {
         self.appId = appId
     }
 
-    func getRecipes(data: (Data)?, error: (AFError)?, callback: RecipesOrError) {
+    func getRecipes(data: (Data)?, error: (RecipeError)?, callback: RecipesOrError) {
         guard let data = data else { return }
         do {
             let decoder = JSONDecoder()
             let recipes = try decoder.decode(RecipePage.self, from: data)
                 callback(recipes, nil)
-            print("aferror:", error as Any)
             } catch {
                 callback(nil, .invalidData)
             }
