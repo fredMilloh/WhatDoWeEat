@@ -14,8 +14,9 @@ class SearchController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchButton: UIButton!
 
+    var viewModel = ListViewModel.shared
     var listOfIngredients = [String]()
-    lazy var ingredientManager = IngredientManager(delegate: self)
+    lazy var ingredientManager = IngredientViewModel(delegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,8 @@ class SearchController: UIViewController {
         ingredientTableView.dataSource = self
         ingredientTextField.delegate = self
     }
+
+    // MARK: - Buttons Actions
 
     @IBAction func addButton(_ sender: UIButton) {
         guard let inventory = ingredientTextField.text else { return }
@@ -45,33 +48,37 @@ class SearchController: UIViewController {
         searchButton.isHidden = true
         activityIndicator.isHidden = false
 
-        guard let url = RecipeRepository.shared.getUrl(with: listOfIngredients) else { return }
+        guard let url = ParserRepository.shared.getUrl(with: listOfIngredients) else { return }
 
-        APIService.shared.get(url: url) { [self] data, error in
-            RecipeRepository.shared.getRecipes(data: data, error: error) { recipes, error in
-                searchButton.isHidden = false
-                activityIndicator.isHidden = true
-
-                guard let recipes = recipes else { return }
-                self.toRecipesList(with: recipes)
-                #if DEBUG
-                print("nextUrl", recipes.nextPage)
-                print("count", recipes.count)
-                #endif
-            }
+        viewModel.getRecipes(with: url) { [self] recipePage, error in
+            searchButton.isHidden = false
+            activityIndicator.isHidden = true
+print("alert error")
+            self.toRecipesList()
         }
     }
 
-    private func toRecipesList(with recipes: (RecipePage)) {
+    // MARK: - Convenience Methods
+
+    private func toRecipesList() {
+
         let storyboard = UIStoryboard(name: "ListRecipes", bundle: Bundle.main)
+
         guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipes")
                 as? ListRecipesController else { return }
-        recipesList.listOfRecipes = recipes
         self.navigationController?.pushViewController(recipesList, animated: true)
+    }
+
+    private func setTextField() {
+        ingredientTextField.attributedPlaceholder = NSAttributedString(
+            string: "Lemon, Cheese, Sausages,...",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
+        )
+        ingredientTextField.setBottomBorder()
     }
 }
 
-// MARK: - TableView DataSource
+    // MARK: - TableView DataSource
 
 extension SearchController: UITableViewDataSource {
 
@@ -90,7 +97,7 @@ extension SearchController: UITableViewDataSource {
     }
 }
 
-// MARK: - TableView Delegate
+    // MARK: - TableView Delegate
 
 extension SearchController: UITableViewDelegate {
 
@@ -106,7 +113,7 @@ extension SearchController: UITableViewDelegate {
         }
     }
 }
-// MARK: - Protocol
+    // MARK: - Ingredients Protocol
 
 extension SearchController: IngredientDelegate {
 
@@ -129,7 +136,7 @@ extension SearchController: IngredientDelegate {
     }
 }
 
-// MARK: - Textfield delegate
+    // MARK: - Textfield delegate
 
 extension SearchController: UITextFieldDelegate {
 
@@ -141,13 +148,5 @@ extension SearchController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ingredientTextField.resignFirstResponder()
         return true
-    }
-
-    private func setTextField() {
-        ingredientTextField.attributedPlaceholder = NSAttributedString(
-            string: "Lemon, Cheese, Sausages,...",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
-        )
-        ingredientTextField.setBottomBorder()
     }
 }

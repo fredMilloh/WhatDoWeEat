@@ -21,9 +21,9 @@
 		B6DC77E027AE86AA0096BDD8 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */; };
 		B6DC77E227AE89410096BDD8 /* ViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77E127AE89410096BDD8 /* ViewController+.swift */; };
 		B6DC77E427AE8AA50096BDD8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77E327AE8AA50096BDD8 /* Recipe.swift */; };
-		B6DC77E627AE8ACB0096BDD8 /* IngredientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77E527AE8ACB0096BDD8 /* IngredientManager.swift */; };
+		B6DC77E627AE8ACB0096BDD8 /* IngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77E527AE8ACB0096BDD8 /* IngredientViewModel.swift */; };
 		B6DC77E927AE8BB40096BDD8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DC77E827AE8BB40096BDD8 /* recipe.json */; };
-		B6DC77EB27AE8BEA0096BDD8 /* IngredientManager+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77EA27AE8BEA0096BDD8 /* IngredientManager+Tests.swift */; };
+		B6DC77EB27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77EA27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift */; };
 		B6DC77ED27AE91A20096BDD8 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */; };
 		B6DC77F727AECE360096BDD8 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77F627AECE360096BDD8 /* IngredientCell.swift */; };
 		B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77F827AEE5CB0096BDD8 /* ListRecipeCell.swift */; };
@@ -33,11 +33,11 @@
 		B6DC780927B02F6E0096BDD8 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC780827B02F6E0096BDD8 /* TimeView.swift */; };
 		B6DC780D27B039FF0096BDD8 /* TimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6DC780C27B039FF0096BDD8 /* TimeView.xib */; };
 		B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781327B0562C0096BDD8 /* Double+.swift */; };
-		B6DC781627B10CA10096BDD8 /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781527B10CA10096BDD8 /* RecipeRepository.swift */; };
+		B6DC781627B10CA10096BDD8 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781527B10CA10096BDD8 /* ListViewModel.swift */; };
 		B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781727B1186A0096BDD8 /* RecipeError.swift */; };
 		B6DC781A27B187D40096BDD8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781927B187D40096BDD8 /* String+.swift */; };
 		B6DC781C27B2788F0096BDD8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781B27B2788F0096BDD8 /* UITextField+.swift */; };
-		B6DC781E27B2B8D90096BDD8 /* RecipeRepository+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781D27B2B8D90096BDD8 /* RecipeRepository+Tests.swift */; };
+		B6DC781E27B2B8D90096BDD8 /* ListViewModel+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */; };
 		B6DC782127B2B9BB0096BDD8 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782027B2B9BB0096BDD8 /* TestCase.swift */; };
 		B6DC782327B2BA480096BDD8 /* Recipe+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */; };
 		B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */; };
@@ -45,10 +45,11 @@
 		B6DC783527B522BE0096BDD8 /* SearchRecipes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783327B522BE0096BDD8 /* SearchRecipes.storyboard */; };
 		B6DC783727B522FE0096BDD8 /* Favorite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783627B522FE0096BDD8 /* Favorite.storyboard */; };
 		B6DC783C27B52EA30096BDD8 /* DetailRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783B27B52EA30096BDD8 /* DetailRecipe.storyboard */; };
-		B6DC786827B5A1220096BDD8 /* datarecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DC786727B5A1220096BDD8 /* datarecipe.json */; };
 		B6DC787527B6CA350096BDD8 /* ListRecipeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6DC787427B6CA350096BDD8 /* ListRecipeCellView.xib */; };
 		B6DC787B27B95F720096BDD8 /* FavoriteRepository+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC787A27B95F720096BDD8 /* FavoriteRepository+Tests.swift */; };
 		B6DC787F27B99CB70096BDD8 /* badrecipe.json in Sources */ = {isa = PBXBuildFile; fileRef = B6DC787E27B99CB70096BDD8 /* badrecipe.json */; };
+		B6DC788127BBA2490096BDD8 /* ParserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC788027BBA2490096BDD8 /* ParserRepository.swift */; };
+		B6DC788527BBFD770096BDD8 /* ParserRepository+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC788427BBFD770096BDD8 /* ParserRepository+Tests.swift */; };
 		C45EDF46D0E9A45F1C1504C9 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B0618514C2C756849DB2C9 /* Pods_Reciplease.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,9 +91,9 @@
 		B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		B6DC77E127AE89410096BDD8 /* ViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+.swift"; sourceTree = "<group>"; };
 		B6DC77E327AE8AA50096BDD8 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
-		B6DC77E527AE8ACB0096BDD8 /* IngredientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientManager.swift; sourceTree = "<group>"; };
+		B6DC77E527AE8ACB0096BDD8 /* IngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewModel.swift; sourceTree = "<group>"; };
 		B6DC77E827AE8BB40096BDD8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
-		B6DC77EA27AE8BEA0096BDD8 /* IngredientManager+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientManager+Tests.swift"; sourceTree = "<group>"; };
+		B6DC77EA27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientViewModel+Tests.swift"; sourceTree = "<group>"; };
 		B6DC77EC27AE91A20096BDD8 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		B6DC77F627AECE360096BDD8 /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		B6DC77F827AEE5CB0096BDD8 /* ListRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRecipeCell.swift; sourceTree = "<group>"; };
@@ -102,11 +103,11 @@
 		B6DC780827B02F6E0096BDD8 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
 		B6DC780C27B039FF0096BDD8 /* TimeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeView.xib; sourceTree = "<group>"; };
 		B6DC781327B0562C0096BDD8 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
-		B6DC781527B10CA10096BDD8 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
+		B6DC781527B10CA10096BDD8 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		B6DC781727B1186A0096BDD8 /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		B6DC781927B187D40096BDD8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B6DC781B27B2788F0096BDD8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
-		B6DC781D27B2B8D90096BDD8 /* RecipeRepository+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeRepository+Tests.swift"; sourceTree = "<group>"; };
+		B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListViewModel+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782027B2B9BB0096BDD8 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
@@ -114,10 +115,11 @@
 		B6DC783427B522BE0096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Reciplease/Features/Base.lproj/SearchRecipes.storyboard; sourceTree = SOURCE_ROOT; };
 		B6DC783627B522FE0096BDD8 /* Favorite.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorite.storyboard; sourceTree = SOURCE_ROOT; };
 		B6DC783B27B52EA30096BDD8 /* DetailRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailRecipe.storyboard; sourceTree = "<group>"; };
-		B6DC786727B5A1220096BDD8 /* datarecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = datarecipe.json; sourceTree = "<group>"; };
 		B6DC787427B6CA350096BDD8 /* ListRecipeCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListRecipeCellView.xib; sourceTree = "<group>"; };
 		B6DC787A27B95F720096BDD8 /* FavoriteRepository+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteRepository+Tests.swift"; sourceTree = "<group>"; };
 		B6DC787E27B99CB70096BDD8 /* badrecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = badrecipe.json; sourceTree = "<group>"; };
+		B6DC788027BBA2490096BDD8 /* ParserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserRepository.swift; sourceTree = "<group>"; };
+		B6DC788427BBFD770096BDD8 /* ParserRepository+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserRepository+Tests.swift"; sourceTree = "<group>"; };
 		F3950EC8678F1EF511AE1635 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,7 +196,7 @@
 				B6DC77DA27AE86000096BDD8 /* Common */,
 				B6DC77CA27AE800C0096BDD8 /* Model */,
 				B6DC77CB27AE80180096BDD8 /* View */,
-				B6DC77A527AE7FAC0096BDD8 /* LaunchScreen.storyboard */,
+				B6DC788227BBA81F0096BDD8 /* ViewModels */,
 				B6DC77CC27AE80380096BDD8 /* Features */,
 				B6DC787627B914D10096BDD8 /* Resources */,
 			);
@@ -207,6 +209,7 @@
 				B6DC781F27B2B9830096BDD8 /* Helpers */,
 				B6DC77E727AE8B740096BDD8 /* DataMock */,
 				B6DC77D327AE839D0096BDD8 /* Model */,
+				B6DC788327BBFC370096BDD8 /* ViewModels */,
 			);
 			path = RecipleaseTests;
 			sourceTree = "<group>";
@@ -223,9 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DC77E327AE8AA50096BDD8 /* Recipe.swift */,
-				B6DC77E527AE8ACB0096BDD8 /* IngredientManager.swift */,
-				B6DC781527B10CA10096BDD8 /* RecipeRepository.swift */,
-				B6DC786727B5A1220096BDD8 /* datarecipe.json */,
+				B6DC788027BBA2490096BDD8 /* ParserRepository.swift */,
 				B6DC782427B2CED30096BDD8 /* CoreData */,
 			);
 			path = Model;
@@ -237,6 +238,7 @@
 				B6DC780827B02F6E0096BDD8 /* TimeView.swift */,
 				B6DC780C27B039FF0096BDD8 /* TimeView.xib */,
 				B6DC77F527AECE130096BDD8 /* Cell */,
+				B6DC77A527AE7FAC0096BDD8 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -275,9 +277,8 @@
 		B6DC77D327AE839D0096BDD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B6DC77EA27AE8BEA0096BDD8 /* IngredientManager+Tests.swift */,
-				B6DC781D27B2B8D90096BDD8 /* RecipeRepository+Tests.swift */,
 				B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */,
+				B6DC788427BBFD770096BDD8 /* ParserRepository+Tests.swift */,
 				B6DC787927B95F220096BDD8 /* CoreData */,
 			);
 			path = Model;
@@ -394,6 +395,24 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		B6DC788227BBA81F0096BDD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6DC77E527AE8ACB0096BDD8 /* IngredientViewModel.swift */,
+				B6DC781527B10CA10096BDD8 /* ListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B6DC788327BBFC370096BDD8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6DC77EA27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift */,
+				B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -504,7 +523,6 @@
 			files = (
 				B6DC783527B522BE0096BDD8 /* SearchRecipes.storyboard in Resources */,
 				B6DC77A727AE7FAC0096BDD8 /* LaunchScreen.storyboard in Resources */,
-				B6DC786827B5A1220096BDD8 /* datarecipe.json in Resources */,
 				B6DC77A427AE7FAC0096BDD8 /* Assets.xcassets in Resources */,
 				B6DC779F27AE7FA30096BDD8 /* TabBar.storyboard in Resources */,
 				B6DC783727B522FE0096BDD8 /* Favorite.storyboard in Resources */,
@@ -582,7 +600,7 @@
 				B6DC77ED27AE91A20096BDD8 /* UIImageView+.swift in Sources */,
 				B6DC77DE27AE865D0096BDD8 /* TabBarAppearance.swift in Sources */,
 				B6DC780027AEFE0A0096BDD8 /* DetailRecipeController.swift in Sources */,
-				B6DC781627B10CA10096BDD8 /* RecipeRepository.swift in Sources */,
+				B6DC781627B10CA10096BDD8 /* ListViewModel.swift in Sources */,
 				B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */,
 				B6DC781C27B2788F0096BDD8 /* UITextField+.swift in Sources */,
 				B6DC781427B0562C0096BDD8 /* Double+.swift in Sources */,
@@ -596,11 +614,12 @@
 				B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */,
 				B6DC77F727AECE360096BDD8 /* IngredientCell.swift in Sources */,
 				B6DC77D027AE818F0096BDD8 /* SearchController.swift in Sources */,
+				B6DC788127BBA2490096BDD8 /* ParserRepository.swift in Sources */,
 				B6DC780527AFEF690096BDD8 /* ListRecipesController.swift in Sources */,
 				B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */,
 				B6DC779C27AE7FA30096BDD8 /* TabBarController.swift in Sources */,
 				B6DC779827AE7FA30096BDD8 /* AppDelegate.swift in Sources */,
-				B6DC77E627AE8ACB0096BDD8 /* IngredientManager.swift in Sources */,
+				B6DC77E627AE8ACB0096BDD8 /* IngredientViewModel.swift in Sources */,
 				B6DC779A27AE7FA30096BDD8 /* SceneDelegate.swift in Sources */,
 				B6DC77E427AE8AA50096BDD8 /* Recipe.swift in Sources */,
 			);
@@ -610,10 +629,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6DC77EB27AE8BEA0096BDD8 /* IngredientManager+Tests.swift in Sources */,
-				B6DC781E27B2B8D90096BDD8 /* RecipeRepository+Tests.swift in Sources */,
+				B6DC77EB27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift in Sources */,
+				B6DC781E27B2B8D90096BDD8 /* ListViewModel+Tests.swift in Sources */,
 				B6DC782127B2B9BB0096BDD8 /* TestCase.swift in Sources */,
 				B6DC787F27B99CB70096BDD8 /* badrecipe.json in Sources */,
+				B6DC788527BBFD770096BDD8 /* ParserRepository+Tests.swift in Sources */,
 				B6DC787B27B95F720096BDD8 /* FavoriteRepository+Tests.swift in Sources */,
 				B6DC782327B2BA480096BDD8 /* Recipe+Tests.swift in Sources */,
 			);

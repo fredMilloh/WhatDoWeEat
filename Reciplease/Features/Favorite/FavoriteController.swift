@@ -51,13 +51,9 @@ extension FavoriteController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
                 as? ListRecipeCell else { return UITableViewCell() }
 
-        let recipe = favoritesRecipes[indexPath.row]
-        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl.orEmpty)
-        cell.configCell(name: recipe.name.orEmpty,
-                        ingredients: recipe.ingredients.orEmpty,
-                        yields: recipe.yield,
-                        time: recipe.totalTime
-        )
+        let recipe = convertionIntoRecipeFrom(favorite: favoritesRecipes[indexPath.row])
+        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
+        cell.configCell(with: recipe)
         return cell
     }
 }
@@ -69,6 +65,7 @@ extension FavoriteController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favoriteRecipe = favoritesRecipes[indexPath.row]
         let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe)
+
         guard let cell = listFavoriteTableView.cellForRow(at: indexPath) as? ListRecipeCell,
               let imageSelectedRecipe = cell.listCellImageView.image
         else { return }
@@ -103,7 +100,8 @@ extension FavoriteController {
         guard let name = favorite.name,
               let ingredients = favorite.ingredients,
               let urlDirections = favorite.urlDirections,
-              let ingredientLines = favorite.ingredientLines
+              let ingredientLines = favorite.ingredientLines,
+              let imageUrl = favorite.imageUrl
         else { return Recipe(name: "",
                              imageUrl: "",
                              urlDirections: "",
@@ -116,7 +114,7 @@ extension FavoriteController {
         let totalTime = favorite.totalTime
 
         return Recipe(name: name,
-                      imageUrl: "",
+                      imageUrl: imageUrl,
                       urlDirections: urlDirections,
                       yield: yield,
                       ingredientLines: ingredientLines,

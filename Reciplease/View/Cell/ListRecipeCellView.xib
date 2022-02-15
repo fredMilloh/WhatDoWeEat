@@ -12,7 +12,8 @@
             <connections>
                 <outlet property="contentListCellView" destination="iN0-l3-epB" id="fIc-VK-qGJ"/>
                 <outlet property="listCellImageView" destination="Goz-Ow-aWc" id="j2r-4c-uGr"/>
-                <outlet property="listCellIngredients" destination="HkD-E9-XNu" id="xXr-jt-fOc"/>
+                <outlet property="listCellIndicatorView" destination="EZI-uW-Ovw" id="9aq-RD-l6V"/>
+                <outlet property="listCellIngredientsLabel" destination="HkD-E9-XNu" id="xXr-jt-fOc"/>
                 <outlet property="listCellNameLabel" destination="ym7-lT-WD4" id="20F-6g-0OJ"/>
                 <outlet property="listTimeView" destination="f9A-JF-s0V" id="bma-rI-8IW"/>
             </connections>
@@ -73,6 +74,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="EZI-uW-Ovw">
+                    <rect key="frame" x="256" y="170" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

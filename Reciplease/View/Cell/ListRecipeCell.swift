@@ -12,11 +12,36 @@ class ListRecipeCell: UITableViewCell {
     @IBOutlet weak var listTimeView: TimeView!
     @IBOutlet weak var listCellImageView: UIImageView!
     @IBOutlet weak var listCellNameLabel: UILabel!
-    @IBOutlet weak var listCellIngredients: UILabel!
+    @IBOutlet weak var listCellIngredientsLabel: UILabel!
+    @IBOutlet weak var listCellIndicatorView: UIActivityIndicatorView!
     @IBOutlet var contentListCellView: UIView!
+
+    override func prepareForReuse() {
+      super.prepareForReuse()
+        configCell(with: .none)
+    }
+
+    func configCell(with recipe: Recipe?) {
+        if let recipe = recipe {
+            let yieldString = String(recipe.yield.withoutDecimal())
+            let timeString = (recipe.totalTime * 60).convertToString(style: .abbreviated)
+            listCellNameLabel.text = recipe.name
+            listCellIngredientsLabel.text = recipe.ingredients
+            listTimeView.yieldLabel.text = yieldString
+            listTimeView.timeLabel.text = timeString
+            listCellIndicatorView.startAnimating()
+        } else {
+            listTimeView.alpha = 0
+            listCellImageView.alpha = 0
+            listCellNameLabel.alpha = 0
+            listCellIngredientsLabel.alpha = 0
+            listCellIndicatorView.startAnimating()
+        }
+    }
 
     override func layoutSubviews() {
         listCellImageView.makeGradient(to: listCellImageView)
+        listCellIndicatorView.hidesWhenStopped = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -29,15 +54,5 @@ class ListRecipeCell: UITableViewCell {
         addSubview(contentListCellView)
         contentListCellView.frame = self.bounds
         contentListCellView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    }
-
-    func configCell(name: String, ingredients: String, yields: Double, time: Double) {
-        let yieldsString = String(yields.withoutDecimal())
-        let timeString = (time * 60).convertToString(style: .abbreviated)
-        listCellNameLabel.text = name
-        listCellIngredients.text = ingredients
-        listTimeView.yieldLabel.text = yieldsString
-        listTimeView.timeLabel.text = timeString
-
     }
 }

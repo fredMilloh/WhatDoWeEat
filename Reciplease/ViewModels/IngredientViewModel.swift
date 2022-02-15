@@ -12,13 +12,15 @@ protocol IngredientDelegate: AnyObject {
     func presentAlert(message alertError: RecipeError)
 }
 
-class IngredientManager {
+class IngredientViewModel {
 
     weak var delegate: IngredientDelegate?
 
     init(delegate: IngredientDelegate) {
         self.delegate = delegate
     }
+
+    // MARK: - Properties
 
     var listOfIngredients: [String] = [] {
         didSet {
@@ -33,6 +35,8 @@ class IngredientManager {
     }
 
     var ingredients = [String]()
+
+    // MARK: - Common Methods
 
     func createIngredientsArray(with inventory: String) {
         if inventory.isLetters {

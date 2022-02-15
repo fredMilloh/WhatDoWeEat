@@ -10,28 +10,24 @@ import UIKit
 class ListRecipesController: UIViewController {
 
     @IBOutlet weak var listRecipesTableView: UITableView!
-
-    var listOfRecipes: (RecipePage)!
-    /// unwrapped list to allow deletion of a cell
-    var list = [Recipe]()
+    
+    private var viewModel = ListViewModel.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Reciplease"
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
         listRecipesTableView.delegate = self
         listRecipesTableView.dataSource = self
-        guard let list = listOfRecipes else { return }
-        self.list = list.hits
+        listRecipesTableView.prefetchDataSource = self
     }
 }
 
-// MARK: - TableView DataSource
+    // MARK: - TableView DataSource
 
 extension ListRecipesController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return viewModel.totalCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,23 +35,23 @@ extension ListRecipesController: UITableViewDataSource {
                                                        for: indexPath) as? ListRecipeCell
         else { return UITableViewCell() }
 
-        let recipe = self.list[indexPath.row]
-        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
-        cell.configCell(name: recipe.name,
-                        ingredients: recipe.ingredients,
-                        yields: recipe.yield,
-                        time: recipe.totalTime
-        )
+        if isLoadingCell(for: indexPath) {
+            cell.configCell(with: .none)
+        } else {
+            let recipe = viewModel.recipe(at: indexPath.row)
+            cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
+            cell.configCell(with: recipe)
+        }
         return cell
     }
 }
 
-// MARK: - TableView Delegate
+    // MARK: - TableView Delegate
 
 extension ListRecipesController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRecipe = list[indexPath.row]
+        let selectedRecipe = viewModel.recipe(at: indexPath.row)
         guard let cell = listRecipesTableView.cellForRow(at: indexPath) as? ListRecipeCell,
               let imageSelectedRecipe = cell.listCellImageView.image
         else { return }
@@ -67,15 +63,53 @@ extension ListRecipesController: UITableViewDelegate {
         detailRecipe.selectedImage = imageSelectedRecipe
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
+}
+    // MARK: - TableView Prefetching
 
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath
-        ) {
-        if editingStyle == .delete {
-            list.remove(at: indexPath.row)
-            listRecipesTableView.deleteRows(at: [indexPath], with: .fade)
-            listRecipesTableView.reloadData()
+extension ListRecipesController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+
+        /// check if any of indexPath are not loaded yet. If so, ask next page
+        if indexPaths.contains(where: isLoadingCell) {
+
+            guard let url = URL(string: viewModel.nextPageUrl) else { return }
+
+            viewModel.getRecipes(with: url) { [self] recipePage, error in
+                guard let recipes = recipePage else { return }
+
+                let nextUrl = recipes.nextPage
+                viewModel.nextPageUrl = nextUrl != nil ? nextUrl.orEmpty : ""
+            }
         }
+    }
+
+    /// Determine if the cell at that index path is beyond the count of the recipe received so far
+    private func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= viewModel.currentCount
+    }
+
+    /// Calculate the cells of the table view needed to reload when a new page is received
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+      let indexPathsForVisibleRows = listRecipesTableView.indexPathsForVisibleRows ?? []
+      let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+      return Array(indexPathsIntersection)
+    }
+
+}
+
+extension ListRecipesController: ListVMDelegate {
+
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        guard let newIndexPathsToReload = newIndexPathsToReload else {
+            listRecipesTableView.reloadData()
+            return
+        }
+        /// newIndexPathsToReload is not nil (next pages), find the visible cells that needs reloading and reload only those
+        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+        listRecipesTableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
+
+    func onFetchFailed(with reason: String) {
+        print("error delegate on FetchFailed")
     }
 }

@@ -8,7 +8,8 @@
 import Foundation
 
 struct RecipePage: Decodable {
-    var nextPage: String
+    var nextPage: String?
+    var counter: Int
     var count: Int
     let hits: [Recipe]
 }
@@ -27,6 +28,7 @@ extension RecipePage {
 
     enum MainKeys: String, CodingKey {
         case nextLink = "_links"
+        case counter = "to"
         case count = "count"
         case hits = "hits"
 
@@ -96,9 +98,12 @@ extension RecipePage {
         }
         self.hits = recipes
 
+        /// counter
+        self.counter = try container.decode(Int.self, forKey: .counter)
+
         /// count
         self.count = try container.decode(Int.self, forKey: .count)
-        
+
         /// link container
         let linkContainer = try container.nestedContainer(keyedBy: MainKeys.LinkKeys.self, forKey: .nextLink)
         let nextContainer = try linkContainer.nestedContainer(keyedBy: MainKeys.LinkKeys.NextKeys.self, forKey: .next)

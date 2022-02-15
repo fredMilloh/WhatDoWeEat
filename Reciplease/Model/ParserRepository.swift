@@ -1,45 +1,27 @@
 //
-//  RecipeRepository.swift
+//  UrlParse.swift
 //  Reciplease
 //
-//  Created by fred on 07/02/2022.
+//  Created by fred on 15/02/2022.
 //
 
 import Foundation
-import Alamofire
 
-class RecipeRepository {
+class ParserRepository {
 
-    // MARK: - API
-
-    typealias RecipesOrError = (_ recipes: (RecipePage)?, _ error: RecipeError?) -> Void
-
-    static var shared = RecipeRepository()
+    static var shared = ParserRepository()
     private init() {}
+
+    // MARK: - Url Request
 
     var apiKey: String = "7"
     var appId: String = "17f51d8a"
+    
     /// to test getUrl method with a fake apiKey
     init(apiKey: String, appId: String) {
         self.apiKey = apiKey
         self.appId = appId
     }
-
-    func getRecipes(data: (Data)?, error: (RecipeError)?, callback: RecipesOrError) {
-        guard let data = data else { return }
-        do {
-            let decoder = JSONDecoder()
-            let recipes = try decoder.decode(RecipePage.self, from: data)
-                callback(recipes, nil)
-            } catch {
-                callback(nil, .invalidData)
-            }
-    }
-}
-
-    // MARK: - Url
-
-extension RecipeRepository {
 
     /// build url with the app id, key, and list of ingredients parameters
     func getUrl(with ingredients: [String]) -> URL? {
@@ -56,5 +38,18 @@ extension RecipeRepository {
             URLQueryItem(name: "app_key", value: apiKey)
         ]
         return component.url
+    }
+}
+
+    // MARK: - Recipe Data
+
+extension ParserRepository {
+
+    func parse(_ data: Data?) -> RecipePage {
+        guard let data = data,
+              let dataSet = try? JSONDecoder().decode(RecipePage.self, from: data) else {
+                  return RecipePage(nextPage: "", counter: 0, count: 0, hits: [])
+        }
+        return dataSet
     }
 }
