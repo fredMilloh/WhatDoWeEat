@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class DetailRecipeController: UIViewController {
+class DetailRecipeController: TabBarController {
 
     @IBOutlet weak var detailTimeView: TimeView!
     @IBOutlet weak var detailTableView: UITableView!
@@ -53,10 +53,18 @@ class DetailRecipeController: UIViewController {
     @objc private func favoriteButtonPressed() {
         if isFavorite {
             favoriteButton?.image = UIImage(systemName: "star")
-            favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+            AskConfirmation(title: "Are you sure ?",
+                            message: "Remove the recipe from the list")
+            { [self] result in
+                if result {
+                    favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+                    presentAlert(message: .deleteCoreData)
+                }
+            }
         } else {
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
                 favoriteButton?.image = UIImage(systemName: "star.fill")
+                presentAlert(message: .saveCoreData)
             }
         }
     }

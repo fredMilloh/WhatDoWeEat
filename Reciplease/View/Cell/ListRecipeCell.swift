@@ -22,21 +22,13 @@ class ListRecipeCell: UITableViewCell {
     }
 
     func configCell(with recipe: Recipe?) {
-        if let recipe = recipe {
-            let yieldString = String(recipe.yield.withoutDecimal())
-            let timeString = (recipe.totalTime * 60).convertToString(style: .abbreviated)
-            listCellNameLabel.text = recipe.name
-            listCellIngredientsLabel.text = recipe.ingredients
-            listTimeView.yieldLabel.text = yieldString
-            listTimeView.timeLabel.text = timeString
-            listCellIndicatorView.startAnimating()
-        } else {
-            listTimeView.alpha = 0
-            listCellImageView.alpha = 0
-            listCellNameLabel.alpha = 0
-            listCellIngredientsLabel.alpha = 0
-            listCellIndicatorView.startAnimating()
-        }
+        guard let recipe = recipe else { return }
+        let yieldString = String(recipe.yield.withoutDecimal())
+        let timeString = (recipe.totalTime * 60).convertToString(style: .abbreviated)
+        listCellNameLabel.text = recipe.name
+        listCellIngredientsLabel.text = recipe.ingredients
+        listTimeView.yieldLabel.text = yieldString
+        listTimeView.timeLabel.text = timeString
     }
 
     override func layoutSubviews() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoriteController: UIViewController {
+class FavoriteController: TabBarController {
 
     @IBOutlet weak var listFavoriteTableView: UITableView!
 
@@ -52,7 +52,12 @@ extension FavoriteController: UITableViewDataSource {
                 as? ListRecipeCell else { return UITableViewCell() }
 
         let recipe = convertionIntoRecipeFrom(favorite: favoritesRecipes[indexPath.row])
-        cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
+        if recipe.imageUrl != nil {
+            guard let url = recipe.imageUrl else { return UITableViewCell() }
+            cell.listCellImageView.setImageFromURl(stringImageUrl: url)
+        } else {
+            cell.listCellImageView.image = UIImage(named: "DefaultImage")
+        }
         cell.configCell(with: recipe)
         return cell
     }
@@ -84,12 +89,19 @@ extension FavoriteController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath
         ) {
         if editingStyle == .delete {
-            guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
-            favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-            favoritesRecipes.remove(at: indexPath.row)
-            listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
-            getFavorite()
-            listFavoriteTableView.reloadData()
+            AskConfirmation(title: "Are you sure ?",
+                            message: "Remove this recipe")
+            { [self] result in
+                if result {
+                    guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
+                    favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+                    favoritesRecipes.remove(at: indexPath.row)
+                    listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
+                    presentAlert(message: .remove)
+                    getFavorite()
+                    listFavoriteTableView.reloadData()
+                }
+            }
         }
     }
 }

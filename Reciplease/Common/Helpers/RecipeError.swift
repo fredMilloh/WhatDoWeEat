@@ -13,6 +13,8 @@ enum RecipeError: LocalizedError {
     case unknow
     case incorrectElement
     case remove
+    case saveCoreData
+    case deleteCoreData
 
     var errorDescription: String? {
         switch self {
@@ -25,7 +27,11 @@ enum RecipeError: LocalizedError {
         case .incorrectElement:
             return "Only words and comma are correct."
         case .remove:
-            return "The item has been removed from the list"
+            return "The element has been removed from the list"
+        case .saveCoreData:
+            return "This recipe has been successfully added to your favorites"
+        case .deleteCoreData:
+            return "This recipe has been removed"
         }
     }
 }

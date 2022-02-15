@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListRecipesController: UIViewController {
+class ListRecipesController: TabBarController {
 
     @IBOutlet weak var listRecipesTableView: UITableView!
     
@@ -39,7 +39,12 @@ extension ListRecipesController: UITableViewDataSource {
             cell.configCell(with: .none)
         } else {
             let recipe = viewModel.recipe(at: indexPath.row)
-            cell.listCellImageView.setImageFromURl(stringImageUrl: recipe.imageUrl)
+            if recipe.imageUrl != nil {
+                guard let url = recipe.imageUrl else { return UITableViewCell() }
+                cell.listCellImageView.setImageFromURl(stringImageUrl: url)
+            } else {
+                cell.listCellImageView.image = UIImage(named: "DefaultImage")
+            }
             cell.configCell(with: recipe)
         }
         return cell
@@ -110,6 +115,6 @@ extension ListRecipesController: ListVMDelegate {
     }
 
     func onFetchFailed(with reason: String) {
-        print("error delegate on FetchFailed")
+        presentAlert(message: .fetchError)
     }
 }

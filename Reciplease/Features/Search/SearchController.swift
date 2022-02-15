@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchController: UIViewController {
+class SearchController: TabBarController {
 
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
@@ -16,7 +16,7 @@ class SearchController: UIViewController {
 
     var viewModel = ListViewModel.shared
     var listOfIngredients = [String]()
-    lazy var ingredientManager = IngredientViewModel(delegate: self)
+    lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,15 @@ class SearchController: UIViewController {
     }
 
     @IBAction func clearIngredientList(_ sender: UIButton) {
-        ingredientManager.clearListOfIngredients()
-        ingredientTableView.reloadData()
+        AskConfirmation(title: "are you sure ?",
+                        message: "Delete the entire list")
+        { [self] result in
+            if result {
+                ingredientManager.clearListOfIngredients()
+                ingredientTableView.reloadData()
+                presentAlert(message: .remove)
+            }
+        }
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
@@ -53,7 +60,9 @@ class SearchController: UIViewController {
         viewModel.getRecipes(with: url) { [self] recipePage, error in
             searchButton.isHidden = false
             activityIndicator.isHidden = true
-print("alert error")
+            if error != nil {
+                presentAlert(message: .invalidData)
+            }
             self.toRecipesList()
         }
     }
@@ -106,30 +115,22 @@ extension SearchController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath
         ) {
         if editingStyle == .delete {
-            ingredientManager.removeToList(at: indexPath.row)
-            ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
-            presentAlert(message: .remove)
-            ingredientTableView.reloadData()
+            AskConfirmation(title: "Are you sure ?",
+                            message: "Delete this ingredient")
+            { [self] result in
+                if result {
+                    ingredientManager.removeToList(at: indexPath.row)
+                    ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
+                    ingredientTableView.reloadData()
+                    presentAlert(message: .remove)
+                }
+            }
         }
     }
 }
     // MARK: - Ingredients Protocol
 
 extension SearchController: IngredientDelegate {
-
-    func presentAlert(message alertError: RecipeError) {
-        let alert = UIAlertController(
-            title: "",
-            message: "\(alertError.localizedDescription)",
-            preferredStyle: .alert
-        )
-        let errorAction = UIAlertAction(
-            title: "ok",
-            style: .cancel
-        )
-        alert.addAction(errorAction)
-        present(alert, animated: true)
-    }
 
     func ingredientsList(with ingredients: [String]) {
         listOfIngredients = ingredients

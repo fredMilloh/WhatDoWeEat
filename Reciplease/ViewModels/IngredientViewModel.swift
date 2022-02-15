@@ -9,28 +9,32 @@ import Foundation
 
 protocol IngredientDelegate: AnyObject {
     func ingredientsList(with ingredients: [String])
+}
+protocol AlertDelegate: AnyObject {
     func presentAlert(message alertError: RecipeError)
 }
 
 class IngredientViewModel {
 
-    weak var delegate: IngredientDelegate?
+    weak var ingredientDelegate: IngredientDelegate?
+    weak var alertDelegate: AlertDelegate?
 
-    init(delegate: IngredientDelegate) {
-        self.delegate = delegate
+    init(delegate: IngredientDelegate, alertDelegate: AlertDelegate) {
+        self.ingredientDelegate = delegate
+        self.alertDelegate = alertDelegate
     }
 
     // MARK: - Properties
 
     var listOfIngredients: [String] = [] {
         didSet {
-            delegate?.ingredientsList(with: listOfIngredients)
+            ingredientDelegate?.ingredientsList(with: listOfIngredients)
         }
     }
 
     var alert: RecipeError = .incorrectElement {
         didSet {
-            delegate?.presentAlert(message: alert)
+            alertDelegate?.presentAlert(message: alert)
         }
     }
 

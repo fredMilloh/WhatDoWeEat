@@ -16,7 +16,7 @@ struct RecipePage: Decodable {
 
 struct Recipe: Decodable {
     var name: String
-    var imageUrl: String
+    var imageUrl: String?
     var urlDirections: String
     var yield: Double
     var ingredientLines: [String]
