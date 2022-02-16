@@ -25,8 +25,7 @@ class ListViewModel {
     private let client = APIService.shared
     private var parser = ParserRepository.shared
 
-    private var total = 0
-    private var isFetchinInProgress = false
+    var total = 0
     var recipes: [Recipe] = []
     var nextPageUrl: String = ""
 
@@ -74,7 +73,7 @@ class ListViewModel {
     }
 
     /// calculate the indexes of the last page received. Will be used to refresh the tableView
-    private func calculateIndexPathsToReload(from newRecipes: [Recipe]) -> [IndexPath] {
+    func calculateIndexPathsToReload(from newRecipes: [Recipe]) -> [IndexPath] {
         let startIndex = recipes.count - newRecipes.count
         let endIndex = startIndex + newRecipes.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }

@@ -33,7 +33,7 @@ class ParserRepository {
         component.queryItems = [
             URLQueryItem(name: "type", value: "public"),
             /// convert ingredients array to String with a comma between each ingredient
-            URLQueryItem(name: "q", value: ingredients.joined(separator: ",")),
+            URLQueryItem(name: "q", value: ingredients.joined(separator: ",").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
             URLQueryItem(name: "app_id", value: appId),
             URLQueryItem(name: "app_key", value: apiKey)
         ]
@@ -45,11 +45,12 @@ class ParserRepository {
 
 extension ParserRepository {
 
-    func parse(_ data: Data?) -> RecipePage {
-        guard let data = data,
-              let dataSet = try? JSONDecoder().decode(RecipePage.self, from: data) else {
-                  return RecipePage(nextPage: "", counter: 0, count: 0, hits: [])
+    func parse(_ data: Data) -> RecipePage {
+        do {
+            let dataSet = try JSONDecoder().decode(RecipePage.self, from: data)
+            return dataSet
+        } catch {
+            return RecipePage(nextPage: "", counter: 0, count: 0, hits: [])
         }
-        return dataSet
     }
 }

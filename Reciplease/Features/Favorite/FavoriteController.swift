@@ -89,9 +89,7 @@ extension FavoriteController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath
         ) {
         if editingStyle == .delete {
-            AskConfirmation(title: "Are you sure ?",
-                            message: "Remove this recipe")
-            { [self] result in
+            AskConfirmation() { [self] result in
                 if result {
                     guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)

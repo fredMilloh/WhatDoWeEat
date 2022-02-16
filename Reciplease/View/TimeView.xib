@@ -23,18 +23,18 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ThW-L7-VeV">
                     <rect key="frame" x="10" y="10" width="372" height="334"/>
                     <subviews>
-                        <stackView contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fcX-8g-Oh7">
+                        <stackView contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fcX-8g-Oh7">
                             <rect key="frame" x="0.0" y="0.0" width="372" height="159.5"/>
                             <subviews>
                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S30-Mu-4yj">
-                                    <rect key="frame" x="0.0" y="0.0" width="183.5" height="159.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="209.5" height="159.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZx-Wc-bgJ">
-                                    <rect key="frame" x="188.5" y="-3" width="183.5" height="165.5"/>
+                                    <rect key="frame" x="214.5" y="-3" width="157.5" height="165.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <imageReference key="image" image="chart.pie.fill" catalog="system" symbolScale="large"/>
@@ -47,21 +47,22 @@
                                 <constraint firstAttribute="bottom" secondItem="CZx-Wc-bgJ" secondAttribute="bottom" id="31d-wv-7N6"/>
                                 <constraint firstAttribute="bottom" secondItem="S30-Mu-4yj" secondAttribute="bottom" id="WBy-E6-1LW"/>
                                 <constraint firstAttribute="trailing" secondItem="CZx-Wc-bgJ" secondAttribute="trailing" id="aGS-ya-uha"/>
+                                <constraint firstItem="CZx-Wc-bgJ" firstAttribute="width" secondItem="S30-Mu-4yj" secondAttribute="width" multiplier="0.75" id="axb-80-waS"/>
                                 <constraint firstItem="CZx-Wc-bgJ" firstAttribute="top" secondItem="fcX-8g-Oh7" secondAttribute="top" id="gDf-pm-Zvi"/>
                             </constraints>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-32-Z2l">
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="S5e-32-Z2l">
                             <rect key="frame" x="0.0" y="174.5" width="372" height="159.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1H30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="GzE-Oa-H0e">
-                                    <rect key="frame" x="0.0" y="0.0" width="183.5" height="159.5"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1H30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="GzE-Oa-H0e">
+                                    <rect key="frame" x="0.0" y="0.0" width="209.5" height="159.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o1v-ya-D19">
-                                    <rect key="frame" x="188.5" y="-3" width="183.5" height="165.5"/>
+                                    <rect key="frame" x="214.5" y="-3" width="157.5" height="165.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <imageReference key="image" image="timer" catalog="system" symbolScale="large"/>
@@ -73,6 +74,7 @@
                                 <constraint firstItem="GzE-Oa-H0e" firstAttribute="top" secondItem="S5e-32-Z2l" secondAttribute="top" id="W1f-Ik-ILr"/>
                                 <constraint firstAttribute="bottom" secondItem="GzE-Oa-H0e" secondAttribute="bottom" id="dhb-5S-IWE"/>
                                 <constraint firstItem="o1v-ya-D19" firstAttribute="top" secondItem="S5e-32-Z2l" secondAttribute="top" id="ibj-1J-1OX"/>
+                                <constraint firstItem="o1v-ya-D19" firstAttribute="width" secondItem="GzE-Oa-H0e" secondAttribute="width" multiplier="0.75" id="jMJ-dB-dKY"/>
                                 <constraint firstAttribute="bottom" secondItem="o1v-ya-D19" secondAttribute="bottom" id="pJZ-rB-F2j"/>
                             </constraints>
                         </stackView>

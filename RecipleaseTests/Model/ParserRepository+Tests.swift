@@ -25,18 +25,18 @@ class ParserRepository_Tests: XCTestCase {
     func test_getUrl() {
         // arrange
         let ingredients = ["Tomatoe", "Mozzarella", "Ham"]
-        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=Tomatoe,Mozzarella,Ham&app_id=12345&app_key=abcde")
+        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=Tomatoe,Mozzarella,Ham&app_id=123456&app_key=abcde")
         // assert
         XCTAssertEqual(sut?.getUrl(with: ingredients), urlShouldBe)
     }
 
     func test_parse_recipe_mock_data() {
         // arrange
-        let data = TestCase.stubbedData(from: "recipe")
+        sut = ParserRepository.shared
+        guard let data = TestCase.stubbedData(from: "recipe") else { return }
         // act
-        let recipes = sut?.parse(data)
+        let recipePage = sut?.parse(data)
         // assert
-        XCTAssertEqual(recipes?.hits[0].name, "Baking with Dorie: Lemon-Lemon Lemon Cream Recipe")
+        XCTAssertEqual(recipePage?.hits[0].name, "Baking with Dorie: Lemon-Lemon Lemon Cream Recipe")
     }
-
 }

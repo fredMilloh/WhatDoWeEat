@@ -32,16 +32,40 @@ extension TabBarController : AlertDelegate {
         present(alert, animated: true)
     }
 
-    func AskConfirmation (title:String, message:String, completion:@escaping (_ result:Bool) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+    func AskConfirmation (completion:@escaping (_ result:Bool) -> Void) {
+        let alert = UIAlertController(
+            title: "Are you sure ?",
+            message: "Delete this element",
+            preferredStyle: .actionSheet)
         self.present(alert, animated: true, completion: nil)
 
-        alert.addAction(UIAlertAction(title: "delete", style: .destructive, handler: { action in
+        alert.addAction(UIAlertAction(
+            title: "delete",
+            style: .destructive,
+            handler: { action in
             completion(true)
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: { action in
             completion(false)
         }))
       }
+
+    func presentInfo(message alertInfo: String) {
+
+        let alert = UIAlertController(
+            title: "",
+            message: "",
+            preferredStyle: .alert
+        )
+        let errorAction = UIAlertAction(
+            title: "ok",
+            style: .cancel
+        )
+        alert.addAction(errorAction)
+        present(alert, animated: true)
+    }
 }

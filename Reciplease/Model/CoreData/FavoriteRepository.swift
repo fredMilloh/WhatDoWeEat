@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class FavoriteRepository {
+class FavoriteRepository: TabBarController {
     
     func getFavorite(completion:([Favorite]) -> Void) {
         let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
@@ -35,7 +35,7 @@ class FavoriteRepository {
             try AppDelegate.viewContext.save()
             completion()
         } catch {
-            print("unable to save this recipe")
+            presentInfo(message: "Unable to save this recipe")
         }
     }
 
@@ -49,7 +49,7 @@ class FavoriteRepository {
             }
             try AppDelegate.viewContext.save()
         } catch {
-            print("unable to delete this recipe")
+            presentInfo(message: "Unable to delete this recipe")
         }
     }
 
@@ -62,7 +62,7 @@ class FavoriteRepository {
                 return true
             }
         } catch {
-            print("unable to find this recipe")
+            presentInfo(message: "Unable to find this recipe")
         }
         return false
     }

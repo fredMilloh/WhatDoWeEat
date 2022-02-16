@@ -15,8 +15,20 @@ class SearchController: TabBarController {
     @IBOutlet weak var searchButton: UIButton!
 
     var viewModel = ListViewModel.shared
+    var parser = ParserRepository.shared
     var listOfIngredients = [String]()
     lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
+
+    var inventory: String {
+        guard let inventory = ingredientTextField.text else { return ""}
+        return inventory
+    }
+
+    var url: URL {
+        guard let url = parser.getUrl(with: listOfIngredients)
+        else { return URL(fileURLWithPath: "www") }
+        return url
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +43,6 @@ class SearchController: TabBarController {
     // MARK: - Buttons Actions
 
     @IBAction func addButton(_ sender: UIButton) {
-        guard let inventory = ingredientTextField.text else { return }
         ingredientManager.createIngredientsArray(with: inventory)
         ingredientManager.addIngredientToList()
         ingredientTextField.text = "One more thing ? ..."
@@ -40,9 +51,7 @@ class SearchController: TabBarController {
     }
 
     @IBAction func clearIngredientList(_ sender: UIButton) {
-        AskConfirmation(title: "are you sure ?",
-                        message: "Delete the entire list")
-        { [self] result in
+        AskConfirmation() { [self] result in
             if result {
                 ingredientManager.clearListOfIngredients()
                 ingredientTableView.reloadData()
@@ -54,8 +63,6 @@ class SearchController: TabBarController {
     @IBAction func searchRecipesButton(_ sender: UIButton) {
         searchButton.isHidden = true
         activityIndicator.isHidden = false
-
-        guard let url = ParserRepository.shared.getUrl(with: listOfIngredients) else { return }
 
         viewModel.getRecipes(with: url) { [self] recipePage, error in
             searchButton.isHidden = false
@@ -115,9 +122,7 @@ extension SearchController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath
         ) {
         if editingStyle == .delete {
-            AskConfirmation(title: "Are you sure ?",
-                            message: "Delete this ingredient")
-            { [self] result in
+            AskConfirmation() { [self] result in
                 if result {
                     ingredientManager.removeToList(at: indexPath.row)
                     ingredientTableView.deleteRows(at: [indexPath], with: .automatic)

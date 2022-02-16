@@ -45,17 +45,17 @@ class FavoriteRepository_Tests: XCTestCase {
     func test_given_testRecipe_saved_when_get_Favorites_then_testRecipe_is_present() {
         // assert
         guard let sut = sut else { return }
-        var recipeTest = false
+        var recipeTestIsFavorite = false
         // act
         sut.getFavorite { favorites in
             for favorite in favorites {
                 if favorite.name == "testRecipe" {
-                    recipeTest = true
-                }
+                    recipeTestIsFavorite = true
+                } 
             }
         }
         // assert
-        XCTAssertTrue(recipeTest)
+        XCTAssertTrue(recipeTestIsFavorite)
     }
 
     func test_given_testRecipe_when_delete_then_testRecipe_is_not_favorite() {

@@ -53,9 +53,7 @@ class DetailRecipeController: TabBarController {
     @objc private func favoriteButtonPressed() {
         if isFavorite {
             favoriteButton?.image = UIImage(systemName: "star")
-            AskConfirmation(title: "Are you sure ?",
-                            message: "Remove the recipe from the list")
-            { [self] result in
+            AskConfirmation() { [self] result in
                 if result {
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
                     presentAlert(message: .deleteCoreData)
