@@ -11,7 +11,7 @@ class ListRecipesController: TabBarController {
 
     @IBOutlet weak var listRecipesTableView: UITableView!
     
-    private var viewModel = ListViewModel.shared
+    var viewModel = ListViewModel.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -55,7 +55,7 @@ class SearchController_Tests: XCTestCase {
         XCTAssertEqual(cell?.cellIngredientLabel.text, "pears")
     }
 
-    func test() {
+    func test_given_textField_filled_when_addButton_pressed_then_listOfIngredients_created() {
         // arrange
         sut?.ingredientTextField.text = "pineapple, orange"
         // act
@@ -65,6 +65,35 @@ class SearchController_Tests: XCTestCase {
         XCTAssertEqual(sut?.inventory, "One more thing ? ...")
         XCTAssertEqual(listOfIngredients, ["Orange", "Pineapple"])
     }
-    
-        
+
+    func test_given_searchButton_when_pressed_then_indicatorActivity_is_present() {
+        // arrange
+        guard let spinner = sut?.activityIndicator else { return }
+        guard let url = sut?.url else { return }
+        // act
+        sut?.searchRecipesButton(UIButton())
+        sut?.viewModel.getRecipes(with: url, completion: { recipe, error in
+        // assert
+            XCTAssertTrue(spinner.isHidden)
+        })
+        XCTAssertFalse(spinner.isHidden)
+    }
+
+    func test_given_listOfIngredients_when_clear_list_then_list_empty() {
+        // arrange
+        let ingredients = ["apple", "pears", "banana"]
+        guard var list = sut?.listOfIngredients else { return }
+        list = ingredients
+        // act
+        sut?.clearIngredientList(UIButton())
+        sut?.AskConfirmation(completion: { [self] result in
+            if result {
+                sut?.ingredientManager.clearListOfIngredients()
+        // assert
+                XCTAssertTrue(list.isEmpty)
+            } else {
+                XCTAssertEqual(list, ["apple", "pears", "banana"])
+            }
+        })
+    }
 }
