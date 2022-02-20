@@ -75,8 +75,8 @@ extension FavoriteController: UITableViewDelegate {
               let imageSelectedRecipe = cell.listCellImageView.image
         else { return }
 
-        let storyboard = UIStoryboard(name: "DetailRecipe", bundle: Bundle.main)
-        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipe")
+        let storyboard = UIStoryboard(name: "DetailRecipeController", bundle: Bundle.main)
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController")
                 as? DetailRecipeController else { return }
 
         detailRecipe.selectedRecipe = selectedRecipe

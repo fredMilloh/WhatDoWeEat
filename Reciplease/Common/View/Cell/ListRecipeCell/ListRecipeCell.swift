@@ -16,9 +16,11 @@ class ListRecipeCell: UITableViewCell {
     @IBOutlet weak var listCellIndicatorView: UIActivityIndicatorView!
     @IBOutlet var contentListCellView: UIView!
 
+    static let identifier = "ListCell"
+
     override func prepareForReuse() {
-      super.prepareForReuse()
-        configCell(with: .none)
+        super.prepareForReuse()
+        configCell(with: nil)
     }
 
     func configCell(with recipe: Recipe?) {
@@ -29,6 +31,12 @@ class ListRecipeCell: UITableViewCell {
         listCellIngredientsLabel.text = recipe.ingredients
         listTimeView.yieldLabel.text = yieldString
         listTimeView.timeLabel.text = timeString
+
+        if let url = recipe.imageUrl {
+            listCellImageView.setImageFromURl(stringImageUrl: url)
+        } else {
+            listCellImageView.image = UIImage(named: "DefaultImage")
+        }
     }
 
     override func layoutSubviews() {

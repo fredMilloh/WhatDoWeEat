@@ -19,8 +19,8 @@ class ListRecipesController_Tests: XCTestCase {
     ]
 
     override func setUpWithError() throws {
-        let storyboard = UIStoryboard(name: "ListRecipes", bundle: Bundle.main)
-        sut = storyboard.instantiateViewController(withIdentifier: "ListRecipes") as? ListRecipesController
+        let storyboard = UIStoryboard(name: "ListRecipesController", bundle: Bundle.main)
+        sut = storyboard.instantiateViewController(withIdentifier: "ListRecipesController") as? ListRecipesController
         sut?.loadViewIfNeeded()
     }
 
@@ -63,14 +63,14 @@ class ListRecipesController_Tests: XCTestCase {
         XCTAssertTrue(((cell?.configCell(with: .none)) != nil))
     }
 
-    func test_given_recipes_when_displayed_then_numberOfRows_is_correct() {
+    func test_given_total_recipes_when_displayed_then_numberOfRows_is_correct() {
         // arrange
-        sut?.viewModel.recipes = recipesTest
+        sut?.count = recipesTest.count
         let table = sut?.listRecipesTableView
-        let count = sut?.viewModel.totalCount
+        let totalRow = sut?.totalCount
         // act
         let numberOfCell = table?.numberOfRows(inSection: 0)
         // assert
-        XCTAssertEqual(numberOfCell, count)
+        XCTAssertEqual(numberOfCell, totalRow)
     }
 }

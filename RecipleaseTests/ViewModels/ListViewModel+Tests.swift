@@ -11,7 +11,8 @@ import XCTest
 
 class ListViewModel_Tests: XCTestCase {
 
-    var sut = ListViewModel.shared
+    lazy var sut = ListRecipesViewModel(delegate: self)
+    
     let recipesTest = [
         Recipe(name: "one", imageUrl: "", urlDirections: "", yield: 1, ingredientLines: [], ingredients: "", totalTime: 0),
         Recipe(name: "two", imageUrl: "", urlDirections: "", yield: 2, ingredientLines: [], ingredients: "", totalTime: 0),
@@ -20,20 +21,11 @@ class ListViewModel_Tests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = ListViewModel.shared
+        sut = ListRecipesViewModel(delegate: self)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-    }
-
-    func test_totalCount_return_total() {
-        // arrange
-        sut.total = 12
-        //act
-        let totalCountshouldBe = sut.totalCount
-        // assert
-        XCTAssertEqual(totalCountshouldBe, 12)
     }
 
     func test_currentCount_of_recipes_array_and_good_index() {
@@ -83,4 +75,15 @@ class ListViewModel_Tests: XCTestCase {
 //            XCTAssertEqual(error?.localizedDescription, "There is no corresponding recipe. Add an ingredient if necessary.")
 //        })
 //    }
+}
+extension ListViewModel_Tests: ListViewModelDelegate {
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+
+    }
+
+    func onFetchFailed(with reason: String) {
+
+    }
+
+
 }

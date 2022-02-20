@@ -10,7 +10,7 @@
         <!--Favorite Controller-->
         <scene sceneID="kjy-4y-X6k">
             <objects>
-                <viewController storyboardIdentifier="FavoriteList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OEX-XL-gcs" customClass="FavoriteController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OEX-XL-gcs" customClass="FavoriteController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YTJ-pK-8ig">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

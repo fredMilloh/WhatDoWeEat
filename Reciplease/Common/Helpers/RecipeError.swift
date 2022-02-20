@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RecipeError: LocalizedError {
+enum RecipeError: Error {
     case fetchError
     case invalidData
     case unknow

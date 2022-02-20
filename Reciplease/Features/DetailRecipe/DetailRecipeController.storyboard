@@ -11,7 +11,7 @@
         <!--Detail Recipe Controller-->
         <scene sceneID="lGO-Hy-TFK">
             <objects>
-                <viewController storyboardIdentifier="DetailRecipe" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FJ4-jp-fgB" customClass="DetailRecipeController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailRecipeController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FJ4-jp-fgB" customClass="DetailRecipeController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="akG-J9-pa3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

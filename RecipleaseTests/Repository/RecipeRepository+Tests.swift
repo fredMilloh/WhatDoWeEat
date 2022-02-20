@@ -1,20 +1,20 @@
 //
-//  Parserrepository+Tests.swift
+//  RecipeRepository+Tests.swift
 //  RecipleaseTests
 //
-//  Created by fred on 15/02/2022.
+//  Created by fred on 20/02/2022.
 //
 
 import XCTest
 @testable import Reciplease
 
-class ParserRepository_Tests: XCTestCase {
+class RecipeRepository_Tests: XCTestCase {
 
-    var sut: ParserRepository?
+    var sut: RecipeRepository?
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = ParserRepository(apiKey: "abcde", appId: "123456")
+        sut = RecipeRepository(apiKey: "abcde", appId: "123456")
     }
 
     override func tearDownWithError() throws {
@@ -32,7 +32,7 @@ class ParserRepository_Tests: XCTestCase {
 
     func test_parse_recipe_mock_data() {
         // arrange
-        sut = ParserRepository.shared
+        sut = RecipeRepository.shared
         guard let data = TestCase.stubbedData(from: "recipe") else { return }
         // act
         let recipePage = sut?.parse(data)

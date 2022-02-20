@@ -13,7 +13,7 @@ class SearchController_Tests: XCTestCase {
     var sut: SearchController?
 
     override func setUpWithError() throws {
-        let storyboard = UIStoryboard(name: "SearchRecipes", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "SearchController", bundle: Bundle.main)
         sut = storyboard.instantiateViewController(withIdentifier: "SearchController") as? SearchController
         sut?.loadViewIfNeeded()
     }
@@ -64,19 +64,6 @@ class SearchController_Tests: XCTestCase {
         // assert
         XCTAssertEqual(sut?.inventory, "One more thing ? ...")
         XCTAssertEqual(listOfIngredients, ["Orange", "Pineapple"])
-    }
-
-    func test_given_searchButton_when_pressed_then_indicatorActivity_is_present() {
-        // arrange
-        guard let spinner = sut?.activityIndicator else { return }
-        guard let url = sut?.url else { return }
-        // act
-        sut?.searchRecipesButton(UIButton())
-        sut?.viewModel.getRecipes(with: url, completion: { recipe, error in
-        // assert
-            XCTAssertTrue(spinner.isHidden)
-        })
-        XCTAssertFalse(spinner.isHidden)
     }
 
     func test_given_listOfIngredients_when_clear_list_then_list_empty() {

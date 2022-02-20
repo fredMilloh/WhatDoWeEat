@@ -25,26 +25,26 @@
             </objects>
             <point key="canvasLocation" x="18.840579710144929" y="93.75"/>
         </scene>
-        <!--DetailRecipe-->
+        <!--DetailRecipeController-->
         <scene sceneID="q9H-dI-j4l">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="DetailRecipe" storyboardName="DetailRecipe" referencedIdentifier="DetailRecipe" id="dwR-un-5g1" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="DetailRecipeController" storyboardName="DetailRecipeController" referencedIdentifier="DetailRecipeController" id="dwR-un-5g1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6V-DZ-860" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19" y="729"/>
         </scene>
-        <!--ListRecipes-->
+        <!--ListRecipesController-->
         <scene sceneID="jBf-s6-xEt">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ListRecipes" storyboardName="ListRecipes" referencedIdentifier="ListRecipes" id="4HT-VN-V8K" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="ListRecipesController" storyboardName="ListRecipesController" referencedIdentifier="ListRecipesController" id="4HT-VN-V8K" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DIj-6e-0KJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="457" y="665"/>
         </scene>
-        <!--SearchRecipes-->
+        <!--SearchController-->
         <scene sceneID="Fmk-9O-m0B">
             <objects>
-                <viewControllerPlaceholder storyboardName="SearchRecipes" id="WB9-vX-KYv" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="SearchController" id="WB9-vX-KYv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="C3N-Zj-ecz"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jei-MI-6LW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -54,17 +54,17 @@
         <!--UINavigationController-wy0-bF-nS1-->
         <scene sceneID="e21-I1-s0p">
             <objects>
-                <viewControllerPlaceholder storyboardName="Favorite" referencedIdentifier="UINavigationController-wy0-bF-nS1" id="ReP-1Q-r0N" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FavoriteController" referencedIdentifier="UINavigationController-wy0-bF-nS1" id="ReP-1Q-r0N" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Y1I-f5-ZtT"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M2H-aq-ypQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-351" y="583"/>
         </scene>
-        <!--FavoriteList-->
+        <!--FavoriteController-->
         <scene sceneID="yQh-gx-y70">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="FavoriteList" storyboardName="Favorite" referencedIdentifier="FavoriteList" id="4zh-AT-KFa" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="FavoriteListController" storyboardName="FavoriteController" referencedIdentifier="FavoriteController" id="4zh-AT-KFa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6g-Iw-3DM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-394" y="665"/>

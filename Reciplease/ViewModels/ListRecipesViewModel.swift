@@ -7,32 +7,28 @@
 
 import Foundation
 
-protocol ListVMDelegate: AnyObject {
-  func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-  func onFetchFailed(with reason: String)
+typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
+
+protocol ListViewModelDelegate: AnyObject {
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
+    func onFetchFailed(with reason: String)
 }
 
-class ListViewModel {
-
-    // MARK: - Singleton
-
-    static var shared = ListViewModel()
-    private init() {}
+class ListRecipesViewModel {
 
     // MARK: - Properties
 
-    private weak var delegate: ListVMDelegate?
     private let client = APIService.shared
-    private var parser = ParserRepository.shared
+    private var recipeRepository = RecipeRepository.shared
+    weak var delegate: ListViewModelDelegate?
 
-    var total = 0
+    init(delegate: ListViewModelDelegate) {
+        self.delegate = delegate
+    }
+
     var recipes: [Recipe] = []
     var nextPageUrl: String = ""
-
-    /// number of rows List tableView
-    var totalCount: Int {
-      return total
-    }
+    private var isFetchingProgress = false
 
     /// Use for the calculation of the cells to be displayed
     var currentCount: Int {
@@ -45,29 +41,34 @@ class ListViewModel {
 
     // MARK: - Common Methods
 
-    typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
+    func getRecipes() {
 
-    func getRecipes(with url: URL, completion: @escaping RecipePageOrError) {
+        guard !isFetchingProgress else { return }
+        isFetchingProgress = true
 
-        client.get(url: url) { [self] data, error in
+        guard let url = URL(string: nextPageUrl) else {
+            print("url is nil")
+            return }
 
-            if let data = data {
-                let recipes = parser.parse(data)
-                self.recipes.append(contentsOf: recipes.hits)
-                self.total = recipes.count
-                self.nextPageUrl = recipes.nextPage.orEmpty
-                completion(recipes, nil)
+        recipeRepository.getRecipes(with: url) { [self] recipePage, error in
+            if let newRecipePage = recipePage {
+                isFetchingProgress = false
+                nextPageUrl = ""
+                recipes.append(contentsOf: newRecipePage.hits)
+                guard let newUrl = newRecipePage.nextPage else { return }
+                nextPageUrl = newUrl
 
                 /// If this isn't the first page, determine how to update the tableView by calculating the index paths to reload.
-                if recipes.counter > 20 {
-                    let indexPathsToReload = calculateIndexPathsToReload(from: recipes.hits)
+                if newRecipePage.counter > 20 {
+                    let indexPathsToReload = calculateIndexPathsToReload(from: newRecipePage.hits)
                     self.delegate?.onFetchCompleted(with: indexPathsToReload)
                 } else {
                     self.delegate?.onFetchCompleted(with: .none)
                 }
             } else if let error = error {
+                isFetchingProgress = false
                 self.delegate?.onFetchFailed(with: error.localizedDescription)
-                completion(nil, .invalidData)
+
             }
         }
     }

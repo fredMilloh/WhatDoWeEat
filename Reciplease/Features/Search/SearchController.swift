@@ -11,13 +11,12 @@ class SearchController: TabBarController {
 
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchButton: UIButton!
 
-    var viewModel = ListViewModel.shared
-    var parser = ParserRepository.shared
-    var listOfIngredients = [String]()
+    var recipeRepository = RecipeRepository.shared
     lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
+
+    var listOfIngredients = [String]()
 
     var inventory: String {
         guard let inventory = ingredientTextField.text else { return ""}
@@ -25,7 +24,7 @@ class SearchController: TabBarController {
     }
 
     var url: URL {
-        guard let url = parser.getUrl(with: listOfIngredients)
+        guard let url = recipeRepository.getUrl(with: listOfIngredients)
         else { return URL(fileURLWithPath: "www") }
         return url
     }
@@ -61,27 +60,18 @@ class SearchController: TabBarController {
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
-        searchButton.isHidden = true
-        activityIndicator.isHidden = false
-
-        viewModel.getRecipes(with: url) { [self] recipePage, error in
-            searchButton.isHidden = false
-            activityIndicator.isHidden = true
-            if error != nil {
-                presentAlert(message: .invalidData)
-            }
-            self.toRecipesList()
-        }
+        toRecipesList()
     }
 
     // MARK: - Convenience Methods
 
     private func toRecipesList() {
 
-        let storyboard = UIStoryboard(name: "ListRecipes", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: "ListRecipesController", bundle: Bundle.main)
 
-        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipes")
+        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipesController")
                 as? ListRecipesController else { return }
+        recipesList.url = url
         self.navigationController?.pushViewController(recipesList, animated: true)
     }
 

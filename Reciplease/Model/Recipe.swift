@@ -9,6 +9,7 @@ import Foundation
 
 struct RecipePage: Decodable {
     var nextPage: String?
+//    var alreadyLoaded: Int
     var counter: Int
     var count: Int
     let hits: [Recipe]
@@ -28,6 +29,7 @@ extension RecipePage {
 
     enum MainKeys: String, CodingKey {
         case nextLink = "_links"
+//        case alreadyLoaded = "from"
         case counter = "to"
         case count = "count"
         case hits = "hits"
@@ -100,6 +102,9 @@ extension RecipePage {
 
         /// counter
         self.counter = try container.decode(Int.self, forKey: .counter)
+
+        /// alreadyLoaded
+//        self.alreadyLoaded = try container.decode(Int.self, forKey: .alreadyLoaded)
 
         /// count
         self.count = try container.decode(Int.self, forKey: .count)

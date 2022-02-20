@@ -10,7 +10,7 @@
         <!--List Recipes Controller-->
         <scene sceneID="1lw-ZT-73z">
             <objects>
-                <viewController storyboardIdentifier="ListRecipes" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dJJ-i4-kXP" customClass="ListRecipesController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListRecipesController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dJJ-i4-kXP" customClass="ListRecipesController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fpw-xe-q9E">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,17 +30,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="VFc-Qv-Ka9">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CZI-zo-fKw"/>
                         <color key="backgroundColor" red="0.21551859379999999" green="0.2000619471" blue="0.1960774958" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="84T-zP-hgu" firstAttribute="leading" secondItem="CZI-zo-fKw" secondAttribute="leading" id="5tP-pU-8an"/>
+                            <constraint firstItem="VFc-Qv-Ka9" firstAttribute="centerY" secondItem="Fpw-xe-q9E" secondAttribute="centerY" id="Hho-q9-dVs"/>
                             <constraint firstItem="84T-zP-hgu" firstAttribute="trailing" secondItem="CZI-zo-fKw" secondAttribute="trailing" id="VnY-xc-Ud5"/>
                             <constraint firstItem="CZI-zo-fKw" firstAttribute="bottom" secondItem="84T-zP-hgu" secondAttribute="bottom" id="apJ-Sw-M9B"/>
+                            <constraint firstItem="VFc-Qv-Ka9" firstAttribute="centerX" secondItem="Fpw-xe-q9E" secondAttribute="centerX" id="jQZ-gj-yck"/>
                             <constraint firstItem="84T-zP-hgu" firstAttribute="top" secondItem="CZI-zo-fKw" secondAttribute="top" id="vFC-Bf-E1U"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="listIndicatorView" destination="VFc-Qv-Ka9" id="ue7-7x-tso"/>
                         <outlet property="listRecipesTableView" destination="84T-zP-hgu" id="mAV-4U-fDy"/>
                     </connections>
                 </viewController>
