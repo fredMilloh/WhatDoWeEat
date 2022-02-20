@@ -12,6 +12,8 @@ class SearchController: TabBarController {
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var clearButton: UIButton!
 
     var recipeRepository = RecipeRepository.shared
     lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
@@ -33,6 +35,7 @@ class SearchController: TabBarController {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Reciplease"
         setTextField()
+        buttonsAreAvaiables()
         tabBarConfig()
         ingredientTableView.delegate = self
         ingredientTableView.dataSource = self
@@ -44,6 +47,7 @@ class SearchController: TabBarController {
     @IBAction func addButton(_ sender: UIButton) {
         ingredientManager.createIngredientsArray(with: inventory)
         ingredientManager.addIngredientToList()
+        buttonsAreAvaiables()
         ingredientTextField.text = "One more thing ? ..."
         ingredientTableView.reloadData()
         ingredientTextField.resignFirstResponder()
@@ -54,6 +58,7 @@ class SearchController: TabBarController {
             if result {
                 ingredientManager.clearListOfIngredients()
                 ingredientTableView.reloadData()
+                buttonsAreAvaiables()
                 presentAlert(message: .remove)
             }
         }
@@ -81,6 +86,15 @@ class SearchController: TabBarController {
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
         )
         ingredientTextField.setBottomBorder()
+    }
+
+    private func buttonsAreAvaiables() {
+        searchButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
+        clearButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
+        addButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
+        searchButton.isEnabled = listOfIngredients.isEmpty ? false : true
+        clearButton.isEnabled = listOfIngredients.isEmpty ? false : true
+        addButton.isEnabled = listOfIngredients.isEmpty ? false : true
     }
 }
 
@@ -117,6 +131,7 @@ extension SearchController: UITableViewDelegate {
                     ingredientManager.removeToList(at: indexPath.row)
                     ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
                     ingredientTableView.reloadData()
+                    buttonsAreAvaiables()
                     presentAlert(message: .remove)
                 }
             }
@@ -139,10 +154,17 @@ extension SearchController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ingredientTextField.becomeFirstResponder()
         ingredientTextField.placeholder = ""
+        addButton.alpha = 1
+        addButton.isEnabled = true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ingredientTextField.resignFirstResponder()
         return true
+    }
+
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        ingredientTextField.resignFirstResponder()
+        ingredientTextField.text = "One more thing ? ..."
     }
 }

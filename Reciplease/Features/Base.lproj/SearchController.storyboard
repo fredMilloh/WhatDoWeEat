@@ -107,6 +107,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fQ6-1B-0WP">
                                 <rect key="frame" x="0.0" y="314" width="414" height="429"/>
                                 <color key="backgroundColor" red="0.21551859379999999" green="0.2000619471" blue="0.1960774958" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" id="Rj6-Sh-ZsF" customClass="IngredientCell" customModule="Reciplease" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="34.5"/>
@@ -151,6 +152,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="4pA-6m-SgY" appends="YES" id="LOK-DZ-rcQ"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qSB-Vg-tlr" userLabel="Button View">
                                 <rect key="frame" x="0.0" y="743" width="414" height="119"/>
@@ -205,12 +209,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="CoO-B4-qwt"/>
                     <connections>
+                        <outlet property="addButton" destination="q6e-Ve-5HV" id="ORF-mL-Zfk"/>
+                        <outlet property="clearButton" destination="Esf-rn-jhB" id="AHp-6L-VHF"/>
                         <outlet property="ingredientTableView" destination="fQ6-1B-0WP" id="QRU-fg-9Q0"/>
                         <outlet property="ingredientTextField" destination="5mm-XG-SMV" id="0QZ-8W-7aN"/>
                         <outlet property="searchButton" destination="o18-zL-yC3" id="UUj-zJ-CnE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4pA-6m-SgY">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="OUK-BP-LSR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1950.7246376811595" y="-307.36607142857139"/>
         </scene>
