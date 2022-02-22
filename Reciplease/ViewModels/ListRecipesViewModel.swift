@@ -7,24 +7,21 @@
 
 import Foundation
 
-typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
-
 protocol ListViewModelDelegate: AnyObject {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-    func onFetchFailed(with reason: String)
+    func onFetchFailed(with error: RecipeError)
 }
 
 class ListRecipesViewModel {
 
-    // MARK: - Properties
-
-    private let client = APIService.shared
-    private var recipeRepository = RecipeRepository.shared
+    var recipeRepository = RecipeRepository.shared
     weak var delegate: ListViewModelDelegate?
 
     init(delegate: ListViewModelDelegate) {
         self.delegate = delegate
     }
+
+// MARK: - Properties
 
     var recipes: [Recipe] = []
     var nextPageUrl: String = ""
@@ -35,20 +32,24 @@ class ListRecipesViewModel {
       return recipes.count
     }
 
+    var url: URL {
+        guard let url = URL(string: nextPageUrl) else {
+            delegate?.onFetchFailed(with: .fetchError)
+            return URL(fileURLWithPath: "www")
+        }
+        return url
+    }
+
+// MARK: - Common Methods
+
     func recipe(at index: Int) -> Recipe {
         return recipes[index]
     }
-
-    // MARK: - Common Methods
 
     func getRecipes() {
 
         guard !isFetchingProgress else { return }
         isFetchingProgress = true
-
-        guard let url = URL(string: nextPageUrl) else {
-            print("url is nil")
-            return }
 
         recipeRepository.getRecipes(with: url) { [self] recipePage, error in
             if let newRecipePage = recipePage {
@@ -67,7 +68,7 @@ class ListRecipesViewModel {
                 }
             } else if let error = error {
                 isFetchingProgress = false
-                self.delegate?.onFetchFailed(with: error.localizedDescription)
+                self.delegate?.onFetchFailed(with: error)
 
             }
         }

@@ -73,4 +73,37 @@ class ListRecipesController_Tests: XCTestCase {
         // assert
         XCTAssertEqual(numberOfCell, totalRow)
     }
+
+    func test_given_scroll_tableView_when_newPage_is_received_then_calculate_cells_needed() {
+        // arrange
+        let indexPathsForVisibleRows = sut?.listRecipesTableView.indexPathsForVisibleRows ?? []
+        let indexPaths = [IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)]
+        // act
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        // assert
+        XCTAssertEqual(sut?.visibleIndexPathsToReload(intersecting: indexPaths), Array(indexPathsIntersection))
+
+    }
+
+    func test_given_getRecipes_when_failed_fetch_then_delegate_pass_error() {
+        // arrange
+        let error: RecipeError = .invalidData
+        // act
+        sut?.onFetchFailed(with: error)
+        // assert
+        XCTAssertEqual(sut?.alertMessage.localizedDescription, "There is no corresponding recipe. Add an ingredient if necessary.")
+    }
+
+    func test_given_getFirstrecipes_when_call_repository_get_method_then_receive_RecipePage() {
+        // arrange
+        guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
+        // act
+        sut?.getFirstRecipes()
+        sut?.recipeRepository.getRecipes(with: url, callback: { recipePage, error in
+            if let firstRecipePage = recipePage {
+                guard let url = firstRecipePage.nextPage else { return }
+                XCTAssertEqual(url, "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&")
+            }
+        })
+    }
 }

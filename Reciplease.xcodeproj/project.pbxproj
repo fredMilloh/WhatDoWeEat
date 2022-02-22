@@ -43,7 +43,7 @@
 		B6DC781827B1186A0096BDD8 /* RecipeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781727B1186A0096BDD8 /* RecipeError.swift */; };
 		B6DC781A27B187D40096BDD8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781927B187D40096BDD8 /* String+.swift */; };
 		B6DC781C27B2788F0096BDD8 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781B27B2788F0096BDD8 /* UITextField+.swift */; };
-		B6DC781E27B2B8D90096BDD8 /* ListViewModel+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */; };
+		B6DC781E27B2B8D90096BDD8 /* ListRecipesViewModel+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC781D27B2B8D90096BDD8 /* ListRecipesViewModel+Tests.swift */; };
 		B6DC782127B2B9BB0096BDD8 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782027B2B9BB0096BDD8 /* TestCase.swift */; };
 		B6DC782327B2BA480096BDD8 /* Recipe+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */; };
 		B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */; };
@@ -118,7 +118,7 @@
 		B6DC781727B1186A0096BDD8 /* RecipeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeError.swift; sourceTree = "<group>"; };
 		B6DC781927B187D40096BDD8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		B6DC781B27B2788F0096BDD8 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
-		B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListViewModel+Tests.swift"; sourceTree = "<group>"; };
+		B6DC781D27B2B8D90096BDD8 /* ListRecipesViewModel+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListRecipesViewModel+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782027B2B9BB0096BDD8 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DC77EA27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift */,
-				B6DC781D27B2B8D90096BDD8 /* ListViewModel+Tests.swift */,
+				B6DC781D27B2B8D90096BDD8 /* ListRecipesViewModel+Tests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -678,7 +678,7 @@
 				B6DC77EB27AE8BEA0096BDD8 /* IngredientViewModel+Tests.swift in Sources */,
 				B6E9499527C2A3CF00FAB280 /* RecipeRepository+Tests.swift in Sources */,
 				B67F7BFC27BE420C0043F622 /* ListRecipesController+Tests.swift in Sources */,
-				B6DC781E27B2B8D90096BDD8 /* ListViewModel+Tests.swift in Sources */,
+				B6DC781E27B2B8D90096BDD8 /* ListRecipesViewModel+Tests.swift in Sources */,
 				B6DC782127B2B9BB0096BDD8 /* TestCase.swift in Sources */,
 				B67F7BFE27BE50B90043F622 /* DetailRecipeController+Tests.swift in Sources */,
 				B67F7BF827BD457D0043F622 /* TabBarController+Tests.swift in Sources */,

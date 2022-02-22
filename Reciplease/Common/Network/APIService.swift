@@ -17,8 +17,8 @@ class APIService {
         AF.request(url).responseData { response in
             switch response.result {
             case .failure(let error):
-                debugPrint(error)
-                callback(Data(), .fetchError)
+                debugPrint("AFError :", error)
+                callback(nil, .fetchError)
             case .success(let data):
                 callback(data, nil)
             }

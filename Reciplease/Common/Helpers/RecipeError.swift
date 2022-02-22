@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Alamofire
 
-enum RecipeError: Error {
+enum RecipeError: LocalizedError {
     case fetchError
     case invalidData
     case unknow
@@ -19,7 +20,7 @@ enum RecipeError: Error {
     var errorDescription: String? {
         switch self {
         case .fetchError:
-            return "An error occurred while retrieving the recipes"
+            return "Sorry, no recipe was found, try with other ingredients. Check your network connection if necessary."
         case .invalidData:
             return "There is no corresponding recipe. Add an ingredient if necessary."
         case .unknow:
@@ -31,7 +32,7 @@ enum RecipeError: Error {
         case .saveCoreData:
             return "This recipe has been successfully added to your favorites"
         case .deleteCoreData:
-            return "This recipe has been removed"
+            return "This recipe has been removed from the favorites list"
         }
     }
 }

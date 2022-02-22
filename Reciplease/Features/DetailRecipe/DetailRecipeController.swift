@@ -16,19 +16,28 @@ class DetailRecipeController: TabBarController {
     @IBOutlet weak var detailRecipeNameLabel: UILabel!
 
     var selectedRecipe: Recipe!
-    var selectedImage: UIImage!
-    private var favoriteButton: UIBarButtonItem?
+
     private let favoriteRepository = FavoriteRepository()
+
+    private var favoriteButton: UIBarButtonItem?
     private var isFavorite = false
     private lazy var recipeUrl = selectedRecipe.urlDirections
 
+    var alertMessage: RecipeError = .unknow {
+        didSet {
+            presentAlert(message: alertMessage.localizedDescription)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailTableView.delegate = self
         detailTableView.dataSource = self
         detailRecipeImageView.makeGradient(to: detailRecipeImageView)
         configureNavigationItem()
+        configHeaderView()
     }
+
+// MARK: - To directions web page
 
     @IBAction func getDirectionsButton(_ sender: UIButton) {
         let directionsLink = selectedRecipe.urlDirections
@@ -37,7 +46,9 @@ class DetailRecipeController: TabBarController {
         present(directionsView, animated: true, completion: nil)
     }
 
-    private func configureNavigationItem() {
+// MARK: - Favorite button choice
+
+    func configureNavigationItem() {
         favoriteButton = UIBarButtonItem(image: UIImage(systemName: "star"),
                                          style: .plain,
                                          target: self,
@@ -56,46 +67,48 @@ class DetailRecipeController: TabBarController {
             AskConfirmation() { [self] result in
                 if result {
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                    presentAlert(message: .deleteCoreData)
+                    alertMessage = .deleteCoreData
                 }
             }
         } else {
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
                 favoriteButton?.image = UIImage(systemName: "star.fill")
-                presentAlert(message: .saveCoreData)
+                alertMessage = .saveCoreData
             }
+        }
+    }
+
+// MARK: - TableView Header
+
+    private func configHeaderView() {
+        let yieldsString = String(selectedRecipe.yield.withoutDecimal())
+        let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
+        detailTimeView.yieldLabel.text = yieldsString
+        detailTimeView.timeLabel.text = timeString
+        detailRecipeNameLabel.text = selectedRecipe.name
+
+        if let url = selectedRecipe.imageUrl {
+            detailRecipeImageView.setImageFromURl(stringImageUrl: url)
+        } else {
+            detailRecipeImageView.image = UIImage(named: "DefaultImage")
         }
     }
 }
 
+// MARK: - TableView DataSource
+
 extension DetailRecipeController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return selectedRecipe.ingredientLines.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell",
-                                                       for: indexPath
-            ) as? IngredientCell else {
-            return UITableViewCell()
-        }
-
-        let yieldsString = String(selectedRecipe.yield.withoutDecimal())
-        let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
-        detailTimeView.yieldLabel.text = yieldsString
-        detailTimeView.timeLabel.text = timeString
-
-        detailRecipeImageView.image = selectedImage != UIImage() ? selectedImage : UIImage(named: "DefaultImage")
-        detailRecipeNameLabel.text = selectedRecipe.name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell else { return UITableViewCell() }
 
         let ingredient = selectedRecipe.ingredientLines[indexPath.row]
-
         cell.configCell(withIngredient: ingredient)
-
         return cell
     }
-}
-extension DetailRecipeController: UITableViewDelegate {
-
 }

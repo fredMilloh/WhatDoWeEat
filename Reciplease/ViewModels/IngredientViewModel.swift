@@ -11,20 +11,20 @@ protocol IngredientDelegate: AnyObject {
     func ingredientsList(with ingredients: [String])
 }
 protocol AlertDelegate: AnyObject {
-    func presentAlert(message alertError: RecipeError)
+    func presentAlert(message: String)
 }
 
 class IngredientViewModel {
 
     weak var ingredientDelegate: IngredientDelegate?
-    weak var alertDelegate: AlertDelegate?
+    var alertDelegate: AlertDelegate?
 
     init(delegate: IngredientDelegate, alertDelegate: AlertDelegate) {
         self.ingredientDelegate = delegate
         self.alertDelegate = alertDelegate
     }
 
-    // MARK: - Properties
+// MARK: - Properties
 
     var listOfIngredients: [String] = [] {
         didSet {
@@ -32,15 +32,15 @@ class IngredientViewModel {
         }
     }
 
-    var alert: RecipeError = .incorrectElement {
+    var presentAlert: RecipeError = .incorrectElement {
         didSet {
-            alertDelegate?.presentAlert(message: alert)
+            alertDelegate?.presentAlert(message: presentAlert.localizedDescription)
         }
     }
 
     var ingredients = [String]()
 
-    // MARK: - Common Methods
+// MARK: - Common Methods
 
     func createIngredientsArray(with inventory: String) {
         if inventory.isLetters {
@@ -48,7 +48,7 @@ class IngredientViewModel {
                 .map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
             self.ingredients = ingredient
         } else {
-            alert = .incorrectElement
+            presentAlert = .incorrectElement
         }
     }
 
@@ -56,7 +56,7 @@ class IngredientViewModel {
         return listOfIngredients.contains(this)
     }
 
-    // MARK: - Create Update
+// MARK: - Create Update
 
     func addIngredientToList() {
         ingredients.forEach { ingredient in
@@ -68,12 +68,12 @@ class IngredientViewModel {
         }
     }
 
-    // MARK: - Delete
+// MARK: - Delete
 
     func removeToList(at index: Int) {
         listOfIngredients.remove(at: index)
         ingredients = [String]()
-        alert = .remove
+        presentAlert = .remove
     }
 
     func clearListOfIngredients() {

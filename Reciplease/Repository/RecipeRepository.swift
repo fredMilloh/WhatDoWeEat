@@ -7,24 +7,32 @@
 
 import Foundation
 
-class RecipeRepository {
+typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
+
+/// Protocol to mock the method
+protocol GetDelegate {
+    func getRecipes(with url: URL, callback: @escaping RecipePageOrError)
+}
+
+class RecipeRepository: GetDelegate {
 
     static var shared = RecipeRepository()
     private init() {}
 
     private let client = APIService.shared
-
-
-    var apiKey: String = "7aac57c3a479c1b47bef3a206193917d"
+    var getDelegate: GetDelegate?
+    
+    var apiKey: String = "7"
     var appId: String = "17f51d8a"
-    var newRecipePage: RecipePage?
-    var error: RecipeError?
 
     /// to test getUrl method with a fake apiKey
-    init(apiKey: String, appId: String) {
+    init(apiKey: String, appId: String, getDelegate: GetDelegate) {
         self.apiKey = apiKey
         self.appId = appId
+        self.getDelegate = getDelegate
     }
+
+// MARK: - Get Recipes and Url
 
     /// decodes the data received from the APIService request, and passes them on by callback
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
@@ -33,7 +41,7 @@ class RecipeRepository {
                 let recipesPage = parse(data)
                 callback(recipesPage, nil)
             } else {
-                callback(nil, .fetchError)
+                callback(nil, error)
             }
         }
     }
@@ -55,16 +63,17 @@ class RecipeRepository {
         return component.url
     }
 }
-// MARK: - Recipe Data
+
+// MARK: - Decode Recipe Data
 
 extension RecipeRepository {
 
- func parse(_ data: Data) -> RecipePage {
-     do {
-         let dataSet = try JSONDecoder().decode(RecipePage.self, from: data)
-         return dataSet
-     } catch {
-         return RecipePage(nextPage: "", counter: 0, count: 0, hits: [])
-     }
- }
+    func parse(_ data: Data) -> RecipePage? {
+        do {
+            let dataSet = try JSONDecoder().decode(RecipePage.self, from: data)
+            return dataSet
+        } catch {
+            return nil
+        }
+    }
 }

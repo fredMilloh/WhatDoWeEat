@@ -10,8 +10,7 @@ import XCTest
 
 class IngredientViewModel_Tests: XCTestCase, IngredientDelegate, AlertDelegate {
 
-    func presentAlert(message alertError: RecipeError) {
-        print("alert")
+    func presentAlert(message: String) {
     }
 
     func ingredientsList(with ingredients: [String]) {
@@ -123,6 +122,7 @@ class IngredientViewModel_Tests: XCTestCase, IngredientDelegate, AlertDelegate {
         // act
         sut.createIngredientsArray(with: inventory)
         // arrange
+        XCTAssertEqual(sut.presentAlert.localizedDescription, "Only words and comma are correct.")
         XCTAssertEqual(sut.listOfIngredients, ["Lemon", "Mushrooms", "Tomatoe"])
     }
 }

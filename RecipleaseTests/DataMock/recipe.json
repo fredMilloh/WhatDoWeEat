@@ -3,7 +3,7 @@
     "count": 10000,
     "_links": {
         "next": {
-            "href": "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7aac57c3a479c1b47bef3a206193917d&_cont=CHcVQBtNNQphDmgVQntAEX4BYlBtAgAEQGxAAWMQY1RxAgoBUXlSUGobYwAmAQoPEjcWBGcbMFYiDQdSSmARAmtHMAdzAwcVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=17f51d8a",
+            "href": "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&",
             "title": "Next page"
         }
     },

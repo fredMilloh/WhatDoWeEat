@@ -9,9 +9,11 @@ import XCTest
 
 @testable import Reciplease
 
-class ListViewModel_Tests: XCTestCase {
+class ListRecipesViewModel_Tests: XCTestCase {
 
+    var getDelegate: GetDelegate?
     lazy var sut = ListRecipesViewModel(delegate: self)
+    var recipeRepository = RecipeRepository.shared
     
     let recipesTest = [
         Recipe(name: "one", imageUrl: "", urlDirections: "", yield: 1, ingredientLines: [], ingredients: "", totalTime: 0),
@@ -52,38 +54,36 @@ class ListViewModel_Tests: XCTestCase {
         XCTAssertEqual(newIndex, [[0, 1], [0, 2]])
     }
 
+    func test_given_nextPageUrl_when_get_recipes_then_url_correct() {
+        // arrange
+        let nextPageUrl = "https://api.edamam.com/api/recipes/v2?q=test"
+        sut.nextPageUrl = nextPageUrl
+        // act
+        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?q=test")
+        // assert
+        XCTAssertEqual(sut.url, urlShouldBe)
+    }
 
-//    func test_getRecipes_with_good_dataMock() {
-//        // arrange
-//        let data = TestCase.stubbedData(from: "recipe")
-//        // act
-//        sut?.getRecipes(data: data, error: nil, callback: { recipes, error in
-//            guard let recipes = recipes?.hits else { return }
-//        // assert
-//            XCTAssertEqual(recipes[0].name, "Baking with Dorie: Lemon-Lemon Lemon Cream Recipe")
-//        })
-//    }
-
-//    func test_getrecipes_with_bad_dataMock() {
-//        // arrange
-//        let data = TestCase.stubbedData(from: "badrecipe")
-//        // act
-//        sut?.getRecipes(data: data, error: nil, callback: { recipes, error in
-//            guard let recipes = recipes?.hits else { return }
-//        // assert
-//            XCTAssertEqual(recipes[1].totalTime, nil)
-//            XCTAssertEqual(error?.localizedDescription, "There is no corresponding recipe. Add an ingredient if necessary.")
-//        })
-//    }
+    func test_given_url_when_getRecipe_calls_then_nextPageUrl_updated() {
+        // arrange
+        guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
+        // act
+        sut.getRecipes()
+        sut.recipeRepository.getDelegate?.getRecipes(with: url, callback: { [self] recipePage, error in
+            if let newRecipePage = recipePage {
+                guard let newUrl = newRecipePage.nextPage else { return }
+                sut.nextPageUrl = newUrl
+        // assert
+                XCTAssertEqual(sut.nextPageUrl, "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&")
+            }
+        })
+    }
 }
-extension ListViewModel_Tests: ListViewModelDelegate {
+extension ListRecipesViewModel_Tests: ListViewModelDelegate {
+
+    func onFetchFailed(with error: RecipeError) {
+    }
+
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-
     }
-
-    func onFetchFailed(with reason: String) {
-
-    }
-
-
 }

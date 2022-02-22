@@ -18,4 +18,12 @@ class TestCase: XCTestCase {
         return try? Data(contentsOf: url)
     }
 
+    // MARK: - Url
+
+    static func stubbedUrl( from json: String) -> URL? {
+        let bundle = Bundle(for: TestCase.self)
+        let url = bundle.url(forResource: json, withExtension: "json") ?? URL(fileURLWithPath: "www")
+        return url
+    }
+
 }

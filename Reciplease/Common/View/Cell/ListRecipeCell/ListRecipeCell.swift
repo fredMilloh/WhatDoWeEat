@@ -13,7 +13,6 @@ class ListRecipeCell: UITableViewCell {
     @IBOutlet weak var listCellImageView: UIImageView!
     @IBOutlet weak var listCellNameLabel: UILabel!
     @IBOutlet weak var listCellIngredientsLabel: UILabel!
-    @IBOutlet weak var listCellIndicatorView: UIActivityIndicatorView!
     @IBOutlet var contentListCellView: UIView!
 
     static let identifier = "ListCell"
@@ -32,16 +31,12 @@ class ListRecipeCell: UITableViewCell {
         listTimeView.yieldLabel.text = yieldString
         listTimeView.timeLabel.text = timeString
 
+        listCellImageView.makeGradient(to: listCellImageView)
         if let url = recipe.imageUrl {
             listCellImageView.setImageFromURl(stringImageUrl: url)
         } else {
             listCellImageView.image = UIImage(named: "DefaultImage")
         }
-    }
-
-    override func layoutSubviews() {
-        listCellImageView.makeGradient(to: listCellImageView)
-        listCellIndicatorView.hidesWhenStopped = true
     }
 
     required init?(coder aDecoder: NSCoder) {

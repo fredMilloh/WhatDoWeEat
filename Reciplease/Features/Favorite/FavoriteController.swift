@@ -14,6 +14,12 @@ class FavoriteController: TabBarController {
     private let favoriteRepository = FavoriteRepository()
     private var favoritesRecipes = [Favorite]()
 
+    var alertMessage: RecipeError = .unknow {
+        didSet {
+            presentAlert(message: alertMessage.localizedDescription)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = "Reciplease"
@@ -27,6 +33,8 @@ class FavoriteController: TabBarController {
         getFavorite()
         listFavoriteTableView.reloadData()
     }
+
+// MARK: - Get favorites recipes from CoreData
 
     private func getFavorite() {
         favoritesRecipes = [Favorite]()
@@ -52,12 +60,6 @@ extension FavoriteController: UITableViewDataSource {
                 as? ListRecipeCell else { return UITableViewCell() }
 
         let recipe = convertionIntoRecipeFrom(favorite: favoritesRecipes[indexPath.row])
-        if recipe.imageUrl != nil {
-            guard let url = recipe.imageUrl else { return UITableViewCell() }
-            cell.listCellImageView.setImageFromURl(stringImageUrl: url)
-        } else {
-            cell.listCellImageView.image = UIImage(named: "DefaultImage")
-        }
         cell.configCell(with: recipe)
         return cell
     }
@@ -68,19 +70,14 @@ extension FavoriteController: UITableViewDataSource {
 extension FavoriteController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favoriteRecipe = favoritesRecipes[indexPath.row]
-        let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe)
-
-        guard let cell = listFavoriteTableView.cellForRow(at: indexPath) as? ListRecipeCell,
-              let imageSelectedRecipe = cell.listCellImageView.image
-        else { return }
-
         let storyboard = UIStoryboard(name: "DetailRecipeController", bundle: Bundle.main)
-        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController")
+        let favoriteRecipe = favoritesRecipes[indexPath.row]
+
+        guard let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe),
+              let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController")
                 as? DetailRecipeController else { return }
 
         detailRecipe.selectedRecipe = selectedRecipe
-        detailRecipe.selectedImage = imageSelectedRecipe
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
@@ -95,7 +92,7 @@ extension FavoriteController: UITableViewDelegate {
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
                     favoritesRecipes.remove(at: indexPath.row)
                     listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
-                    presentAlert(message: .remove)
+                    alertMessage = .remove
                     getFavorite()
                     listFavoriteTableView.reloadData()
                 }
@@ -104,22 +101,17 @@ extension FavoriteController: UITableViewDelegate {
     }
 }
 
+// MARK: - Convert Favorite to Recipe
+
 extension FavoriteController {
 
-    func convertionIntoRecipeFrom(favorite: Favorite) -> Recipe {
+    func convertionIntoRecipeFrom(favorite: Favorite) -> Recipe? {
         guard let name = favorite.name,
               let ingredients = favorite.ingredients,
               let urlDirections = favorite.urlDirections,
               let ingredientLines = favorite.ingredientLines,
               let imageUrl = favorite.imageUrl
-        else { return Recipe(name: "",
-                             imageUrl: "",
-                             urlDirections: "",
-                             yield: 0,
-                             ingredientLines: [""],
-                             ingredients: "",
-                             totalTime: 0)
-        }
+        else { return nil }
         let yield = favorite.yield
         let totalTime = favorite.totalTime
 

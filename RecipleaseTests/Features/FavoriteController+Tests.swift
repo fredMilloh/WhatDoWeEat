@@ -7,11 +7,12 @@
 
 import XCTest
 @testable import Reciplease
+import CoreData
 
 class FavoriteController_Tests: XCTestCase {
 
     var sut: FavoriteController?
-
+    
     override func setUpWithError() throws {
         let storyboard = UIStoryboard(name: "Favorite", bundle: Bundle.main)
         sut = storyboard.instantiateViewController(withIdentifier: "FavoriteList") as? FavoriteController
@@ -21,4 +22,5 @@ class FavoriteController_Tests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+
 }

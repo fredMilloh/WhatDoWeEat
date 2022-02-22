@@ -42,7 +42,7 @@ class SearchController: TabBarController {
         ingredientTextField.delegate = self
     }
 
-    // MARK: - Buttons Actions
+// MARK: - Buttons Actions
 
     @IBAction func addButton(_ sender: UIButton) {
         ingredientManager.createIngredientsArray(with: inventory)
@@ -59,7 +59,7 @@ class SearchController: TabBarController {
                 ingredientManager.clearListOfIngredients()
                 ingredientTableView.reloadData()
                 buttonsAreAvaiables()
-                presentAlert(message: .remove)
+                presentInfo(message: "Ingredients have been removed")
             }
         }
     }
@@ -68,7 +68,7 @@ class SearchController: TabBarController {
         toRecipesList()
     }
 
-    // MARK: - Convenience Methods
+// MARK: - Convenience Methods
 
     private func toRecipesList() {
 
@@ -117,7 +117,7 @@ extension SearchController: UITableViewDataSource {
     }
 }
 
-    // MARK: - TableView Delegate
+// MARK: - TableView Delegate
 
 extension SearchController: UITableViewDelegate {
 
@@ -132,22 +132,14 @@ extension SearchController: UITableViewDelegate {
                     ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
                     ingredientTableView.reloadData()
                     buttonsAreAvaiables()
-                    presentAlert(message: .remove)
+                    presentInfo(message: "This ingredient has been removed")
                 }
             }
         }
     }
 }
-    // MARK: - Ingredients Protocol
 
-extension SearchController: IngredientDelegate {
-
-    func ingredientsList(with ingredients: [String]) {
-        listOfIngredients = ingredients
-    }
-}
-
-    // MARK: - Textfield delegate
+// MARK: - Textfield Delegate
 
 extension SearchController: UITextFieldDelegate {
 
@@ -166,5 +158,14 @@ extension SearchController: UITextFieldDelegate {
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         ingredientTextField.resignFirstResponder()
         ingredientTextField.text = "One more thing ? ..."
+    }
+}
+
+// MARK: - Protocol Ingredients
+
+extension SearchController: IngredientDelegate {
+
+    func ingredientsList(with ingredients: [String]) {
+        listOfIngredients = ingredients
     }
 }

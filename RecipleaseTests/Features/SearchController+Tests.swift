@@ -33,6 +33,16 @@ class SearchController_Tests: XCTestCase {
         }
     }
 
+    func test_given_keyboard_display_when_clic_view_then_keyboard_dismiss() {
+        // arrange
+        guard let textfield = sut?.ingredientTextField else { return }
+        textfield.becomeFirstResponder()
+        // act
+        sut?.dismissKeyboard(UITapGestureRecognizer())
+        // assert
+        XCTAssertFalse(textfield.isFirstResponder)
+    }
+
     func test_given_textFiel_when_selected_then_keyboard_appears() {
         // arrange
         guard let textField = sut?.ingredientTextField else { return }
@@ -41,6 +51,16 @@ class SearchController_Tests: XCTestCase {
             // arrange
             XCTAssertEqual(textField.placeholder, "")
         }
+    }
+
+    func test_given_ingredients_when_search_recipes_then_url_correct() {
+        // arrange
+        let listOfIngredients = ["banana", "pears", "pineapple"]
+        sut?.listOfIngredients = listOfIngredients
+        // act
+        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=banana,pears,pineapple&app_id=17f51d8a&app_key=7aac57c3a479c1b47bef3a206193917d")
+        // assert
+        XCTAssertEqual(sut?.url, urlShouldBe)
     }
 
     func test_given_ingredients_when_are_displayed_then_cell_title_matches() {

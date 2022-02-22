@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ListRecipesController: TabBarController {
 
@@ -13,6 +14,13 @@ class ListRecipesController: TabBarController {
     @IBOutlet weak var listIndicatorView: UIActivityIndicatorView!
 
     lazy var viewModel = ListRecipesViewModel(delegate: self)
+    var recipeRepository = RecipeRepository.shared
+
+    var alertMessage: RecipeError = .unknow {
+        didSet {
+            presentAlert(message: alertMessage.localizedDescription)
+        }
+    }
 
     var url: URL?
     var count = 0
@@ -31,13 +39,15 @@ class ListRecipesController: TabBarController {
         getFirstRecipes()
     }
 
-    private func getFirstRecipes() {
+// MARK: - Get first recipes
+
+    func getFirstRecipes() {
         listRecipesTableView.isHidden = true
         listIndicatorView.startAnimating()
 
         guard let url = url else { return }
 
-        RecipeRepository.shared.getRecipes(with: url) { [self] recipePage, error in
+        recipeRepository.getRecipes(with: url) { [self] recipePage, error in
             listRecipesTableView.isHidden = false
             listIndicatorView.stopAnimating()
 
@@ -47,10 +57,18 @@ class ListRecipesController: TabBarController {
                 viewModel.nextPageUrl = url
                 count = firstRecipePage.count
                 listRecipesTableView.reloadData()
-            } else if let error = error {
-                print(error)
+            } else {
+                alertMessage = .fetchError
+                goBack()
             }
         }
+    }
+
+    private func goBack() {
+        let storyboard = UIStoryboard(name: "SearchController", bundle: Bundle.main)
+        guard let searchController = storyboard.instantiateViewController(withIdentifier: "SearchController")
+                as? SearchController else { return }
+        self.navigationController?.pushViewController(searchController, animated: true)
     }
 }
 
@@ -69,12 +87,6 @@ extension ListRecipesController: UITableViewDataSource {
             cell.configCell(with: .none)
         } else {
             let recipe = viewModel.recipe(at: indexPath.row)
-
-            if let url = recipe.imageUrl {
-                cell.listCellImageView.setImageFromURl(stringImageUrl: url)
-            } else {
-                cell.listCellImageView.image = UIImage(named: "DefaultImage")
-            }
             cell.configCell(with: recipe)
         }
         return cell
@@ -88,19 +100,16 @@ extension ListRecipesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "DetailRecipeController", bundle: Bundle.main)
 
-        guard let cell = listRecipesTableView.cellForRow(at: indexPath) as? ListRecipeCell,
-              let imageSelectedRecipe = cell.listCellImageView.image,
-              let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController") as? DetailRecipeController
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController") as? DetailRecipeController
         else { return }
 
         let selectedRecipe = viewModel.recipe(at: indexPath.row)
         detailRecipe.selectedRecipe = selectedRecipe
-        detailRecipe.selectedImage = imageSelectedRecipe
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 }
 
-// MARK: - TableView Prefetching
+// MARK: - TableView Prefetching - Get other recipes pages
 
 extension ListRecipesController: UITableViewDataSourcePrefetching {
 
@@ -124,6 +133,8 @@ extension ListRecipesController: UITableViewDataSourcePrefetching {
     }
 }
 
+// MARK: - Protocol ListViewModel
+
 extension ListRecipesController: ListViewModelDelegate {
 
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
@@ -136,7 +147,7 @@ extension ListRecipesController: ListViewModelDelegate {
         listRecipesTableView.reloadRows(at: indexPathsToReload, with: .automatic)
     }
 
-    func onFetchFailed(with reason: String) {
-        presentAlert(message: .fetchError)
+    func onFetchFailed(with error: RecipeError) {
+        alertMessage = error
     }
 }

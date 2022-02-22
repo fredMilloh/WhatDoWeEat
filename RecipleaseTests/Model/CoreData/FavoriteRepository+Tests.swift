@@ -51,11 +51,12 @@ class FavoriteRepository_Tests: XCTestCase {
             for favorite in favorites {
                 if favorite.name == "testRecipe" {
                     recipeTestIsFavorite = true
-                } 
+                }
             }
         }
         // assert
         XCTAssertTrue(recipeTestIsFavorite)
+        XCTAssertEqual(sut.infoMessage, "")
     }
 
     func test_given_testRecipe_when_delete_then_testRecipe_is_not_favorite() {

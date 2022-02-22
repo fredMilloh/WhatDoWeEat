@@ -14,14 +14,14 @@ class TabBarController: UIViewController {
     }
 }
 
-extension TabBarController : AlertDelegate {
+extension TabBarController: AlertDelegate {
 
 
-    func presentAlert(message alertError: RecipeError) {
+    func presentAlert(message: String) {
 
         let alert = UIAlertController(
             title: "",
-            message: "\(alertError.localizedDescription)",
+            message: message,
             preferredStyle: .alert
         )
         let errorAction = UIAlertAction(
@@ -58,14 +58,13 @@ extension TabBarController : AlertDelegate {
 
         let alert = UIAlertController(
             title: "",
-            message: "",
+            message: alertInfo,
             preferredStyle: .alert
         )
-        let errorAction = UIAlertAction(
-            title: "ok",
-            style: .cancel
-        )
-        alert.addAction(errorAction)
-        present(alert, animated: true)
+        self.present(alert, animated: true)
+
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
