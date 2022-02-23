@@ -87,11 +87,12 @@ class ListRecipesController_Tests: XCTestCase {
 
     func test_given_getRecipes_when_failed_fetch_then_delegate_pass_error() {
         // arrange
-        let error: RecipeError = .invalidData
+        let error: RecipeError = .fetchError
         // act
         sut?.onFetchFailed(with: error)
+        let alertMessageShouldBe = error.localizedDescription
         // assert
-        XCTAssertEqual(sut?.alertMessage.localizedDescription, "There is no corresponding recipe. Add an ingredient if necessary.")
+        XCTAssertEqual(sut?.alertMessage.localizedDescription, alertMessageShouldBe)
     }
 
     func test_given_getFirstrecipes_when_call_repository_get_method_then_receive_RecipePage() {
@@ -99,10 +100,12 @@ class ListRecipesController_Tests: XCTestCase {
         guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
         // act
         sut?.getFirstRecipes()
+        let urlShouldBe = "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&"
         sut?.recipeRepository.getRecipes(with: url, callback: { recipePage, error in
             if let firstRecipePage = recipePage {
                 guard let url = firstRecipePage.nextPage else { return }
-                XCTAssertEqual(url, "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&")
+        // assert
+                XCTAssertEqual(url, urlShouldBe)
             }
         })
     }

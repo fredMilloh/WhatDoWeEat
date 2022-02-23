@@ -17,7 +17,16 @@ class DetailRecipeController_Tests: XCTestCase {
         imageUrl: "https://testImage.com",
         urlDirections: "https://testDirections.com",
         yield: 4,
-        ingredientLines: ["1/2 pound unsalted butter, at room temperature", "1/2 cup granulated sugar", "2 cups flour", "1/8 teaspoon kosher salt", "For the full-size lemon layer:", "2 1/2 cup granulated sugar"],
+        ingredientLines: ["2 cups flour", "1/8 teaspoon kosher salt", "2 1/2 cup granulated sugar"],
+        ingredients: "butter, sugar, flour, salt, lemon",
+        totalTime: 90)
+
+    let selectedTestithoutImage = Recipe(
+        name: "selectedOne",
+        imageUrl: nil,
+        urlDirections: "https://testDirections.com",
+        yield: 4,
+        ingredientLines: ["2 cups flour", "1/8 teaspoon kosher salt", "2 1/2 cup granulated sugar"],
         ingredients: "butter, sugar, flour, salt, lemon",
         totalTime: 90)
 
@@ -31,14 +40,50 @@ class DetailRecipeController_Tests: XCTestCase {
         sut = nil
     }
 
-//    func test_given_total_ingredientsLines_when_displayed_then_numberOfRows_is_correct() {
-//        // arrange
+    func test_given_total_ingredientsLines_when_displayed_then_numberOfRows_is_correct() {
+        // arrange
+        sut?.selectedRecipe = selectedTestRecipe
+        guard let recipe = sut?.selectedRecipe else { return }
+        let table = sut?.detailTableView
+        let ingredientLinesCount = recipe.ingredientLines.count
+        // act
+        let numberOfCell = table?.numberOfRows(inSection: 0)
+        // assert
+        XCTAssertEqual(numberOfCell, ingredientLinesCount)
+    }
+
+//    func test_given_selectedRecipe_when_displayed_details_then_labels_corrects() {
+//        //arrange
 //        sut?.selectedRecipe = selectedTestRecipe
-//        let table = sut?.detailTableView
-//        let ingredientLinesCount = selectedTestRecipe.ingredientLines.count
+//        let recipeName = selectedTestRecipe.name
+//        let yieldsString = String(selectedTestRecipe.yield.withoutDecimal())
+//        let timeString = (selectedTestRecipe.totalTime * 60).convertToString(style: .abbreviated)
 //        // act
-//        let numberOfCell = table?.numberOfRows(inSection: 0)
+//        sut?.configHeaderView()
 //        // assert
-//        XCTAssertEqual(numberOfCell, ingredientLinesCount)
+//        XCTAssertEqual(sut?.detailRecipeNameLabel.text, recipeName)
+//        XCTAssertEqual(sut?.detailTimeView.yieldLabel.text, yieldsString)
+//        XCTAssertEqual(sut?.detailTimeView.timeLabel.text, timeString)
 //    }
+
+    func test_given_selectedrecipe_when_without_imageUrl_then_displayed_default_image() {
+        // arrange
+        let defaulImage = UIImage(named: "DefaultImage")
+        sut?.selectedRecipe = selectedTestithoutImage
+        // act
+        sut?.configHeaderView()
+        // arrange
+        XCTAssertEqual(sut?.detailRecipeImageView.image, defaulImage)
+    }
+
+    func test_given_ingredientLines_when_are_displayed_then_cell_title_matches() {
+        // arrange
+        sut?.selectedRecipe?.ingredientLines = selectedTestRecipe.ingredientLines
+        let table = sut?.detailTableView
+        guard let cell = sut?.tableView(table ?? UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)) as? IngredientCell, let selectedRecipe = sut?.selectedRecipe else { return }
+        // act
+        cell.configCell(withIngredient: selectedRecipe.ingredientLines[IndexPath(row: 1, section: 0).row])
+        // assert
+        XCTAssertEqual(cell.cellIngredientLabel.text, "1/8 teaspoon kosher salt")
+    }
 }

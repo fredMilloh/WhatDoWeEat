@@ -15,15 +15,14 @@ class DetailRecipeController: TabBarController {
     @IBOutlet weak var detailRecipeImageView: UIImageView!
     @IBOutlet weak var detailRecipeNameLabel: UILabel!
 
-    var selectedRecipe: Recipe!
+    var selectedRecipe: Recipe?
 
     private let favoriteRepository = FavoriteRepository()
 
     private var favoriteButton: UIBarButtonItem?
     private var isFavorite = false
-    private lazy var recipeUrl = selectedRecipe.urlDirections
 
-    var alertMessage: RecipeError = .unknow {
+    var alertMessage: RecipeError = .invalidData {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
         }
@@ -40,7 +39,7 @@ class DetailRecipeController: TabBarController {
 // MARK: - To directions web page
 
     @IBAction func getDirectionsButton(_ sender: UIButton) {
-        let directionsLink = selectedRecipe.urlDirections
+        guard let directionsLink = selectedRecipe?.urlDirections else { return }
         guard let directionsUrl = URL(string: directionsLink) else { return }
         let directionsView = SFSafariViewController(url: directionsUrl)
         present(directionsView, animated: true, completion: nil)
@@ -54,6 +53,7 @@ class DetailRecipeController: TabBarController {
                                          target: self,
                                          action: #selector(favoriteButtonPressed))
         favoriteButton?.tintColor = .yellow
+        guard let recipeUrl = selectedRecipe?.urlDirections else { return }
         if favoriteRepository.isFavorite(recipeUrl: recipeUrl) {
             isFavorite = true
             favoriteButton?.image = UIImage(systemName: "star.fill")
@@ -66,11 +66,13 @@ class DetailRecipeController: TabBarController {
             favoriteButton?.image = UIImage(systemName: "star")
             AskConfirmation() { [self] result in
                 if result {
+                    guard let recipeUrl = selectedRecipe?.urlDirections else { return}
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
                     alertMessage = .deleteCoreData
                 }
             }
         } else {
+            guard let selectedRecipe = selectedRecipe else { return }
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
                 favoriteButton?.image = UIImage(systemName: "star.fill")
                 alertMessage = .saveCoreData
@@ -80,7 +82,8 @@ class DetailRecipeController: TabBarController {
 
 // MARK: - TableView Header
 
-    private func configHeaderView() {
+    func configHeaderView() {
+        guard let selectedRecipe = selectedRecipe else { return }
         let yieldsString = String(selectedRecipe.yield.withoutDecimal())
         let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
         detailTimeView.yieldLabel.text = yieldsString
@@ -100,12 +103,13 @@ class DetailRecipeController: TabBarController {
 extension DetailRecipeController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedRecipe.ingredientLines.count
+        guard let ingredientsCount = selectedRecipe?.ingredientLines.count else { return 0 }
+        return ingredientsCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell, let selectedRecipe = selectedRecipe else { return UITableViewCell() }
 
         let ingredient = selectedRecipe.ingredientLines[indexPath.row]
         cell.configCell(withIngredient: ingredient)

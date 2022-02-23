@@ -73,6 +73,7 @@ class RecipeRepository_Tests: XCTestCase {
         guard let error = error else { return }
         // assert
         XCTAssertNil(recipe)
+        XCTAssertEqual(error, .invalidData)
         XCTAssertEqual(error.localizedDescription, "Sorry, no recipe was found, try with other ingredients. Check your network connection if necessary.")
         })
     }

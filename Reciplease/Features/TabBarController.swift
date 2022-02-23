@@ -16,7 +16,6 @@ class TabBarController: UIViewController {
 
 extension TabBarController: AlertDelegate {
 
-
     func presentAlert(message: String) {
 
         let alert = UIAlertController(

@@ -64,7 +64,7 @@
         <!--FavoriteController-->
         <scene sceneID="yQh-gx-y70">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="FavoriteListController" storyboardName="FavoriteController" referencedIdentifier="FavoriteController" id="4zh-AT-KFa" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="FavoriteController" storyboardName="FavoriteController" referencedIdentifier="FavoriteController" id="4zh-AT-KFa" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6g-Iw-3DM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-394" y="665"/>

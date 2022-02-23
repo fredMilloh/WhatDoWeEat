@@ -13,15 +13,16 @@
 		B67F7BFE27BE50B90043F622 /* DetailRecipeController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F7BFD27BE50B90043F622 /* DetailRecipeController+Tests.swift */; };
 		B67F7C0027BE50D80043F622 /* FavoriteController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F7BFF27BE50D80043F622 /* FavoriteController+Tests.swift */; };
 		B67F7C0427BE7C4D0043F622 /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F7C0327BE7C4D0043F622 /* RecipeRepository.swift */; };
+		B6CFA36527C62D9000950539 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CFA36427C62D9000950539 /* FavoriteController.swift */; };
+		B6CFA36727C62DD600950539 /* FavoriteController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CFA36627C62DD600950539 /* FavoriteController.storyboard */; };
 		B6DC779827AE7FA30096BDD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC779727AE7FA30096BDD8 /* AppDelegate.swift */; };
 		B6DC779A27AE7FA30096BDD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC779927AE7FA30096BDD8 /* SceneDelegate.swift */; };
 		B6DC779C27AE7FA30096BDD8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC779B27AE7FA30096BDD8 /* TabBarController.swift */; };
-		B6DC779F27AE7FA30096BDD8 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC779D27AE7FA30096BDD8 /* TabBar.storyboard */; };
+		B6DC779F27AE7FA30096BDD8 /* TabBarController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC779D27AE7FA30096BDD8 /* TabBarController.storyboard */; };
 		B6DC77A227AE7FA30096BDD8 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77A027AE7FA30096BDD8 /* Reciplease.xcdatamodeld */; };
 		B6DC77A427AE7FAC0096BDD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DC77A327AE7FAC0096BDD8 /* Assets.xcassets */; };
 		B6DC77A727AE7FAC0096BDD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC77A527AE7FAC0096BDD8 /* LaunchScreen.storyboard */; };
 		B6DC77D027AE818F0096BDD8 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77CF27AE818F0096BDD8 /* SearchController.swift */; };
-		B6DC77D227AE81A90096BDD8 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77D127AE81A90096BDD8 /* FavoriteController.swift */; };
 		B6DC77D727AE84470096BDD8 /* RecipleaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77D627AE84470096BDD8 /* RecipleaseUITests.swift */; };
 		B6DC77DE27AE865D0096BDD8 /* TabBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77DD27AE865D0096BDD8 /* TabBarAppearance.swift */; };
 		B6DC77E027AE86AA0096BDD8 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */; };
@@ -49,7 +50,6 @@
 		B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */; };
 		B6DC783227B522400096BDD8 /* ListRecipesController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783127B522400096BDD8 /* ListRecipesController.storyboard */; };
 		B6DC783527B522BE0096BDD8 /* SearchController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783327B522BE0096BDD8 /* SearchController.storyboard */; };
-		B6DC783727B522FE0096BDD8 /* FavoriteController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783627B522FE0096BDD8 /* FavoriteController.storyboard */; };
 		B6DC783C27B52EA30096BDD8 /* DetailRecipeController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DC783B27B52EA30096BDD8 /* DetailRecipeController.storyboard */; };
 		B6DC787527B6CA350096BDD8 /* ListRecipeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6DC787427B6CA350096BDD8 /* ListRecipeCellView.xib */; };
 		B6DC787B27B95F720096BDD8 /* FavoriteRepository+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC787A27B95F720096BDD8 /* FavoriteRepository+Tests.swift */; };
@@ -84,11 +84,13 @@
 		B67F7BFD27BE50B90043F622 /* DetailRecipeController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailRecipeController+Tests.swift"; sourceTree = "<group>"; };
 		B67F7BFF27BE50D80043F622 /* FavoriteController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteController+Tests.swift"; sourceTree = "<group>"; };
 		B67F7C0327BE7C4D0043F622 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
+		B6CFA36427C62D9000950539 /* FavoriteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
+		B6CFA36627C62DD600950539 /* FavoriteController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoriteController.storyboard; sourceTree = "<group>"; };
 		B6DC779427AE7FA30096BDD8 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DC779727AE7FA30096BDD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DC779927AE7FA30096BDD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B6DC779B27AE7FA30096BDD8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		B6DC779E27AE7FA30096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TabBar.storyboard; sourceTree = "<group>"; };
+		B6DC779E27AE7FA30096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TabBarController.storyboard; sourceTree = "<group>"; };
 		B6DC77A127AE7FA30096BDD8 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		B6DC77A327AE7FAC0096BDD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DC77A627AE7FAC0096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,7 +98,6 @@
 		B6DC77AD27AE7FAC0096BDD8 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DC77B727AE7FAC0096BDD8 /* RecipleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DC77CF27AE818F0096BDD8 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
-		B6DC77D127AE81A90096BDD8 /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
 		B6DC77D627AE84470096BDD8 /* RecipleaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseUITests.swift; sourceTree = "<group>"; };
 		B6DC77DD27AE865D0096BDD8 /* TabBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAppearance.swift; sourceTree = "<group>"; };
 		B6DC77DF27AE86AA0096BDD8 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -122,9 +123,8 @@
 		B6DC782027B2B9BB0096BDD8 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B6DC782227B2BA480096BDD8 /* Recipe+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Tests.swift"; sourceTree = "<group>"; };
 		B6DC782C27B2E0B70096BDD8 /* FavoriteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepository.swift; sourceTree = "<group>"; };
-		B6DC783127B522400096BDD8 /* ListRecipesController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ListRecipesController.storyboard; sourceTree = SOURCE_ROOT; };
+		B6DC783127B522400096BDD8 /* ListRecipesController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ListRecipesController.storyboard; path = ../../Base.lproj/ListRecipesController.storyboard; sourceTree = "<group>"; };
 		B6DC783427B522BE0096BDD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Reciplease/Features/Base.lproj/SearchController.storyboard; sourceTree = SOURCE_ROOT; };
-		B6DC783627B522FE0096BDD8 /* FavoriteController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoriteController.storyboard; sourceTree = SOURCE_ROOT; };
 		B6DC783B27B52EA30096BDD8 /* DetailRecipeController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailRecipeController.storyboard; sourceTree = "<group>"; };
 		B6DC787427B6CA350096BDD8 /* ListRecipeCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListRecipeCellView.xib; sourceTree = "<group>"; };
 		B6DC787A27B95F720096BDD8 /* FavoriteRepository+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteRepository+Tests.swift"; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DC779B27AE7FA30096BDD8 /* TabBarController.swift */,
-				B6DC779D27AE7FA30096BDD8 /* TabBar.storyboard */,
+				B6DC779D27AE7FA30096BDD8 /* TabBarController.storyboard */,
 				B6DC77CD27AE81380096BDD8 /* Search */,
 				B6DC77FE27AEFDAB0096BDD8 /* DetailRecipe */,
 				B6DC77CE27AE81590096BDD8 /* Favorite */,
@@ -306,8 +306,8 @@
 		B6DC77CE27AE81590096BDD8 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				B6DC77D127AE81A90096BDD8 /* FavoriteController.swift */,
-				B6DC783627B522FE0096BDD8 /* FavoriteController.storyboard */,
+				B6CFA36427C62D9000950539 /* FavoriteController.swift */,
+				B6CFA36627C62DD600950539 /* FavoriteController.storyboard */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -568,10 +568,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DC783527B522BE0096BDD8 /* SearchController.storyboard in Resources */,
+				B6CFA36727C62DD600950539 /* FavoriteController.storyboard in Resources */,
 				B6DC77A727AE7FAC0096BDD8 /* LaunchScreen.storyboard in Resources */,
 				B6DC77A427AE7FAC0096BDD8 /* Assets.xcassets in Resources */,
-				B6DC779F27AE7FA30096BDD8 /* TabBar.storyboard in Resources */,
-				B6DC783727B522FE0096BDD8 /* FavoriteController.storyboard in Resources */,
+				B6DC779F27AE7FA30096BDD8 /* TabBarController.storyboard in Resources */,
 				B6DC787527B6CA350096BDD8 /* ListRecipeCellView.xib in Resources */,
 				B6DC780D27B039FF0096BDD8 /* TimeView.xib in Resources */,
 				B6DC783227B522400096BDD8 /* ListRecipesController.storyboard in Resources */,
@@ -655,10 +655,10 @@
 				B6DC77E227AE89410096BDD8 /* ViewController+.swift in Sources */,
 				B6DC781A27B187D40096BDD8 /* String+.swift in Sources */,
 				B6DC780927B02F6E0096BDD8 /* TimeView.swift in Sources */,
-				B6DC77D227AE81A90096BDD8 /* FavoriteController.swift in Sources */,
 				B6DC77FD27AEF6610096BDD8 /* APIService.swift in Sources */,
 				B6DC77FA27AEE5CB0096BDD8 /* ListRecipeCell.swift in Sources */,
 				B6DC77F727AECE360096BDD8 /* IngredientCell.swift in Sources */,
+				B6CFA36527C62D9000950539 /* FavoriteController.swift in Sources */,
 				B6DC77D027AE818F0096BDD8 /* SearchController.swift in Sources */,
 				B6DC780527AFEF690096BDD8 /* ListRecipesController.swift in Sources */,
 				B6DC782D27B2E0B70096BDD8 /* FavoriteRepository.swift in Sources */,
@@ -713,12 +713,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B6DC779D27AE7FA30096BDD8 /* TabBar.storyboard */ = {
+		B6DC779D27AE7FA30096BDD8 /* TabBarController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B6DC779E27AE7FA30096BDD8 /* Base */,
 			);
-			name = TabBar.storyboard;
+			name = TabBarController.storyboard;
 			sourceTree = "<group>";
 		};
 		B6DC77A527AE7FAC0096BDD8 /* LaunchScreen.storyboard */ = {
@@ -869,10 +869,9 @@
 				INFOPLIST_FILE = Reciplease/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TabBar;
+				INFOPLIST_KEY_UIMainStoryboardFile = TabBarController;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -900,10 +899,9 @@
 				INFOPLIST_FILE = Reciplease/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = TabBar;
+				INFOPLIST_KEY_UIMainStoryboardFile = TabBarController;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

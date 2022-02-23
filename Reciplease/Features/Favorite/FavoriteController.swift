@@ -11,10 +11,10 @@ class FavoriteController: TabBarController {
 
     @IBOutlet weak var listFavoriteTableView: UITableView!
 
-    private let favoriteRepository = FavoriteRepository()
-    private var favoritesRecipes = [Favorite]()
+    let favoriteRepository = FavoriteRepository()
+    var favoritesRecipes = [Favorite]()
 
-    var alertMessage: RecipeError = .unknow {
+    var alertMessage: RecipeError = .saveCoreData {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
         }
@@ -36,7 +36,7 @@ class FavoriteController: TabBarController {
 
 // MARK: - Get favorites recipes from CoreData
 
-    private func getFavorite() {
+    func getFavorite() {
         favoritesRecipes = [Favorite]()
         favoriteRepository.getFavorite { favorites in
 
@@ -81,10 +81,7 @@ extension FavoriteController: UITableViewDelegate {
         self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath
-        ) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             AskConfirmation() { [self] result in
                 if result {

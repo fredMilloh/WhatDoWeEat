@@ -11,7 +11,6 @@ import Alamofire
 enum RecipeError: LocalizedError {
     case fetchError
     case invalidData
-    case unknow
     case incorrectElement
     case remove
     case saveCoreData
@@ -23,8 +22,6 @@ enum RecipeError: LocalizedError {
             return "Sorry, no recipe was found, try with other ingredients. Check your network connection if necessary."
         case .invalidData:
             return "There is no corresponding recipe. Add an ingredient if necessary."
-        case .unknow:
-            return "An error has occurred... Try again."
         case .incorrectElement:
             return "Only words and comma are correct."
         case .remove:

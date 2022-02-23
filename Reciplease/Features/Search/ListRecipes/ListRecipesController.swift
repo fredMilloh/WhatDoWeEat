@@ -16,7 +16,7 @@ class ListRecipesController: TabBarController {
     lazy var viewModel = ListRecipesViewModel(delegate: self)
     var recipeRepository = RecipeRepository.shared
 
-    var alertMessage: RecipeError = .unknow {
+    var alertMessage: RecipeError = .fetchError {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
         }
