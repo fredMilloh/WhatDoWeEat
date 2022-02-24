@@ -45,12 +45,12 @@ class ListRecipesController_Tests: XCTestCase {
         let table = sut?.listRecipesTableView
         let cell = sut?.tableView(table ?? UITableView(), cellForRowAt: IndexPath(row: 2, section: 0)) as? ListRecipeCell
         let defaultImage = UIImage(named: "DefaultImage")
-        guard let imageView = cell?.listCellImageView else { return }
+
         // act
         cell?.configCell(with: recipesTest[IndexPath(row: 2, section: 0).row])
         // assert
         XCTAssertEqual(cell?.listCellImageView.image, defaultImage)
-        XCTAssertTrue(((cell?.listCellImageView.makeGradient(to: imageView)) != nil))
+        XCTAssertTrue(((cell?.listCellImageView.makeGradient()) != nil))
     }
 
     func test_given_recipes_outOf_currentRange_when_displayed_then_cell_default() {

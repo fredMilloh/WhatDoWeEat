@@ -10,12 +10,13 @@ import Foundation
 protocol IngredientDelegate: AnyObject {
     func ingredientsList(with ingredients: [String])
 }
+
 protocol AlertDelegate: AnyObject {
     func presentAlert(message: String)
     func presentInfo(message alertInfo: String)
 }
 
-class IngredientViewModel {
+class SearchViewModel {
 
     weak var ingredientDelegate: IngredientDelegate?
     var alertDelegate: AlertDelegate?
@@ -39,7 +40,7 @@ class IngredientViewModel {
         }
     }
 
-    var presentInfo: String = listRemoved {
+    var presentInfo: String = "Ingredients have been removed" {
         didSet {
             alertDelegate?.presentInfo(message: presentInfo)
         }
@@ -54,6 +55,8 @@ class IngredientViewModel {
             let ingredient = inventory.split(separator: ",")
                 .map{ "\($0.trimmingCharacters(in: .whitespaces).localizedCapitalized)" }
             self.ingredients = ingredient
+
+            addIngredientToList()
         } else {
             presentAlert = .incorrectElement
         }
@@ -65,10 +68,9 @@ class IngredientViewModel {
 
 // MARK: - Create Update
 
-    func addIngredientToList() {
+    private func addIngredientToList() {
         ingredients.forEach { ingredient in
-            if !listAlreadyContains(this: ingredient)
-                && ingredient.count > 1 {
+            if !listAlreadyContains(this: ingredient) && ingredient.count > 1 {
                 listOfIngredients.append(ingredient)
                 listOfIngredients = listOfIngredients.sorted()
             }
@@ -80,11 +82,11 @@ class IngredientViewModel {
     func removeToList(at index: Int) {
         listOfIngredients.remove(at: index)
         ingredients = [String]()
-        presentInfo = ingredientRemoved
+        presentInfo = "This ingredient has been removed"
     }
 
     func clearListOfIngredients() {
         listOfIngredients.removeAll()
-        presentInfo = listRemoved
+        presentInfo = "Ingredients have been removed"
     }
 }

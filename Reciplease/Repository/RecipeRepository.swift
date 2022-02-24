@@ -10,23 +10,23 @@ import Foundation
 typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
 
 /// Protocol to mock the method
-protocol GetDelegate {
+protocol RecipeRepositoryDelegate {
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError)
 }
 
-class RecipeRepository: GetDelegate {
+class RecipeRepository: RecipeRepositoryDelegate {
 
     static var shared = RecipeRepository()
     private init() {}
 
     private let client = APIService.shared
-    var getDelegate: GetDelegate?
+    var getDelegate: RecipeRepositoryDelegate?
     
-    var apiKey: String = appApiKey
-    var appId: String = appIdentifier
+    var apiKey: String = "7"
+    var appId: String = "17f51d8a"
 
-    /// to test getUrl method with a fake apiKey
-    init(apiKey: String, appId: String, getDelegate: GetDelegate) {
+    /// to test getUrl method with a fake apiKey and getRecipes method
+    init(apiKey: String, appId: String, getDelegate: RecipeRepositoryDelegate) {
         self.apiKey = apiKey
         self.appId = appId
         self.getDelegate = getDelegate

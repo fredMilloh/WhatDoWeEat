@@ -11,7 +11,6 @@ import XCTest
 
 class ListRecipesViewModel_Tests: XCTestCase {
 
-    var getDelegate: GetDelegate?
     lazy var sut = ListRecipesViewModel(delegate: self)
     var recipeRepository = RecipeRepository.shared
     

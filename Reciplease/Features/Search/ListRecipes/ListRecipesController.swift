@@ -16,7 +16,7 @@ class ListRecipesController: TabBarController {
     lazy var viewModel = ListRecipesViewModel(delegate: self)
     var recipeRepository = RecipeRepository.shared
 
-    static let identifier = listRecipesController
+    static let identifier = "ListRecipesController"
 
     var alertMessage: RecipeError = .fetchError {
         didSet {

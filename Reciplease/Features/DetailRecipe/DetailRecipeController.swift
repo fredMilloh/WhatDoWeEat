@@ -18,11 +18,13 @@ class DetailRecipeController: TabBarController {
     var selectedRecipe: Recipe?
 
     private let favoriteRepository = FavoriteRepository()
-    static let identifier = detailRecipeController
+    static let identifier = "DetailRecipeController"
+    let noFavorite = "star"
+    let favorite = "star.fill"
     private var favoriteButton: UIBarButtonItem?
     private var isFavorite = false
 
-    var alertInfo: String = listRemoved {
+    var alertInfo: String = "" {
         didSet {
             presentInfo(message: alertInfo)
         }
@@ -31,7 +33,7 @@ class DetailRecipeController: TabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailTableView.dataSource = self
-        detailRecipeImageView.makeGradient(to: detailRecipeImageView)
+        detailRecipeImageView.makeGradient()
         configureNavigationItem()
         configHeaderView()
     }
@@ -64,18 +66,16 @@ class DetailRecipeController: TabBarController {
     @objc private func favoriteButtonPressed() {
         if isFavorite {
             favoriteButton?.image = UIImage(systemName: noFavorite)
-            AskConfirmation() { [self] result in
-                if result {
-                    guard let recipeUrl = selectedRecipe?.urlDirections else { return}
-                    favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                    alertInfo = recipeNotFavorite
-                }
-            }
+            self.presentDeletePopUp(deleteAction: { [weak self] in
+                guard let self = self, let recipeUrl = self.selectedRecipe?.urlDirections else { return}
+                self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+                self.alertInfo = "This recipe has been removed from the favorites list"
+            })
         } else {
             guard let selectedRecipe = selectedRecipe else { return }
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
                 favoriteButton?.image = UIImage(systemName: favorite)
-                alertInfo = recipeIsFavorite
+                alertInfo = "This recipe has been successfully added to your favorites"
             }
         }
     }
@@ -84,16 +84,16 @@ class DetailRecipeController: TabBarController {
 
     func configHeaderView() {
         guard let selectedRecipe = selectedRecipe else { return }
-        let yieldsString = String(selectedRecipe.yield.withoutDecimal())
+        let yieldsString = selectedRecipe.yield.withoutDecimal()
         let timeString = (selectedRecipe.totalTime * 60).convertToString(style: .abbreviated)
         detailTimeView.yieldLabel.text = yieldsString
         detailTimeView.timeLabel.text = timeString
         detailRecipeNameLabel.text = selectedRecipe.name
 
         if let url = selectedRecipe.imageUrl {
-            detailRecipeImageView.setImageFromURl(stringImageUrl: url)
+            detailRecipeImageView.setImageFromURL(stringImageUrl: url)
         } else {
-            detailRecipeImageView.image = UIImage(named: defaultRecipeImage)
+            detailRecipeImageView.image = UIImage(named: "DefaultImage")
         }
     }
 }

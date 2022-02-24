@@ -16,13 +16,16 @@ class SearchController: TabBarController {
     @IBOutlet weak var clearButton: UIButton!
 
     var recipeRepository = RecipeRepository.shared
-    lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
+
+    lazy var viewModel = SearchViewModel(delegate: self, alertDelegate: self)
 
     var listOfIngredients = [String]()
-    static let identifier = searchController
+    static let identifier = "SearchController"
+    let firstPlaceholder = "Lemon, Cheese, Sausages,..."
+    let oneMoreThing = "One more thing ? ..."
 
     var inventory: String {
-        guard let inventory = ingredientTextField.text else { return ""}
+        guard let inventory = ingredientTextField.text else { return "" }
         return inventory
     }
 
@@ -34,7 +37,7 @@ class SearchController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = appName
+        navigationController?.navigationBar.topItem?.title = "Reciplease"
         setTextField()
         buttonsAreAvaiables()
         tabBarConfig()
@@ -46,8 +49,7 @@ class SearchController: TabBarController {
 // MARK: - Buttons Actions
 
     @IBAction func addButton(_ sender: UIButton) {
-        ingredientManager.createIngredientsArray(with: inventory)
-        ingredientManager.addIngredientToList()
+        viewModel.createIngredientsArray(with: inventory)
         buttonsAreAvaiables()
         ingredientTextField.text = oneMoreThing
         ingredientTableView.reloadData()
@@ -55,13 +57,12 @@ class SearchController: TabBarController {
     }
 
     @IBAction func clearIngredientList(_ sender: UIButton) {
-        AskConfirmation() { [self] result in
-            if result {
-                ingredientManager.clearListOfIngredients()
-                ingredientTableView.reloadData()
-                buttonsAreAvaiables()
-            }
-        }
+        self.presentDeletePopUp(deleteAction: { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.clearListOfIngredients()
+            self.ingredientTableView.reloadData()
+            self.buttonsAreAvaiables()
+        })
     }
 
     @IBAction func searchRecipesButton(_ sender: UIButton) {
@@ -83,18 +84,19 @@ class SearchController: TabBarController {
     private func setTextField() {
         ingredientTextField.attributedPlaceholder = NSAttributedString(
             string: firstPlaceholder,
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
+            attributes: [.foregroundColor: UIColor.clearStack]
         )
         ingredientTextField.setBottomBorder()
     }
 
     private func buttonsAreAvaiables() {
-        searchButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
-        clearButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
-        addButton.alpha = listOfIngredients.isEmpty ? 0.5 : 1
-        searchButton.isEnabled = listOfIngredients.isEmpty ? false : true
-        clearButton.isEnabled = listOfIngredients.isEmpty ? false : true
-        addButton.isEnabled = listOfIngredients.isEmpty ? false : true
+        let alpha = listOfIngredients.isEmpty ? 0.5 : 1
+        let isEnabled = listOfIngredients.isEmpty ? false : true
+
+        [searchButton, clearButton, addButton].forEach {
+            $0?.alpha = alpha
+            $0?.isEnabled = isEnabled
+        }
     }
 }
 
@@ -126,14 +128,13 @@ extension SearchController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath
         ) {
         if editingStyle == .delete {
-            AskConfirmation() { [self] result in
-                if result {
-                    ingredientManager.removeToList(at: indexPath.row)
-                    ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
-                    ingredientTableView.reloadData()
-                    buttonsAreAvaiables()
-                }
-            }
+            self.presentDeletePopUp(deleteAction: { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.removeToList(at: indexPath.row)
+                self.ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
+                self.ingredientTableView.reloadData()
+                self.buttonsAreAvaiables()
+            })
         }
     }
 }

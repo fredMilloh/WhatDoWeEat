@@ -56,7 +56,6 @@ class FavoriteRepository_Tests: XCTestCase {
         }
         // assert
         XCTAssertTrue(recipeTestIsFavorite)
-        XCTAssertEqual(sut.infoMessage, "")
     }
 
     func test_given_testRecipe_when_delete_then_testRecipe_is_not_favorite() {
@@ -67,5 +66,6 @@ class FavoriteRepository_Tests: XCTestCase {
         sut.deleteFavorite(recipeUrl: recipeUrl)
         // assert
         XCTAssertFalse(sut.isFavorite(recipeUrl: recipeUrl))
+        XCTAssertFalse(sut.infoMessage == "Unable to delete this recipe")
     }
 }

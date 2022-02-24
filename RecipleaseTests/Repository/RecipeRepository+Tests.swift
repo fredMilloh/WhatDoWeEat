@@ -53,7 +53,7 @@ class RecipeRepository_Tests: XCTestCase {
 
     func test_given_good_mock_data_when_getRecipes_then_get_data() {
         // arrange
-        sut = RecipeRepository.shared
+        //sut = RecipeRepository.shared
         guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
         // act
         sut?.getDelegate?.getRecipes(with: url, callback: { recipe, error in
@@ -66,7 +66,7 @@ class RecipeRepository_Tests: XCTestCase {
 
     func test_given_bad_mock_data_when_getRecipes_then_get_error() {
         // arrange
-        sut = RecipeRepository.shared
+        //sut = RecipeRepository.shared
         guard let url = TestCase.stubbedUrl(from: "badrecipe") else { return }
         // act
         sut?.getDelegate?.getRecipes(with: url, callback: { recipe, error in
@@ -79,7 +79,8 @@ class RecipeRepository_Tests: XCTestCase {
     }
 }
 
-extension RecipeRepository_Tests: GetDelegate {
+extension RecipeRepository_Tests: RecipeRepositoryDelegate {
+
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
     }
 }

@@ -17,7 +17,6 @@ class TabBarController: UIViewController {
 extension TabBarController: AlertDelegate {
 
     func presentAlert(message: String) {
-
         let alert = UIAlertController(
             title: "",
             message: message,
@@ -31,30 +30,29 @@ extension TabBarController: AlertDelegate {
         present(alert, animated: true)
     }
 
-    func AskConfirmation (completion:@escaping (_ result:Bool) -> Void) {
+    func presentDeletePopUp(deleteAction completion: @escaping () -> Void) {
         let alert = UIAlertController(
             title: "Are you sure ?",
             message: "Delete this element",
-            preferredStyle: .actionSheet)
-        self.present(alert, animated: true, completion: nil)
+            preferredStyle: .actionSheet
+        )
 
         alert.addAction(UIAlertAction(
             title: "delete",
             style: .destructive,
-            handler: { action in
-            completion(true)
-        }))
+            handler: { _ in completion() }
+        ))
 
         alert.addAction(UIAlertAction(
             title: "Cancel",
             style: .cancel,
-            handler: { action in
-            completion(false)
-        }))
+            handler: { _ in self.dismiss(animated: true) }
+        ))
+
+        self.present(alert, animated: true, completion: nil)
       }
 
     func presentInfo(message alertInfo: String) {
-
         let alert = UIAlertController(
             title: "",
             message: alertInfo,

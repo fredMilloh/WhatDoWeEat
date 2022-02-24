@@ -15,32 +15,34 @@ class ListRecipeCell: UITableViewCell {
     @IBOutlet weak var listCellIngredientsLabel: UILabel!
     @IBOutlet var contentListCellView: UIView!
 
+    static let identifier = "ListCell"
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXib()
     }
 
-    static let identifier = "ListCell"
-
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        listCellImageView.makeGradient(to: listCellImageView)
-//    }
-
-//    override func layoutMarginsDidChange() {
-//        super.layoutMarginsDidChange()
-//        listCellImageView.makeGradient(to: listCellImageView)
-//    }
+    private func loadXib() {
+        Bundle.main.loadNibNamed("ListRecipeCell", owner: self, options: nil)
+        addSubview(contentListCellView)
+        contentListCellView.frame = self.bounds
+        contentListCellView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         configCell(with: nil)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        listCellImageView.makeGradient()
+    }
+
     func configCell(with recipe: Recipe?) {
-        listCellImageView.makeGradient(to: listCellImageView)
         guard let recipe = recipe else { return }
-        let yieldString = String(recipe.yield.withoutDecimal())
+
+        let yieldString = recipe.yield.withoutDecimal()
         let timeString = (recipe.totalTime * 60).convertToString(style: .abbreviated)
         listCellNameLabel.text = recipe.name
         listCellIngredientsLabel.text = recipe.ingredients
@@ -48,16 +50,11 @@ class ListRecipeCell: UITableViewCell {
         listTimeView.timeLabel.text = timeString
 
         if let url = recipe.imageUrl {
-            listCellImageView.setImageFromURl(stringImageUrl: url)
+            listCellImageView.setImageFromURL(stringImageUrl: url)
         } else {
             listCellImageView.image = UIImage(named: "DefaultImage")
         }
-    }
 
-    private func loadXib() {
-        Bundle.main.loadNibNamed("ListRecipeCellView", owner: self, options: nil)
-        addSubview(contentListCellView)
-        contentListCellView.frame = self.bounds
-        contentListCellView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.layoutIfNeeded()
     }
 }

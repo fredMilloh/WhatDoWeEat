@@ -22,7 +22,7 @@ class FavoriteController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = appPageFavorite
+        navigationController?.navigationBar.topItem?.title = "Favorite"
         listFavoriteTableView.delegate = self
         listFavoriteTableView.dataSource = self
     }
@@ -33,7 +33,7 @@ class FavoriteController: TabBarController {
         listFavoriteTableView.reloadData()
     }
 
-// MARK: - Get favorites recipes from CoreData
+    // MARK: - Get favorites recipes from CoreData
 
     func getFavorite() {
         favoritesRecipes = [Favorite]()
@@ -65,17 +65,15 @@ extension FavoriteController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            AskConfirmation() { [self] result in
-                if result {
-                    guard let recipeUrl = favoritesRecipes[indexPath.row].urlDirections else { return }
-                    favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                    favoritesRecipes.remove(at: indexPath.row)
-                    listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
-                    alertMessage = .remove
-                    getFavorite()
-                    listFavoriteTableView.reloadData()
-                }
-            }
+            self.presentDeletePopUp(deleteAction: {
+                guard let recipeUrl = self.favoritesRecipes[indexPath.row].urlDirections else { return }
+                self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
+                self.favoritesRecipes.remove(at: indexPath.row)
+                self.listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
+                self.alertMessage = .remove
+                self.getFavorite()
+                self.listFavoriteTableView.reloadData()
+            })
         }
     }
 }

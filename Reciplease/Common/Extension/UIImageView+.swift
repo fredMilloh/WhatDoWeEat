@@ -10,24 +10,22 @@ import UIKit
 
 extension UIImageView {
 
-    func setImageFromURl(stringImageUrl url: String){
-
-      if let url = NSURL(string: url) {
-         if let data = NSData(contentsOf: url as URL) {
+    func setImageFromURL(stringImageUrl url: String) {
+        if let url = NSURL(string: url),
+           let data = NSData(contentsOf: url as URL) {
             self.image = UIImage(data: data as Data)
-         }
-      }
+        }
     }
 
-    func makeGradient(to image: UIImageView) {
+    func makeGradient() {
         let gradientLayer = CAGradientLayer()
         let color = UIColor.black
-        image.layer.sublayers?.removeAll()
+        self.layer.sublayers?.removeAll()
         gradientLayer.removeFromSuperlayer()
-        gradientLayer.frame = image.bounds
+        gradientLayer.frame = self.bounds
         gradientLayer.type = .axial
         gradientLayer.colors = [color.withAlphaComponent(0).cgColor, color.withAlphaComponent(0.7).cgColor]
         gradientLayer.locations = [0, 1]
-        image.layer.addSublayer(gradientLayer)
+        self.layer.addSublayer(gradientLayer)
     }
 }

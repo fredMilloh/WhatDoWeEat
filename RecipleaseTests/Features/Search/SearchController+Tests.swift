@@ -80,7 +80,7 @@ class SearchController_Tests: XCTestCase {
         sut?.ingredientTextField.text = "pineapple, orange"
         // act
         sut?.addButton(UIButton())
-        let listOfIngredients = sut?.ingredientManager.listOfIngredients
+        let listOfIngredients = sut?.viewModel.listOfIngredients
         // assert
         XCTAssertEqual(sut?.inventory, "One more thing ? ...")
         XCTAssertEqual(listOfIngredients, ["Orange", "Pineapple"])
@@ -93,14 +93,11 @@ class SearchController_Tests: XCTestCase {
         list = ingredients
         // act
         sut?.clearIngredientList(UIButton())
-        sut?.AskConfirmation(completion: { [self] result in
-            if result {
-                sut?.ingredientManager.clearListOfIngredients()
-        // assert
-                XCTAssertTrue(list.isEmpty)
-            } else {
-                XCTAssertEqual(list, ["apple", "pears", "banana"])
-            }
+        sut?.presentDeletePopUp(deleteAction: { [weak self] in
+            guard let self = self else { return }
+            self.sut?.viewModel.clearListOfIngredients()
+            // assert
+            XCTAssertTrue(list.isEmpty)
         })
     }
 }
