@@ -8,6 +8,7 @@
 import Foundation
 
 let appName = "Reciplease"
+let appPageFavorite = "Favorite"
 let appIdentifier = "17f51d8a"
 let appApiKey = "7"
 
@@ -27,6 +28,8 @@ let oneMoreThing = "One more thing ? ..."
 
 let listRemoved = "Ingredients have been removed"
 let ingredientRemoved = "This ingredient has been removed"
+let recipeIsFavorite = "This recipe has been successfully added to your favorites"
+let recipeNotFavorite = "This recipe has been removed from the favorites list"
 let unableSave = "Unable to save this recipe"
 let unableDelete = "Unable to delete this recipe"
 let unableFind = "Unable to find this recipe"

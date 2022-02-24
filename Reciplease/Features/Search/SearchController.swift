@@ -60,7 +60,6 @@ class SearchController: TabBarController {
                 ingredientManager.clearListOfIngredients()
                 ingredientTableView.reloadData()
                 buttonsAreAvaiables()
-                presentInfo(message: listRemoved)
             }
         }
     }
@@ -133,7 +132,6 @@ extension SearchController: UITableViewDelegate {
                     ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
                     ingredientTableView.reloadData()
                     buttonsAreAvaiables()
-                    presentInfo(message: ingredientRemoved)
                 }
             }
         }

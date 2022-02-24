@@ -22,9 +22,9 @@ class DetailRecipeController: TabBarController {
     private var favoriteButton: UIBarButtonItem?
     private var isFavorite = false
 
-    var alertMessage: RecipeError = .invalidData {
+    var alertInfo: String = listRemoved {
         didSet {
-            presentAlert(message: alertMessage.localizedDescription)
+            presentInfo(message: alertInfo)
         }
     }
 
@@ -68,14 +68,14 @@ class DetailRecipeController: TabBarController {
                 if result {
                     guard let recipeUrl = selectedRecipe?.urlDirections else { return}
                     favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                    alertMessage = .deleteCoreData
+                    alertInfo = recipeNotFavorite
                 }
             }
         } else {
             guard let selectedRecipe = selectedRecipe else { return }
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
                 favoriteButton?.image = UIImage(systemName: favorite)
-                alertMessage = .saveCoreData
+                alertInfo = recipeIsFavorite
             }
         }
     }

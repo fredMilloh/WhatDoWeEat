@@ -22,14 +22,14 @@ class FavoriteController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = appName
+        navigationController?.navigationBar.topItem?.title = appPageFavorite
         listFavoriteTableView.delegate = self
         listFavoriteTableView.dataSource = self
-        getFavorite()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getFavorite()
         listFavoriteTableView.reloadData()
     }
 

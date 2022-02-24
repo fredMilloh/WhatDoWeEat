@@ -12,6 +12,7 @@ protocol IngredientDelegate: AnyObject {
 }
 protocol AlertDelegate: AnyObject {
     func presentAlert(message: String)
+    func presentInfo(message alertInfo: String)
 }
 
 class IngredientViewModel {
@@ -35,6 +36,12 @@ class IngredientViewModel {
     var presentAlert: RecipeError = .incorrectElement {
         didSet {
             alertDelegate?.presentAlert(message: presentAlert.localizedDescription)
+        }
+    }
+
+    var presentInfo: String = listRemoved {
+        didSet {
+            alertDelegate?.presentInfo(message: presentInfo)
         }
     }
 
@@ -73,10 +80,11 @@ class IngredientViewModel {
     func removeToList(at index: Int) {
         listOfIngredients.remove(at: index)
         ingredients = [String]()
-        presentAlert = .remove
+        presentInfo = ingredientRemoved
     }
 
     func clearListOfIngredients() {
         listOfIngredients.removeAll()
+        presentInfo = listRemoved
     }
 }

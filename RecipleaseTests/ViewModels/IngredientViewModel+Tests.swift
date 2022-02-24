@@ -10,6 +10,9 @@ import XCTest
 
 class IngredientViewModel_Tests: XCTestCase, IngredientDelegate, AlertDelegate {
 
+    func presentInfo(message alertInfo: String) {
+    }
+
     func presentAlert(message: String) {
     }
 
@@ -102,6 +105,7 @@ class IngredientViewModel_Tests: XCTestCase, IngredientDelegate, AlertDelegate {
         sut.clearListOfIngredients()
         // assert
         XCTAssertTrue(sut.listOfIngredients.isEmpty)
+        XCTAssertEqual(sut.presentInfo, listRemoved)
     }
 
     func test_given_list_filled_when_remove_one_ingredient_then_list_updated() {
