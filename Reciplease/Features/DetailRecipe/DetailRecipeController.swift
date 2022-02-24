@@ -18,7 +18,7 @@ class DetailRecipeController: TabBarController {
     var selectedRecipe: Recipe?
 
     private let favoriteRepository = FavoriteRepository()
-
+    static let identifier = detailRecipeController
     private var favoriteButton: UIBarButtonItem?
     private var isFavorite = false
 
@@ -48,7 +48,7 @@ class DetailRecipeController: TabBarController {
 // MARK: - Favorite button choice
 
     func configureNavigationItem() {
-        favoriteButton = UIBarButtonItem(image: UIImage(systemName: "star"),
+        favoriteButton = UIBarButtonItem(image: UIImage(systemName: noFavorite),
                                          style: .plain,
                                          target: self,
                                          action: #selector(favoriteButtonPressed))
@@ -56,14 +56,14 @@ class DetailRecipeController: TabBarController {
         guard let recipeUrl = selectedRecipe?.urlDirections else { return }
         if favoriteRepository.isFavorite(recipeUrl: recipeUrl) {
             isFavorite = true
-            favoriteButton?.image = UIImage(systemName: "star.fill")
+            favoriteButton?.image = UIImage(systemName: favorite)
         }
         navigationItem.rightBarButtonItem = favoriteButton
     }
 
     @objc private func favoriteButtonPressed() {
         if isFavorite {
-            favoriteButton?.image = UIImage(systemName: "star")
+            favoriteButton?.image = UIImage(systemName: noFavorite)
             AskConfirmation() { [self] result in
                 if result {
                     guard let recipeUrl = selectedRecipe?.urlDirections else { return}
@@ -74,7 +74,7 @@ class DetailRecipeController: TabBarController {
         } else {
             guard let selectedRecipe = selectedRecipe else { return }
             favoriteRepository.saveFavorite(recipe: selectedRecipe) {
-                favoriteButton?.image = UIImage(systemName: "star.fill")
+                favoriteButton?.image = UIImage(systemName: favorite)
                 alertMessage = .saveCoreData
             }
         }
@@ -93,7 +93,7 @@ class DetailRecipeController: TabBarController {
         if let url = selectedRecipe.imageUrl {
             detailRecipeImageView.setImageFromURl(stringImageUrl: url)
         } else {
-            detailRecipeImageView.image = UIImage(named: "DefaultImage")
+            detailRecipeImageView.image = UIImage(named: defaultRecipeImage)
         }
     }
 }
@@ -109,7 +109,7 @@ extension DetailRecipeController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell, let selectedRecipe = selectedRecipe else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientCell.identifier, for: indexPath) as? IngredientCell, let selectedRecipe = selectedRecipe else { return UITableViewCell() }
 
         let ingredient = selectedRecipe.ingredientLines[indexPath.row]
         cell.configCell(withIngredient: ingredient)

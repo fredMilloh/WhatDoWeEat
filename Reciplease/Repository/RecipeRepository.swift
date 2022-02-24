@@ -22,8 +22,8 @@ class RecipeRepository: GetDelegate {
     private let client = APIService.shared
     var getDelegate: GetDelegate?
     
-    var apiKey: String = "7"
-    var appId: String = "17f51d8a"
+    var apiKey: String = appApiKey
+    var appId: String = appIdentifier
 
     /// to test getUrl method with a fake apiKey
     init(apiKey: String, appId: String, getDelegate: GetDelegate) {

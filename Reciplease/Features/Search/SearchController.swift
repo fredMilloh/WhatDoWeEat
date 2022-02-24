@@ -19,6 +19,7 @@ class SearchController: TabBarController {
     lazy var ingredientManager = IngredientViewModel(delegate: self, alertDelegate: self)
 
     var listOfIngredients = [String]()
+    static let identifier = searchController
 
     var inventory: String {
         guard let inventory = ingredientTextField.text else { return ""}
@@ -33,7 +34,7 @@ class SearchController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = "Reciplease"
+        navigationController?.navigationBar.topItem?.title = appName
         setTextField()
         buttonsAreAvaiables()
         tabBarConfig()
@@ -48,7 +49,7 @@ class SearchController: TabBarController {
         ingredientManager.createIngredientsArray(with: inventory)
         ingredientManager.addIngredientToList()
         buttonsAreAvaiables()
-        ingredientTextField.text = "One more thing ? ..."
+        ingredientTextField.text = oneMoreThing
         ingredientTableView.reloadData()
         ingredientTextField.resignFirstResponder()
     }
@@ -59,7 +60,7 @@ class SearchController: TabBarController {
                 ingredientManager.clearListOfIngredients()
                 ingredientTableView.reloadData()
                 buttonsAreAvaiables()
-                presentInfo(message: "Ingredients have been removed")
+                presentInfo(message: listRemoved)
             }
         }
     }
@@ -72,9 +73,9 @@ class SearchController: TabBarController {
 
     private func toRecipesList() {
 
-        let storyboard = UIStoryboard(name: "ListRecipesController", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: ListRecipesController.identifier, bundle: Bundle.main)
 
-        guard let recipesList = storyboard.instantiateViewController(withIdentifier: "ListRecipesController")
+        guard let recipesList = storyboard.instantiateViewController(withIdentifier: ListRecipesController.identifier)
                 as? ListRecipesController else { return }
         recipesList.url = url
         self.navigationController?.pushViewController(recipesList, animated: true)
@@ -82,7 +83,7 @@ class SearchController: TabBarController {
 
     private func setTextField() {
         ingredientTextField.attributedPlaceholder = NSAttributedString(
-            string: "Lemon, Cheese, Sausages,...",
+            string: firstPlaceholder,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.clearStack]
         )
         ingredientTextField.setBottomBorder()
@@ -108,7 +109,7 @@ extension SearchController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "IngredientCell",
+            withIdentifier: IngredientCell.identifier,
             for: indexPath) as? IngredientCell else { return UITableViewCell() }
 
         let ingredient = listOfIngredients[indexPath.row]
@@ -132,7 +133,7 @@ extension SearchController: UITableViewDelegate {
                     ingredientTableView.deleteRows(at: [indexPath], with: .automatic)
                     ingredientTableView.reloadData()
                     buttonsAreAvaiables()
-                    presentInfo(message: "This ingredient has been removed")
+                    presentInfo(message: ingredientRemoved)
                 }
             }
         }
@@ -157,7 +158,7 @@ extension SearchController: UITextFieldDelegate {
 
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         ingredientTextField.resignFirstResponder()
-        ingredientTextField.text = "One more thing ? ..."
+        ingredientTextField.text = oneMoreThing
     }
 }
 

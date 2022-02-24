@@ -15,7 +15,22 @@ class ListRecipeCell: UITableViewCell {
     @IBOutlet weak var listCellIngredientsLabel: UILabel!
     @IBOutlet var contentListCellView: UIView!
 
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        loadXib()
+    }
+
     static let identifier = "ListCell"
+
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        listCellImageView.makeGradient(to: listCellImageView)
+//    }
+
+//    override func layoutMarginsDidChange() {
+//        super.layoutMarginsDidChange()
+//        listCellImageView.makeGradient(to: listCellImageView)
+//    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -23,6 +38,7 @@ class ListRecipeCell: UITableViewCell {
     }
 
     func configCell(with recipe: Recipe?) {
+        listCellImageView.makeGradient(to: listCellImageView)
         guard let recipe = recipe else { return }
         let yieldString = String(recipe.yield.withoutDecimal())
         let timeString = (recipe.totalTime * 60).convertToString(style: .abbreviated)
@@ -31,17 +47,11 @@ class ListRecipeCell: UITableViewCell {
         listTimeView.yieldLabel.text = yieldString
         listTimeView.timeLabel.text = timeString
 
-        listCellImageView.makeGradient(to: listCellImageView)
         if let url = recipe.imageUrl {
             listCellImageView.setImageFromURl(stringImageUrl: url)
         } else {
             listCellImageView.image = UIImage(named: "DefaultImage")
         }
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        loadXib()
     }
 
     private func loadXib() {

@@ -41,7 +41,7 @@ class FavoriteRepository: TabBarController {
             try AppDelegate.viewContext.save()
             completion()
         } catch {
-            infoMessage = "Unable to save this recipe"
+            infoMessage = unableSave
         }
     }
 
@@ -55,7 +55,7 @@ class FavoriteRepository: TabBarController {
             }
             try AppDelegate.viewContext.save()
         } catch {
-            infoMessage = "Unable to delete this recipe"
+            infoMessage = unableDelete
         }
     }
 
@@ -68,7 +68,7 @@ class FavoriteRepository: TabBarController {
                 return true
             }
         } catch {
-            infoMessage = "Unable to find this recipe"
+            infoMessage = unableFind
         }
         return false
     }

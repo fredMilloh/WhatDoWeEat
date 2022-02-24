@@ -22,15 +22,14 @@ class FavoriteController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = "Reciplease"
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationController?.navigationBar.topItem?.title = appName
         listFavoriteTableView.delegate = self
         listFavoriteTableView.dataSource = self
+        getFavorite()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getFavorite()
         listFavoriteTableView.reloadData()
     }
 
@@ -56,29 +55,12 @@ extension FavoriteController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListRecipeCell.identifier, for: indexPath)
                 as? ListRecipeCell else { return UITableViewCell() }
 
         let recipe = convertionIntoRecipeFrom(favorite: favoritesRecipes[indexPath.row])
         cell.configCell(with: recipe)
         return cell
-    }
-}
-
-//MARK: - TableView Delegate
-
-extension FavoriteController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailRecipeController", bundle: Bundle.main)
-        let favoriteRecipe = favoritesRecipes[indexPath.row]
-
-        guard let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe),
-              let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController")
-                as? DetailRecipeController else { return }
-
-        detailRecipe.selectedRecipe = selectedRecipe
-        self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -95,6 +77,23 @@ extension FavoriteController: UITableViewDelegate {
                 }
             }
         }
+    }
+}
+
+//MARK: - TableView Delegate
+
+extension FavoriteController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: DetailRecipeController.identifier, bundle: Bundle.main)
+        let favoriteRecipe = favoritesRecipes[indexPath.row]
+
+        guard let selectedRecipe = convertionIntoRecipeFrom(favorite: favoriteRecipe),
+              let detailRecipe = storyboard.instantiateViewController(withIdentifier: DetailRecipeController.identifier)
+                as? DetailRecipeController else { return }
+
+        detailRecipe.selectedRecipe = selectedRecipe
+        self.navigationController?.pushViewController(detailRecipe, animated: true)
     }
 }
 

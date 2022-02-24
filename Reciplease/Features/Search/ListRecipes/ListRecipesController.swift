@@ -16,6 +16,8 @@ class ListRecipesController: TabBarController {
     lazy var viewModel = ListRecipesViewModel(delegate: self)
     var recipeRepository = RecipeRepository.shared
 
+    static let identifier = listRecipesController
+
     var alertMessage: RecipeError = .fetchError {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
@@ -32,7 +34,6 @@ class ListRecipesController: TabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.title = "Reciplease"
         listRecipesTableView.delegate = self
         listRecipesTableView.dataSource = self
         listRecipesTableView.prefetchDataSource = self
@@ -65,8 +66,8 @@ class ListRecipesController: TabBarController {
     }
 
     private func goBack() {
-        let storyboard = UIStoryboard(name: "SearchController", bundle: Bundle.main)
-        guard let searchController = storyboard.instantiateViewController(withIdentifier: "SearchController")
+        let storyboard = UIStoryboard(name: SearchController.identifier, bundle: Bundle.main)
+        guard let searchController = storyboard.instantiateViewController(withIdentifier: SearchController.identifier)
                 as? SearchController else { return }
         self.navigationController?.pushViewController(searchController, animated: true)
     }
@@ -98,9 +99,9 @@ extension ListRecipesController: UITableViewDataSource {
 extension ListRecipesController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "DetailRecipeController", bundle: Bundle.main)
+        let storyboard = UIStoryboard(name: DetailRecipeController.identifier, bundle: Bundle.main)
 
-        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: "DetailRecipeController") as? DetailRecipeController
+        guard let detailRecipe = storyboard.instantiateViewController(withIdentifier: DetailRecipeController.identifier) as? DetailRecipeController
         else { return }
 
         let selectedRecipe = viewModel.recipe(at: indexPath.row)
