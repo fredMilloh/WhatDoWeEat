@@ -31,6 +31,9 @@ class FavoriteController: TabBarController {
         super.viewWillAppear(animated)
         getFavorite()
         listFavoriteTableView.reloadData()
+        if favoritesRecipes.count == 0 {
+            alertMessage = .noFavorite
+        }
     }
 
     // MARK: - Get favorites recipes from CoreData

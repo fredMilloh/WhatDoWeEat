@@ -65,9 +65,9 @@ class DetailRecipeController: TabBarController {
 
     @objc private func favoriteButtonPressed() {
         if isFavorite {
-            favoriteButton?.image = UIImage(systemName: noFavorite)
             self.presentDeletePopUp(deleteAction: { [weak self] in
                 guard let self = self, let recipeUrl = self.selectedRecipe?.urlDirections else { return}
+                self.favoriteButton?.image = UIImage(systemName: self.noFavorite)
                 self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
                 self.alertInfo = "This recipe has been removed from the favorites list"
             })
