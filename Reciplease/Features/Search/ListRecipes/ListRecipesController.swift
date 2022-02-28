@@ -18,13 +18,15 @@ class ListRecipesController: TabBarController {
 
     static let identifier = "ListRecipesController"
 
+    /// Url from SearchController
+    var url: URL?
+
     var alertMessage: RecipeError = .fetchError {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
         }
     }
 
-    var url: URL?
     var count = 0
 
     /// number of rows List tableView

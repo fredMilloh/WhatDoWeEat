@@ -27,9 +27,9 @@ class FavoriteRepository: TabBarController {
     }
 
     func saveFavorite(recipe: Recipe, completion: () -> Void) {
-
+        /// Declaration an object by instantiating the Favorite entity of type NSManagedObject, with context
         let favorite = Favorite(context: AppDelegate.viewContext)
-
+        /// Instantiation of the object
         favorite.name = recipe.name
         favorite.imageUrl = recipe.imageUrl
         favorite.ingredients = recipe.ingredients

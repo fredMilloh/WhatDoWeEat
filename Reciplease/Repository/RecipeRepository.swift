@@ -25,7 +25,7 @@ class RecipeRepository: RecipeRepositoryDelegate {
     var apiKey: String = "7"
     var appId: String = "17f51d8a"
 
-    /// to test getUrl method with a fake apiKey and getRecipes method
+    /// To test getUrl method with a fake apiKey and getRecipes method
     init(apiKey: String, appId: String, getDelegate: RecipeRepositoryDelegate) {
         self.apiKey = apiKey
         self.appId = appId
@@ -34,7 +34,7 @@ class RecipeRepository: RecipeRepositoryDelegate {
 
 // MARK: - Get Recipes and Url
 
-    /// decodes the data received from the APIService request, and passes them on by callback
+    /// Decodes the data received from the APIService request, and passes them on by callback
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
         client.get(url: url) { [self] data, error in
             if let data = data {
@@ -46,7 +46,7 @@ class RecipeRepository: RecipeRepositoryDelegate {
         }
     }
 
-    /// build url with the app id, key, and list of ingredients parameters
+    /// Build url with the app id, key, and list of ingredients parameters
     func getUrl(with ingredients: [String]) -> URL? {
 
         var component = URLComponents()

@@ -34,6 +34,7 @@ class ListRecipeCell: UITableViewCell {
         configCell(with: nil)
     }
 
+    /// Called by layoutIfNeeded automatically
     override func layoutSubviews() {
         super.layoutSubviews()
         listCellImageView.makeGradient()
@@ -54,7 +55,7 @@ class ListRecipeCell: UITableViewCell {
         } else {
             listCellImageView.image = UIImage(named: "DefaultImage")
         }
-
+        /// Lays out the subviews immediately - Allows to have the gradient from the first display
         self.layoutIfNeeded()
     }
 }

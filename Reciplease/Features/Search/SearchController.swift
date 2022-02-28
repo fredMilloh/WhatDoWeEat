@@ -57,6 +57,7 @@ class SearchController: TabBarController {
             ingredientTableView.reloadData()
         } else if viewModel.presentAlert == .incorrectElement {
             ingredientTextField.text = ""
+            viewModel.presentAlert = .invalidData
         }
     }
 
@@ -104,7 +105,7 @@ class SearchController: TabBarController {
     }
 }
 
-    // MARK: - TableView DataSource
+// MARK: - TableView DataSource
 
 extension SearchController: UITableViewDataSource {
 

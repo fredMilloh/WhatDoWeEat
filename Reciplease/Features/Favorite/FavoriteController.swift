@@ -36,7 +36,7 @@ class FavoriteController: TabBarController {
         }
     }
 
-    // MARK: - Get favorites recipes from CoreData
+// MARK: - Get favorites recipes from CoreData
 
     func getFavorite() {
         favoritesRecipes = [Favorite]()

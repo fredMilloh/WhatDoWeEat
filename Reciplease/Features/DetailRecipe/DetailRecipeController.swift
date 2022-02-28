@@ -15,6 +15,7 @@ class DetailRecipeController: TabBarController {
     @IBOutlet weak var detailRecipeImageView: UIImageView!
     @IBOutlet weak var detailRecipeNameLabel: UILabel!
 
+    /// Selected recipe from ListRecipesController or FavoriteController
     var selectedRecipe: Recipe?
 
     private let favoriteRepository = FavoriteRepository()

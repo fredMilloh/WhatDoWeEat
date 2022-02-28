@@ -23,7 +23,7 @@ extension TabBarController: AlertDelegate {
             preferredStyle: .alert
         )
         let errorAction = UIAlertAction(
-            title: "ok",
+            title: "Ok",
             style: .cancel
         )
         alert.addAction(errorAction)
@@ -38,7 +38,7 @@ extension TabBarController: AlertDelegate {
         )
 
         alert.addAction(UIAlertAction(
-            title: "delete",
+            title: "Delete",
             style: .destructive,
             handler: { _ in completion() }
         ))
