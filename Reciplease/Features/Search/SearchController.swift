@@ -50,10 +50,14 @@ class SearchController: TabBarController {
 
     @IBAction func addButton(_ sender: UIButton) {
         viewModel.createIngredientsArray(with: inventory)
-        buttonsAreAvaiables()
-        ingredientTextField.text = oneMoreThing
-        ingredientTableView.reloadData()
-        ingredientTextField.resignFirstResponder()
+        if viewModel.presentAlert != .incorrectElement {
+            buttonsAreAvaiables()
+            ingredientTextField.text = oneMoreThing
+            ingredientTextField.resignFirstResponder()
+            ingredientTableView.reloadData()
+        } else if viewModel.presentAlert == .incorrectElement {
+            ingredientTextField.text = ""
+        }
     }
 
     @IBAction func clearIngredientList(_ sender: UIButton) {

@@ -34,7 +34,7 @@ class SearchViewModel {
         }
     }
 
-    var presentAlert: RecipeError = .incorrectElement {
+    var presentAlert: RecipeError = .invalidData {
         didSet {
             alertDelegate?.presentAlert(message: presentAlert.localizedDescription)
         }
