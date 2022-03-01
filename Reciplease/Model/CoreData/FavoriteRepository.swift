@@ -8,14 +8,8 @@
 import Foundation
 import CoreData
 
-class FavoriteRepository: TabBarController {
+class FavoriteRepository {
 
-    var infoMessage: String = "" {
-        didSet {
-            presentInfo(message: infoMessage)
-        }
-    }
-    
     func getFavorite(completion:([Favorite]) -> Void) {
         let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
         do {
@@ -26,7 +20,7 @@ class FavoriteRepository: TabBarController {
         }
     }
 
-    func saveFavorite(recipe: Recipe, completion: () -> Void) {
+   func saveFavorite(recipe: Recipe, completion: (_ error: Bool) -> Void) {
         /// Declaration an object by instantiating the Favorite entity of type NSManagedObject, with context
         let favorite = Favorite(context: AppDelegate.viewContext)
         /// Instantiation of the object
@@ -39,13 +33,13 @@ class FavoriteRepository: TabBarController {
         favorite.ingredientLines = recipe.ingredientLines
         do {
             try AppDelegate.viewContext.save()
-            completion()
+           completion(false)
         } catch {
-            infoMessage = "Unable to save this recipe"
+           completion(true)
         }
     }
 
-    func deleteFavorite(recipeUrl: String) {
+   func deleteFavorite(recipeUrl: String, completion: (_ error: Bool) -> Void) {
         let request: NSFetchRequest<Favorite> = Favorite.fetchRequest()
         request.predicate = NSPredicate(format: "urlDirections == %@", "\(recipeUrl)")
         do {
@@ -54,8 +48,9 @@ class FavoriteRepository: TabBarController {
                 AppDelegate.viewContext.delete(item)
             }
             try AppDelegate.viewContext.save()
+           completion(false)
         } catch {
-            infoMessage = "Unable to delete this recipe"
+           completion(true)
         }
     }
 
@@ -68,8 +63,8 @@ class FavoriteRepository: TabBarController {
                 return true
             }
         } catch {
-            infoMessage = "Unable to find this recipe"
+            return false
         }
-        return false
+       return false
     }
 }

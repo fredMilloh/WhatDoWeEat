@@ -67,17 +67,20 @@ class DetailRecipeController: TabBarController {
     @objc private func favoriteButtonPressed() {
         if isFavorite {
             self.presentDeletePopUp(deleteAction: { [weak self] in
-                guard let self = self, let recipeUrl = self.selectedRecipe?.urlDirections else { return}
-                self.favoriteButton?.image = UIImage(systemName: self.noFavorite)
-                self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                self.alertInfo = "This recipe has been removed from the favorites list"
-            })
+               guard let self = self, let recipeUrl = self.selectedRecipe?.urlDirections else { return }
+               self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl) { error in
+                  if error { self.presentInfo(message: "Unable to delete this recipe") }
+                  self.favoriteButton?.image = UIImage(systemName: self.noFavorite)
+                  self.alertInfo = "This recipe has been removed from the favorites list"
+                }
+             })
         } else {
-            guard let selectedRecipe = selectedRecipe else { return }
-            favoriteRepository.saveFavorite(recipe: selectedRecipe) {
-                favoriteButton?.image = UIImage(systemName: favorite)
-                alertInfo = "This recipe has been successfully added to your favorites"
-            }
+           guard let selectedRecipe = selectedRecipe else { return }
+           favoriteRepository.saveFavorite(recipe: selectedRecipe) { error in
+              if error { presentInfo(message: "Unable to save this recipe") }
+              favoriteButton?.image = UIImage(systemName: favorite)
+              alertInfo = "This recipe has been successfully added to your favorites"
+           }
         }
     }
 

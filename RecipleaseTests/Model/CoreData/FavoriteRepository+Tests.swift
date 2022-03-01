@@ -37,7 +37,7 @@ class FavoriteRepository_Tests: XCTestCase {
         guard let sut = sut else { return }
         let recipeUrl = recipe.urlDirections
         // act
-        sut.saveFavorite(recipe: recipe, completion: {})
+       sut.saveFavorite(recipe: recipe) { error in }
         // assert
         XCTAssertTrue(sut.isFavorite(recipeUrl: recipeUrl))
     }
@@ -63,9 +63,8 @@ class FavoriteRepository_Tests: XCTestCase {
         guard let sut = sut else { return }
         let recipeUrl = recipe.urlDirections
         // act
-        sut.deleteFavorite(recipeUrl: recipeUrl)
+       sut.deleteFavorite(recipeUrl: recipeUrl) { error in }
         // assert
         XCTAssertFalse(sut.isFavorite(recipeUrl: recipeUrl))
-        XCTAssertFalse(sut.infoMessage == "Unable to delete this recipe")
     }
 }

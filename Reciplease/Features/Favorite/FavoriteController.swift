@@ -69,13 +69,15 @@ extension FavoriteController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             presentDeletePopUp { [weak self] in
-                guard let self = self, let recipeUrl = self.favoritesRecipes[indexPath.row].urlDirections else { return }
-                self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl)
-                self.favoritesRecipes.remove(at: indexPath.row)
-                self.listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
-                self.presentInfo(message: "This recipe has been removed from the favorites list")
-                self.getFavorite()
-                self.listFavoriteTableView.reloadData()
+               guard let self = self, let recipeUrl = self.favoritesRecipes[indexPath.row].urlDirections else { return }
+               self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl) { error in
+                  if error { self.presentInfo(message: "Unable to delete this recipe") }
+                  self.favoritesRecipes.remove(at: indexPath.row)
+                  self.listFavoriteTableView.deleteRows(at: [indexPath], with: .fade)
+                  self.presentInfo(message: "This recipe has been removed from the favorites list")
+                  self.getFavorite()
+                  self.listFavoriteTableView.reloadData()
+               }
             }
         }
     }
