@@ -57,8 +57,10 @@ class SearchController_Tests: XCTestCase {
         // arrange
         let listOfIngredients = ["banana", "pears", "pineapple"]
         sut?.listOfIngredients = listOfIngredients
+        sut?.recipeRepository.apiKey = "apiTest"
+        sut?.recipeRepository.appId = "appTest"
         // act
-        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=banana,pears,pineapple&app_id=17f51d8a&app_key=7aac57c3a479c1b47bef3a206193917d")
+        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=banana,pears,pineapple&app_id=appTest&app_key=apiTest")
         // assert
         XCTAssertEqual(sut?.url, urlShouldBe)
     }

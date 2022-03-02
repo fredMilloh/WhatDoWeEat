@@ -50,8 +50,8 @@ class RecipeRepository {
       self.repositoryFetcher = repositoryFetcher
     }
 
-   var apiKey: String = (Bundle.main.infoDictionary?["API_KEY"] as? String ?? "")
-   var appId: String = (Bundle.main.infoDictionary?["ID_APP_KEY"] as? String ?? "")
+   var apiKey: String = (Bundle.main.infoDictionary?["API_KEY"] as? String).orEmpty
+   var appId: String = (Bundle.main.infoDictionary?["ID_APP_KEY"] as? String).orEmpty
 
 // MARK: - Get Recipes and Url
 

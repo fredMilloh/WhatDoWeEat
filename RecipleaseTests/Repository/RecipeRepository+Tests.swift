@@ -33,7 +33,10 @@ class RecipeRepository_Tests: XCTestCase {
     func test_given_ingredients_when_search_recipe_then_getUrl_is_correct() {
         // arrange
         let ingredients = ["Tomatoe", "Mozzarella", "Ham"]
-        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=Tomatoe,Mozzarella,Ham&app_id=17f51d8a&app_key=7aac57c3a479c1b47bef3a206193917d")
+        // act
+        sut?.appId = "appTest"
+        sut?.apiKey = "apiKeyTest"
+        let urlShouldBe = URL(string: "https://api.edamam.com/api/recipes/v2?type=public&q=Tomatoe,Mozzarella,Ham&app_id=appTest&app_key=apiKeyTest")
         // assert
         XCTAssertEqual(sut?.getUrl(with: ingredients), urlShouldBe)
     }
@@ -46,21 +49,21 @@ class RecipeRepository_Tests: XCTestCase {
           guard let recipesPage = recipe else { return }
           let imageShouldBe = "https://www.edamam.com/web-img/52c/52c39fac86eb11ae14c5d36fc54e5022.jpg"
        // assert
-              XCTAssertEqual(recipesPage.hits[1].imageUrl, imageShouldBe)
+          XCTAssertEqual(recipesPage.hits[1].imageUrl, imageShouldBe)
        })
     }
 
-//    func test_given_bad_mock_data_when_getRecipes_then_get_error() {
-//        // arrange
-//        //sut = RecipeRepository.shared
-//        guard let url = TestCase.stubbedUrl(from: "badrecipe") else { return }
-//        // act
-//        sut?.getDelegate?.getRecipes(with: url, callback: { recipe, error in
-//        guard let error = error else { return }
-//        // assert
-//        XCTAssertNil(recipe)
-//        XCTAssertEqual(error, .invalidData)
-//        XCTAssertEqual(error.localizedDescription, "Sorry, no recipe was found, try with other ingredients. Check your network connection if necessary.")
-//        })
-//    }
+    func test_given_bad_mock_data_when_getRecipes_then_get_error() {
+        // arrange
+        //sut = RecipeRepository.shared
+        guard let url = TestCase.stubbedUrl(from: "badrecipe") else { return }
+        // act
+        sut?.getRecipes(with: url, callback: { recipe, error in
+        guard let error = error else { return }
+        // assert
+        XCTAssertNil(recipe)
+        XCTAssertEqual(error, .invalidData)
+        XCTAssertEqual(error.localizedDescription, "Sorry, no recipe was found, try with other ingredients. Check your network connection if necessary.")
+        })
+    }
 }
