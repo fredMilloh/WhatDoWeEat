@@ -14,12 +14,13 @@ protocol ListViewModelDelegate: AnyObject {
 
 class ListRecipesViewModel {
 
-    var recipeRepository = RecipeRepository.shared
     weak var delegate: ListViewModelDelegate?
 
     init(delegate: ListViewModelDelegate) {
         self.delegate = delegate
     }
+
+    lazy var recipeRepository = RecipeRepository(repositoryFetcher: RecipeRepositoryFetcher())
 
 // MARK: - Properties
 
@@ -29,7 +30,14 @@ class ListRecipesViewModel {
 
     /// Use for the calculation of the cells to be displayed
     var currentCount: Int {
-      return recipes.count
+        return recipes.count
+    }
+
+    var count = 0
+
+    /// number of rows List tableView
+    var totalCount: Int {
+        return count
     }
 
     var url: URL {
@@ -46,12 +54,26 @@ class ListRecipesViewModel {
         return recipes[index]
     }
 
+    func getFirstRecipes(with ingredientsUrl: URL, completion: @escaping (_ error: Bool) -> Void) {
+       recipeRepository.getRecipes(with: ingredientsUrl) { recipePage, error in
+          if let firstRecipePage = recipePage {
+             self.recipes.append(contentsOf: firstRecipePage.hits)
+              guard let url = firstRecipePage.nextPage else { return }
+              self.nextPageUrl = url
+              self.count = firstRecipePage.count
+              completion(false)
+          } else {
+              completion(true)
+          }
+       }
+    }
+
     func getRecipes() {
 
         guard !isFetchingProgress else { return }
         isFetchingProgress = true
 
-        recipeRepository.getRecipes(with: url) { [self] recipePage, error in
+       recipeRepository.getRecipes(with: url) { [self] recipePage, error in
             if let newRecipePage = recipePage {
                 isFetchingProgress = false
                 nextPageUrl = ""
@@ -80,4 +102,11 @@ class ListRecipesViewModel {
         let endIndex = startIndex + newRecipes.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
+}
+
+extension ListRecipesViewModel: RecipeRepositoryProtocol {
+   func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
+   }
+
+
 }

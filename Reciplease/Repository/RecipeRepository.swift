@@ -10,40 +10,54 @@ import Foundation
 typealias RecipePageOrError = (_ recipe: (RecipePage)?, _ error: RecipeError?) -> Void
 
 /// Protocol to mock the method
-protocol RecipeRepositoryDelegate {
+protocol RecipeRepositoryProtocol {
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError)
 }
 
-class RecipeRepository: RecipeRepositoryDelegate {
+class RecipeRepositoryFetcher: RecipeRepositoryProtocol {
 
-    static var shared = RecipeRepository()
-    private init() {}
+   private let client = APIService.shared
 
-    private let client = APIService.shared
-    var getDelegate: RecipeRepositoryDelegate?
-    
-    var apiKey: String = "7"
-    var appId: String = "17f51d8a"
+   /// Decodes the data received from the APIService request, and passes them on by callback
+   func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
+      client.get(url: url) { [self] data, error in
+          if let data = data {
+              let recipesPage = parse(data)
+              callback(recipesPage, nil)
+          } else {
+              callback(nil, error)
+          }
+      }
+   }
 
-    /// To test getUrl method with a fake apiKey and getRecipes method
-    init(apiKey: String, appId: String, getDelegate: RecipeRepositoryDelegate) {
-        self.apiKey = apiKey
-        self.appId = appId
-        self.getDelegate = getDelegate
+// MARK: - Decode Recipe Data
+
+   func parse(_ data: Data) -> RecipePage? {
+       do {
+           let dataSet = try JSONDecoder().decode(RecipePage.self, from: data)
+           return dataSet
+       } catch {
+           return nil
+       }
+   }
+}
+
+class RecipeRepository {
+
+   private let repositoryFetcher: RecipeRepositoryFetcher
+
+   init(repositoryFetcher: RecipeRepositoryFetcher) {
+      self.repositoryFetcher = repositoryFetcher
     }
+
+   var apiKey: String = (Bundle.main.infoDictionary?["API_KEY"] as? String ?? "")
+   var appId: String = (Bundle.main.infoDictionary?["ID_APP_KEY"] as? String ?? "")
 
 // MARK: - Get Recipes and Url
 
     /// Decodes the data received from the APIService request, and passes them on by callback
     func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
-        client.get(url: url) { [self] data, error in
-            if let data = data {
-                let recipesPage = parse(data)
-                callback(recipesPage, nil)
-            } else {
-                callback(nil, error)
-            }
-        }
+       repositoryFetcher.getRecipes(with: url, callback: callback)
     }
 
     /// Build url with the app id, key, and list of ingredients parameters
@@ -61,19 +75,5 @@ class RecipeRepository: RecipeRepositoryDelegate {
             URLQueryItem(name: "app_key", value: apiKey)
         ]
         return component.url
-    }
-}
-
-// MARK: - Decode Recipe Data
-
-extension RecipeRepository {
-
-    func parse(_ data: Data) -> RecipePage? {
-        do {
-            let dataSet = try JSONDecoder().decode(RecipePage.self, from: data)
-            return dataSet
-        } catch {
-            return nil
-        }
     }
 }

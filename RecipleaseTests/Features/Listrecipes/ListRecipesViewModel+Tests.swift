@@ -11,8 +11,17 @@ import XCTest
 
 class ListRecipesViewModel_Tests: XCTestCase {
 
+    class MockRecipeRepositoryFetcher: RecipeRepositoryFetcher {
+
+       override func getRecipes(with url: URL, callback: @escaping RecipePageOrError) {
+          guard let data = TestCase.stubbedData(from: "recipe") else { return }
+          let recipePage = parse(data)
+          callback(recipePage, nil)
+       }
+    }
+
     lazy var sut = ListRecipesViewModel(delegate: self)
-    var recipeRepository = RecipeRepository.shared
+    var recipeRepository = RecipeRepository(repositoryFetcher: MockRecipeRepositoryFetcher())
     
     let recipesTest = [
         Recipe(name: "one", imageUrl: "", urlDirections: "", yield: 1, ingredientLines: [], ingredients: "", totalTime: 0),
@@ -40,6 +49,15 @@ class ListRecipesViewModel_Tests: XCTestCase {
         XCTAssertEqual(selectedRecipe.name, "two")
     }
 
+    func test_given_count_when_totalCount_then_return_count() {
+        // arrange
+        sut.count = 10
+        // act
+        let totalCountshouldBe = 10
+        // assert
+        XCTAssertEqual(sut.totalCount, totalCountshouldBe)
+    }
+
     func test_calculate_indexPath_to_reload() {
         // arrange
         sut.recipes = recipesTest
@@ -63,12 +81,22 @@ class ListRecipesViewModel_Tests: XCTestCase {
         XCTAssertEqual(sut.url, urlShouldBe)
     }
 
+    func test_given_url_when_getFirstRecipe_calls_then_count_updated() {
+        // arrange
+        guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
+        // act
+        sut.getFirstRecipes(with: url) { error in
+        // assert
+         XCTAssertEqual(self.sut.totalCount, 10000)
+        }
+    }
+
     func test_given_url_when_getRecipe_calls_then_nextPageUrl_updated() {
         // arrange
         guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
         // act
         sut.getRecipes()
-        sut.recipeRepository.getDelegate?.getRecipes(with: url, callback: { [self] recipePage, error in
+        sut.recipeRepository.getRecipes(with: url, callback: { [self] recipePage, error in
             if let newRecipePage = recipePage {
                 guard let newUrl = newRecipePage.nextPage else { return }
                 sut.nextPageUrl = newUrl

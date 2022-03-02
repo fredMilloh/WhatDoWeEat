@@ -63,17 +63,6 @@ class ListRecipesController_Tests: XCTestCase {
         XCTAssertTrue(((cell?.configCell(with: .none)) != nil))
     }
 
-    func test_given_total_recipes_when_displayed_then_numberOfRows_is_correct() {
-        // arrange
-        sut?.count = recipesTest.count
-        let table = sut?.listRecipesTableView
-        let totalRow = sut?.totalCount
-        // act
-        let numberOfCell = table?.numberOfRows(inSection: 0)
-        // assert
-        XCTAssertEqual(numberOfCell, totalRow)
-    }
-
     func test_given_scroll_tableView_when_newPage_is_received_then_calculate_cells_needed() {
         // arrange
         let indexPathsForVisibleRows = sut?.listRecipesTableView.indexPathsForVisibleRows ?? []
@@ -93,20 +82,5 @@ class ListRecipesController_Tests: XCTestCase {
         let alertMessageShouldBe = error.localizedDescription
         // assert
         XCTAssertEqual(sut?.alertMessage.localizedDescription, alertMessageShouldBe)
-    }
-
-    func test_given_getFirstrecipes_when_call_repository_get_method_then_receive_RecipePage() {
-        // arrange
-        guard let url = TestCase.stubbedUrl(from: "recipe") else { return }
-        // act
-        sut?.getFirstRecipes()
-        let urlShouldBe = "https://api.edamam.com/api/recipes/v2?q=lemon&app_key=7&"
-        sut?.recipeRepository.getRecipes(with: url, callback: { recipePage, error in
-            if let firstRecipePage = recipePage {
-                guard let url = firstRecipePage.nextPage else { return }
-        // assert
-                XCTAssertEqual(url, urlShouldBe)
-            }
-        })
     }
 }

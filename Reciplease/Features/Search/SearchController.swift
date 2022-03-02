@@ -15,8 +15,7 @@ class SearchController: TabBarController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
 
-    var recipeRepository = RecipeRepository.shared
-
+    lazy var recipeRepository = RecipeRepository(repositoryFetcher: RecipeRepositoryFetcher())
     lazy var viewModel = SearchViewModel(delegate: self, alertDelegate: self)
 
     var listOfIngredients = [String]()
@@ -170,7 +169,7 @@ extension SearchController: UITextFieldDelegate {
 
 extension SearchController: IngredientDelegate {
 
-    func ingredientsList(with ingredients: [String]) {
+   func ingredientsList(with ingredients: [String]) {
         listOfIngredients = ingredients
     }
 }

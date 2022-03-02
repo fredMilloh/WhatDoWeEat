@@ -14,7 +14,6 @@ class ListRecipesController: TabBarController {
     @IBOutlet weak var listIndicatorView: UIActivityIndicatorView!
 
     lazy var viewModel = ListRecipesViewModel(delegate: self)
-    var recipeRepository = RecipeRepository.shared
 
     static let identifier = "ListRecipesController"
 
@@ -25,13 +24,6 @@ class ListRecipesController: TabBarController {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
         }
-    }
-
-    var count = 0
-
-    /// number of rows List tableView
-    var totalCount: Int {
-      return count
     }
 
     override func viewDidLoad() {
@@ -45,26 +37,21 @@ class ListRecipesController: TabBarController {
 // MARK: - Get first recipes
 
     func getFirstRecipes() {
-        listRecipesTableView.isHidden = true
-        listIndicatorView.startAnimating()
+       listRecipesTableView.isHidden = true
+       listIndicatorView.startAnimating()
 
-        guard let url = url else { return }
+       guard let url = url else { return }
 
-        recipeRepository.getRecipes(with: url) { [self] recipePage, error in
-            listRecipesTableView.isHidden = false
-            listIndicatorView.stopAnimating()
-
-            if let firstRecipePage = recipePage {
-                viewModel.recipes.append(contentsOf: firstRecipePage.hits)
-                guard let url = firstRecipePage.nextPage else { return }
-                viewModel.nextPageUrl = url
-                count = firstRecipePage.count
-                listRecipesTableView.reloadData()
-            } else {
-                alertMessage = .fetchError
-                goBack()
-            }
-        }
+       viewModel.getFirstRecipes(with: url) { error in
+           self.listRecipesTableView.isHidden = false
+           self.listIndicatorView.stopAnimating()
+           if error {
+              self.alertMessage = .fetchError
+           }
+print("vm count = ", self.viewModel.totalCount)
+print("vm recipes count = ", self.viewModel.recipes.count)
+           self.listRecipesTableView.reloadData()
+       }
     }
 
     private func goBack() {
@@ -80,7 +67,7 @@ class ListRecipesController: TabBarController {
 extension ListRecipesController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalCount
+       return viewModel.totalCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
