@@ -20,29 +20,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
-    private let persistentContainerName = "Reciplease"
+    static let persistentContainerName = "Reciplease"
 
-    static var persistentContainer: NSPersistentContainer {
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    }
+//    static var persistentContainer: NSPersistentContainer {
+//        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+//    }
 
     static var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
       }
 
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
-        let container = NSPersistentContainer(name: persistentContainerName)
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+    static var persistentContainer: NSPersistentContainer = {
+       let container = NSPersistentContainer(name: AppDelegate.persistentContainerName)
+        container.loadPersistentStores { _, error in
             if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo) for: \(storeDescription.description)")
+                print("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         return container
     }()
 }

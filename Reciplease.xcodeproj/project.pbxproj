@@ -14,6 +14,7 @@
 		B67F7C0027BE50D80043F622 /* FavoriteController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F7BFF27BE50D80043F622 /* FavoriteController+Tests.swift */; };
 		B67F7C0427BE7C4D0043F622 /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67F7C0327BE7C4D0043F622 /* RecipeRepository.swift */; };
 		B6AE53D627CFAEE20090C213 /* OptionalString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE53D527CFAEE20090C213 /* OptionalString+.swift */; };
+		B6AE53DA27CFD2E30090C213 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE53D927CFD2E30090C213 /* TestCoreDataStack.swift */; };
 		B6CFA36527C62D9000950539 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CFA36427C62D9000950539 /* FavoriteController.swift */; };
 		B6CFA36727C62DD600950539 /* FavoriteController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6CFA36627C62DD600950539 /* FavoriteController.storyboard */; };
 		B6DC779827AE7FA30096BDD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC779727AE7FA30096BDD8 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 		B67F7C0327BE7C4D0043F622 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
 		B6AE53D427CFA1E50090C213 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		B6AE53D527CFAEE20090C213 /* OptionalString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalString+.swift"; sourceTree = "<group>"; };
+		B6AE53D927CFD2E30090C213 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		B6CFA36427C62D9000950539 /* FavoriteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
 		B6CFA36627C62DD600950539 /* FavoriteController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoriteController.storyboard; sourceTree = "<group>"; };
 		B6DC779427AE7FA30096BDD8 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DC787A27B95F720096BDD8 /* FavoriteRepository+Tests.swift */,
+				B6AE53D927CFD2E30090C213 /* TestCoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				B6DC787B27B95F720096BDD8 /* FavoriteRepository+Tests.swift in Sources */,
 				B6DC782327B2BA480096BDD8 /* Recipe+Tests.swift in Sources */,
 				B67F7BFA27BD48F60043F622 /* SearchController+Tests.swift in Sources */,
+				B6AE53DA27CFD2E30090C213 /* TestCoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

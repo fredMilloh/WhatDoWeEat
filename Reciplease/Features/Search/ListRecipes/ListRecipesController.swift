@@ -48,8 +48,6 @@ class ListRecipesController: TabBarController {
            if error {
               self.alertMessage = .fetchError
            }
-print("vm count = ", self.viewModel.totalCount)
-print("vm recipes count = ", self.viewModel.recipes.count)
            self.listRecipesTableView.reloadData()
        }
     }

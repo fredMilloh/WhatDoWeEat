@@ -12,7 +12,9 @@ import CoreData
 class FavoriteRepository_Tests: XCTestCase {
 
     var sut: FavoriteRepository?
-    let recipe = Recipe(
+    var coreDatastack: TestCoreDataStack?
+
+    let recipeTest = Recipe(
         name: "testRecipe",
         imageUrl: "testImageUrl",
         urlDirections: "testUrlDirections",
@@ -23,48 +25,43 @@ class FavoriteRepository_Tests: XCTestCase {
     )
 
     override func setUpWithError() throws {
-        try super.setUpWithError()
+        coreDatastack = TestCoreDataStack()
         sut = FavoriteRepository()
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
+        coreDatastack = nil
         sut = nil
         try super.tearDownWithError()
     }
 
-    func test_given_recipe_when_save_then_isFavorite_true() {
-        // arrange
-        guard let sut = sut else { return }
-        let recipeUrl = recipe.urlDirections
-        // act
-       sut.saveFavorite(recipe: recipe) { error in }
-        // assert
-        XCTAssertTrue(sut.isFavorite(recipeUrl: recipeUrl))
-    }
+   func test_given_recipeTest_when_call_repository_methods_then_result_is_correct() {
 
-    func test_given_testRecipe_saved_when_get_Favorites_then_testRecipe_is_present() {
-        // assert
-        guard let sut = sut else { return }
-        var recipeTestIsFavorite = false
-        // act
-        sut.getFavorite { favorites in
-            for favorite in favorites {
-                if favorite.name == "testRecipe" {
-                    recipeTestIsFavorite = true
-                }
-            }
-        }
-        // assert
-        XCTAssertTrue(recipeTestIsFavorite)
-    }
+      // arrange SAVE
+      guard let sut = sut else { return }
+      let recipeUrl = recipeTest.urlDirections
+      // act SAVE
+     sut.saveFavorite(recipe: recipeTest) { error in }
+      // assert SAVE/isFavorite
+      XCTAssertTrue(sut.isFavorite(recipeUrl: recipeUrl))
 
-    func test_given_testRecipe_when_delete_then_testRecipe_is_not_favorite() {
-        //arrange
-        guard let sut = sut else { return }
-        let recipeUrl = recipe.urlDirections
-        // act
-       sut.deleteFavorite(recipeUrl: recipeUrl) { error in }
-        // assert
-        XCTAssertFalse(sut.isFavorite(recipeUrl: recipeUrl))
-    }
+      // arrange GET
+      var recipeTestIsFavorite = false
+      // act GET
+      sut.getFavorite { favorites in
+          for favorite in favorites {
+              if favorite.name == "testRecipe" {
+                  recipeTestIsFavorite = true
+              }
+          }
+      }
+      // assert GET
+      XCTAssertTrue(recipeTestIsFavorite)
+
+      // act DELETE with let recipeUrl
+     sut.deleteFavorite(recipeUrl: recipeUrl) { error in }
+      // assert DELETE/isFavorite
+      XCTAssertFalse(sut.isFavorite(recipeUrl: recipeUrl))
+   }
 }
