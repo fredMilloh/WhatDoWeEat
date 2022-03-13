@@ -37,9 +37,9 @@ Le résultat des recettes :
 
 Les favoris :
  - Les recettes sauvegardées s'affichent en liste, dans l'onglet *Favorite*.
- - Si la liste est vide, un message informe l'utilisateur de la procédure à suivre pour ajouter une recette dans les foavoris.
+ - Si la liste est vide, un message informe l'utilisateur de la procédure à suivre pour ajouter une recette dans les favoris.
  - Dans la vue détaillée, un bouton évidé en haut à droite, permet de placer la recette dans les favoris.
- - Quand le bouton est teinté, la recette peut étre retirée des favoris, avec un nouvel appui sur ce bouton.
+ - Quand le bouton est teinté, la recette peut être retirée des favoris, avec un nouvel appui sur ce bouton.
  - Un glissé vers la gauche permet également de retirer une recette.
 
 
@@ -70,8 +70,11 @@ Favorites :
 ## Screenshots
 
 <img width="200" alt="Capture d’écran 2022-03-13 à 13 41 38" src="https://user-images.githubusercontent.com/47221695/158069322-7449c899-076f-4e44-8d39-4acfad2a1c95.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 42 42" src="https://user-images.githubusercontent.com/47221695/158069327-3364bf8e-aa63-4141-9179-4397f2395964.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 42 54" src="https://user-images.githubusercontent.com/47221695/158069331-e6d507bd-f0ed-407c-9bbb-bdc37c879062.png">
+
 <img width="200" alt="Capture d’écran 2022-03-13 à 13 43 30" src="https://user-images.githubusercontent.com/47221695/158069350-b81d15d6-16a9-427a-8def-bdaa81773ca9.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 43 38" src="https://user-images.githubusercontent.com/47221695/158069357-3cb7a2a2-2bb4-40cc-b7ed-1e735cc6a0cf.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 44 09" src="https://user-images.githubusercontent.com/47221695/158069360-adba1d5c-1807-4eea-999d-6b10df1cd8e7.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 44 21" src="https://user-images.githubusercontent.com/47221695/158069364-61a1f1e5-f595-4d35-a82a-e33f3823b2b8.png">
+
 <img width="200" alt="Capture d’écran 2022-03-13 à 13 48 28" src="https://user-images.githubusercontent.com/47221695/158069376-2bd089e2-77b9-4799-8af2-db96ed996f1a.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 48 47" src="https://user-images.githubusercontent.com/47221695/158069381-1a9783dc-c6be-4668-a002-2928fd4a4e25.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 49 16" src="https://user-images.githubusercontent.com/47221695/158069388-c22e1c0c-a850-4dab-8466-d02e2568b480.png">
+
 <img width="200" alt="Capture d’écran 2022-03-13 à 13 50 14" src="https://user-images.githubusercontent.com/47221695/158069390-64c3901c-069d-4ebc-b89c-88c3fdffb128.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 50 31" src="https://user-images.githubusercontent.com/47221695/158069410-30df0d64-a7c3-4b9c-a664-0264e2397c59.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 50 55" src="https://user-images.githubusercontent.com/47221695/158069423-e508765b-d91b-470f-83f7-c996d62b1b54.png"><img width="200" alt="Capture d’écran 2022-03-13 à 13 51 18" src="https://user-images.githubusercontent.com/47221695/158069435-edaca360-ccea-4a6d-bb34-0098f8eb7e6e.png">
 
 
@@ -107,6 +110,7 @@ From your terminal, clone this repository with the following git command :
 $ git clone https://github.com/fredMilloh/WhatDoWeEat
 ```
 **Alamofire**
+
 La librairie Alamofire (https://cocoapods.org/pods/Alamofire) est utilisée. 
 
 The Alamofire library (https://cocoapods.org/pods/Alamofire) is used.
@@ -117,36 +121,37 @@ With cocoapods, once the project is cloned, in the terminal, go to the project d
 
 
 **API**
-Cette application utilise les API suivantes :
 
-This application uses the following APIs :
+Cette application utilise l'API suivante :
+
+This application uses the following API :
 
 Edamam : https://developer.edamam.com/edamam-docs-recipe-api
 
 
-Projet sans clé API. Ajoutez vos clé API.
+Projet sans clé API. Ajoutez votre clé API :
 
-Project without API key. Add your API key.
+Project without API key. Add your API key :
 
-Supprimez le fichier ConfigKeys et ajoutez un nouveau "fichier de paramètres de configuration" au projet.
+ - Supprimez le fichier ConfigKeys et ajoutez un nouveau "fichier de paramètres de configuration" au projet.
 
-Delete the ConfigKeys file and add a new "configuration settings file" to the project.
+ - Delete the ConfigKeys file and add a new "configuration settings file" to the project.
 
-Nommez-le *ConfigKeys*.
+ - Nommez-le *ConfigKeys*.
 
-Name it *ConfigKeys*.
+ - Name it *ConfigKeys*.
 
-Définir les configurations (Debug, Release) dans le projet, avec ce fichier de configuration.
+ - Définir les configurations (Debug, Release) dans le projet, avec ce fichier de configuration.
 
-Set the configurations (Debug, Release) in the project, with this configuration file.
+ - Set the configurations (Debug, Release) in the project, with this configuration file.
 
-Ajoutez votre clé API et votre identifiant d'application aux clés suivantes :
+ - Ajoutez votre clé API et votre identifiant d'application aux clés suivantes :
 
-Add your API key and application ID to the following keys :
+ - Add your API key and application ID to the following keys :
 
-API_KEY =
+    API_KEY =
 
-ID_APP_KEY =
+    ID_APP_KEY =
 
 
 
