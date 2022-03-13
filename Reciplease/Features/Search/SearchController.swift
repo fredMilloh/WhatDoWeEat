@@ -82,6 +82,7 @@ class SearchController: TabBarController {
         guard let recipesList = storyboard.instantiateViewController(withIdentifier: ListRecipesController.identifier)
                 as? ListRecipesController else { return }
         recipesList.url = url
+    print("url = ", url)
         self.navigationController?.pushViewController(recipesList, animated: true)
     }
 
