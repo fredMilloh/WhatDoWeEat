@@ -78,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		4D532BB5F405ABF20A32498E /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
+		76F2A7022866266A00915FA6 /* ConfigKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigKeys.xcconfig; sourceTree = "<group>"; };
 		95B0618514C2C756849DB2C9 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67F7BF527BD305B0043F622 /* badrecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = badrecipe.json; sourceTree = "<group>"; };
 		B67F7BF727BD457D0043F622 /* TabBarController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabBarController+Tests.swift"; sourceTree = "<group>"; };
@@ -86,7 +87,6 @@
 		B67F7BFD27BE50B90043F622 /* DetailRecipeController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailRecipeController+Tests.swift"; sourceTree = "<group>"; };
 		B67F7BFF27BE50D80043F622 /* FavoriteController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteController+Tests.swift"; sourceTree = "<group>"; };
 		B67F7C0327BE7C4D0043F622 /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRepository.swift; sourceTree = "<group>"; };
-		B6AE53D427CFA1E50090C213 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		B6AE53D527CFAEE20090C213 /* OptionalString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionalString+.swift"; sourceTree = "<group>"; };
 		B6AE53D927CFD2E30090C213 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		B6CFA36427C62D9000950539 /* FavoriteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		B6DC778B27AE7FA30096BDD8 = {
 			isa = PBXGroup;
 			children = (
-				B6AE53D427CFA1E50090C213 /* Config.xcconfig */,
+				76F2A7022866266A00915FA6 /* ConfigKeys.xcconfig */,
 				B6DC779627AE7FA30096BDD8 /* Reciplease */,
 				B6DC77B027AE7FAC0096BDD8 /* RecipleaseTests */,
 				B6DC77BA27AE7FAC0096BDD8 /* RecipleaseUITests */,
@@ -752,7 +752,7 @@
 /* Begin XCBuildConfiguration section */
 		B6DC77BF27AE7FAC0096BDD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6AE53D427CFA1E50090C213 /* Config.xcconfig */;
+			baseConfigurationReference = 76F2A7022866266A00915FA6 /* ConfigKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -814,7 +814,7 @@
 		};
 		B6DC77C027AE7FAC0096BDD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6AE53D427CFA1E50090C213 /* Config.xcconfig */;
+			baseConfigurationReference = 76F2A7022866266A00915FA6 /* ConfigKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
