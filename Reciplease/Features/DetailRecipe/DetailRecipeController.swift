@@ -71,6 +71,7 @@ class DetailRecipeController: TabBarController {
                self.favoriteRepository.deleteFavorite(recipeUrl: recipeUrl) { error in
                   if error { self.presentInfo(message: "Unable to delete this recipe") }
                   self.favoriteButton?.image = UIImage(systemName: self.noFavorite)
+                  self.isFavorite = false
                   self.alertInfo = "This recipe has been removed from the favorites list"
                 }
              })
@@ -79,6 +80,7 @@ class DetailRecipeController: TabBarController {
            favoriteRepository.saveFavorite(recipe: selectedRecipe) { error in
               if error { presentInfo(message: "Unable to save this recipe") }
               favoriteButton?.image = UIImage(systemName: favorite)
+              isFavorite = true
               alertInfo = "This recipe has been successfully added to your favorites"
            }
         }
