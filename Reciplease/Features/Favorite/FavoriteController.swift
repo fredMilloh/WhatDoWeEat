@@ -17,6 +17,7 @@ class FavoriteController: TabBarController {
     var alertMessage: RecipeError = .saveCoreData {
         didSet {
             presentAlert(message: alertMessage.localizedDescription)
+            navigateToList()
         }
     }
 
@@ -122,5 +123,11 @@ extension FavoriteController {
                       ingredients: ingredients,
                       totalTime: totalTime
         )
+    }
+    
+    func navigateToList() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

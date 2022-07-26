@@ -28,6 +28,7 @@ class DetailRecipeController: TabBarController {
     var alertInfo: String = "" {
         didSet {
             presentInfo(message: alertInfo)
+            navigateToFavorite()
         }
     }
 
@@ -51,10 +52,7 @@ class DetailRecipeController: TabBarController {
 // MARK: - Favorite button choice
 
     func configureNavigationItem() {
-        favoriteButton = UIBarButtonItem(image: UIImage(systemName: noFavorite),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(favoriteButtonPressed))
+        favoriteButton = UIBarButtonItem(image: UIImage(systemName: noFavorite), style: .plain, target: self, action: #selector(favoriteButtonPressed))
         favoriteButton?.tintColor = .yellow
         guard let recipeUrl = selectedRecipe?.urlDirections else { return }
         if favoriteRepository.isFavorite(recipeUrl: recipeUrl) {
@@ -120,5 +118,14 @@ extension DetailRecipeController: UITableViewDataSource {
         let ingredient = selectedRecipe.ingredientLines[indexPath.row]
         cell.configCell(withIngredient: ingredient)
         return cell
+    }
+}
+
+extension DetailRecipeController {
+    
+    func navigateToFavorite() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
