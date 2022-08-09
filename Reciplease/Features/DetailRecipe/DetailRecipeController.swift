@@ -124,7 +124,7 @@ extension DetailRecipeController: UITableViewDataSource {
 extension DetailRecipeController {
     
     func navigateToFavorite() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.navigationController?.popViewController(animated: true)
         }
     }
